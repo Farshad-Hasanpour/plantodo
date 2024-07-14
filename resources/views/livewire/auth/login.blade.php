@@ -16,6 +16,7 @@
                     create a new account
                 </a>
             </p>
+			<p class="text-gray-400 mt-2 text-center">{{$announcement['msg']}}</p>
         @endif
     </div>
 

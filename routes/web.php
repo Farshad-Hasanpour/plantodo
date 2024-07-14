@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome')->name('home');
+Route::permanentRedirect('welcome', '/');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -53,4 +54,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
+});
+
+Route::fallback(function(){
+	return view('404')->with([
+		'msg' => 'Page Not Found'
+	]);
 });
