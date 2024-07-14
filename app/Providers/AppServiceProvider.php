@@ -20,7 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-		$announcement = ['type' => 'info', 'msg' => 'This is an annoucement shared in every view'];
-		View::share('announcement', $announcement);
+		View::share([
+			'announcement' => [
+				'type' => 'info',
+				'msg' => 'This is an annoucement shared in every view'
+			]
+		]);
     }
 }
