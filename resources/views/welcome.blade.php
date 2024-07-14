@@ -69,6 +69,7 @@
 							link="{{$card['link']}}"
 							title="{{$card['title']}}"
 							description="{{$card['description']}}"
+							tabindex="{{$loop->index + 1}}"
 						>
 							{!! $card['icon'] !!}
 						</x-intro-box>
