@@ -16,7 +16,9 @@
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
-        @livewireScripts
+		<!-- Livewire script config -->
+		@livewireScriptConfig
+		<!-- End of Livewire script config -->
 		@stack('scripts')
 		@stack('styles')
         <!-- CSRF Token -->
