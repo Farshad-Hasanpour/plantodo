@@ -36,6 +36,10 @@ class Login extends Component
 
     public function render()
     {
-        return view('livewire.auth.login')->extends('layouts.auth');
+        return view('livewire.auth.login')->layoutData([
+			'metaKeys'=>'key1',
+			'metaDescription'=>'Some description',
+			'metaAuthor'=>'John G__',
+		])->extends('layouts.auth');
     }
 }

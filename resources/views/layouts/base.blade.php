@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
+		@isset($metaKeys) <meta name="keywords" content="{{$metaKeys}}"> @endisset
+		@isset($metaAuthor) <meta name="author" content="{{$metaAuthor}}"> @endisset
+		@isset($metaDescription) <meta name="description" content="{{$metaDescription}}"> @endisset
 		<title>@hasSection('title') @yield('title') - @endif{{ config('app.name') }}</title>
 
         <!-- Favicon -->
