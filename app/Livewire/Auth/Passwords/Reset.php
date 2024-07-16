@@ -60,7 +60,7 @@ class Reset extends Component
         if ($response == Password::PASSWORD_RESET) {
             session()->flash(trans($response));
 
-            return redirect(route('home'));
+            return redirect(route('todo-list'));
         }
 
         $this->addError('email', trans($response));
@@ -88,6 +88,13 @@ class Reset extends Component
 
     public function render()
     {
-        return view('livewire.auth.passwords.reset')->extends('layouts.auth');
+        return view('livewire.auth.passwords.reset')
+			->layoutData([
+				'metaKeys' => 'key1',
+				'metaDescription' => 'Some description',
+				'metaAuthor' => 'John G__',
+				'title' => 'Reset Password'
+			])
+			->extends('layouts.auth');
     }
 }
