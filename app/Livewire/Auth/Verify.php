@@ -10,10 +10,6 @@ class Verify extends Component
 {
     public function resend()
     {
-        if (Auth::user()->hasVerifiedEmail()) {
-            redirect(route('home'));
-        }
-
         Auth::user()->sendEmailVerificationNotification();
 
         $this->dispatch('resent');
@@ -23,6 +19,16 @@ class Verify extends Component
 
     public function render()
     {
-        return view('livewire.auth.verify')->extends('layouts.auth');
+		if (Auth::user()->hasVerifiedEmail()) {
+			redirect(route('todo-list'));
+		}
+
+        return view('livewire.auth.verify')
+			->layoutData([
+				'metaKeys' => 'key1',
+				'metaDescription' => 'Some description',
+				'metaAuthor' => 'John G__',
+				'title' => 'Email Verificaion'
+			])->layout('layouts.auth');
     }
 }

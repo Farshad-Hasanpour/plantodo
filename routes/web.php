@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::view('/', 'home')->name('home');
 Route::permanentRedirect('home', '/');
+Route::get('password/reset', Email::class)->name('password.request');
+Route::get('password/reset/{token}', Reset::class)->name('password.reset');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -30,12 +32,6 @@ Route::middleware('guest')->group(function () {
 
     Route::get('register', Register::class)
         ->name('register');
-
-	Route::get('password/reset', Email::class)
-		->name('password.request');
-
-	Route::get('password/reset/{token}', Reset::class)
-		->name('password.reset');
 });
 
 Route::middleware('auth')->group(function () {
@@ -45,12 +41,12 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1')
         ->name('verification.notice');
 
-    Route::get('password/confirm', Confirm::class)
-        ->name('password.confirm');
-
 	Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
 		->middleware('signed')
 		->name('verification.verify');
+
+    Route::get('password/confirm', Confirm::class)
+        ->name('password.confirm');
 
 	Route::post('logout', LogoutController::class)
 		->name('logout');

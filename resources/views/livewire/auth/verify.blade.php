@@ -1,5 +1,3 @@
-@section('title', 'Verify your email address')
-
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <a href="{{ route('home') }}">
@@ -10,16 +8,15 @@
             Verify your email address
         </h2>
 
-        <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
+        <div class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
             Or
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                sign out
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
+				<button type="submit" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+					sign out
+				</button>
             </form>
-        </p>
+        </div>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
