@@ -31,7 +31,7 @@ class Login extends Component
             return;
         }
 
-        return redirect()->intended(route('home'));
+        return redirect()->intended(route('todo-list'));
     }
 
     public function render()
@@ -40,6 +40,7 @@ class Login extends Component
 			'metaKeys'=>'key1',
 			'metaDescription'=>'Some description',
 			'metaAuthor'=>'John G__',
+			'title' => 'Login'
 		])->extends('layouts.auth');
     }
 }

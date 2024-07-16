@@ -7,7 +7,7 @@
 		@isset($metaKeys) <meta name="keywords" content="{{$metaKeys}}"> @endisset
 		@isset($metaAuthor) <meta name="author" content="{{$metaAuthor}}"> @endisset
 		@isset($metaDescription) <meta name="description" content="{{$metaDescription}}"> @endisset
-		<title>@isset($title) {{$title . ' - '}} @endisset {{ config('app.name') }}</title>
+		<title>@isset($title) {{$title . ' - '}} @endisset{{ config('app.name') }}</title>
         <!-- Favicon -->
 		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
         <!-- Fonts -->
