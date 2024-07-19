@@ -3,7 +3,10 @@
 @section('body')
 	<div class="min-h-screen bg-gray-200 flex flex-col items-stretch">
 		<nav class="w-full p-4 h-[100px]">
-			<div class="w-full h-full bg-white rounded-3xl flex items-center px-7 py-2 bg-purple-800 text-white">
+			<div
+				class="w-full h-full rounded-3xl flex items-center px-7 py-2 bg-purple-800 text-white"
+				style="box-shadow: 0 8px 16px rgba(107, 33, 168, 0.6);"
+			>
 				@php
 					$pages = [
 						'todo-list' => 'My Todo List',
@@ -29,7 +32,7 @@
 				</form>
 			</div>
 		</nav>
-		<main class="px-4">
+		<main class="p-4">
 			@yield('content')
 
 			@isset($slot)
