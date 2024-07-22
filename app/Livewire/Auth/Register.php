@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\TodoList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -36,6 +37,10 @@ class Register extends Component
             'name' => $this->name,
             'password' => Hash::make($this->password),
         ]);
+
+		TodoList::create([
+			'user_id' => $user->id
+		]);
 
         event(new Registered($user));
 

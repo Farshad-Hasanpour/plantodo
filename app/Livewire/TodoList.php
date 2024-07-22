@@ -4,9 +4,11 @@ namespace App\Livewire;
 
 use Illuminate\Http\Request;
 use Livewire\Component;
+use App\Models\Task;
 
 class TodoList extends Component
 {
+	public $listToShow = null;
 	public $icon = '';
 	public $task = '';
 	public function store(){
@@ -15,6 +17,8 @@ class TodoList extends Component
 
     public function render()
     {
-        return view('livewire.todo-list');
+        return view('livewire.todo-list', [
+			'tasks' => []
+		]);
     }
 }

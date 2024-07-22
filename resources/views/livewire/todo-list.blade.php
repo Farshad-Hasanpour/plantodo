@@ -5,6 +5,8 @@
 		<button type="submit">submit</button>
 	</form>
 	<ol>
-		List Here
+		@foreach($tasks as $task)
+			{{$task->title}}
+		@endforeach
 	</ol>
 </div>
