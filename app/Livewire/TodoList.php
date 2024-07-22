@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Models\Task;
 use App\Models\TodoList as ListModel;
@@ -14,10 +13,23 @@ class TodoList extends Component
 	public $active_list_id = null;
 	public $tasks = [];
 
-	public $icon = '';
-	public $task = '';
+	public $new_task = [
+		'title' => '',
+		'description' => ''
+	];
+
 	public function store(){
-		dd($this->icon);
+		if(!$this->active_list_id || !$this->new_task['title']) return;
+		Task::create([
+			'list_id' => $this->active_list_id,
+			'title' => $this->new_task['title'],
+			'description' => empty($this->new_task['description'])
+				? null
+				: $this->new_task['description'],
+		]);
+		$this->new_task['title'] = '';
+		$this->new_task['description'] = '';
+		$this->loadList($this->active_list_id);
 	}
 
 	public function loadList($list_id){

@@ -53,3 +53,30 @@
 [x-cloak] {
     display: none;
 }
+
+/* For Firefox */
+@-moz-document url-prefix() {
+	*{
+		scrollbar-width: thin; /* Options: auto, thin, or none */
+		scrollbar-color: rgb(107, 33, 168) #f1f1f1; /* thumb color and track color */
+	}
+}
+
+
+/* For Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 8px; /* Adjust the width as needed */
+}
+
+*::-webkit-scrollbar-track {
+	background-color: #f1f1f1; /* Background of the scroll track */
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgb(107, 33, 168); /* Color of the scroll thumb */
+	border-radius: 10px; /* Optional: for rounded edges */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: rgb(85, 20, 127); /* Optional: color when hovered */
+}
