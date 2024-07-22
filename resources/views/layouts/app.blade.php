@@ -9,7 +9,7 @@
 			>
 				@php
 					$pages = [
-						'todo-list' => 'My Todo List',
+						'todo-list' => 'Tasks',
 					]
 				@endphp
 				@foreach($pages as $name => $text)
