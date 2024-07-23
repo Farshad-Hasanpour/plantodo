@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\UserController;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Passwords\Confirm;
 use App\Livewire\Auth\Passwords\Email;
@@ -48,6 +49,9 @@ Route::middleware('auth')->group(function () {
 
 	Route::post('logout', LogoutController::class)
 		->name('logout');
+
+	Route::get('delete-account', [UserController::class, 'deleteAccount'])
+		->name('account.delete');
 
 	Route::get('/todo-list', Tasks::class)
 		->name('todo-list');
