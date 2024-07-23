@@ -20,6 +20,9 @@ class TaskFactory extends Factory
 		return [
 			'list_id' => \App\Models\TodoList::factory(),
 			'title' => fake()->text(32),
+			'description' => fake()->text(100),
+			'is_done' => fake()->boolean(),
+			'due' => fake()->dateTime(),
 		];
 	}
 }

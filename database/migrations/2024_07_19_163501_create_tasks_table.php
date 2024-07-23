@@ -16,6 +16,9 @@ return new class extends Migration
 			$table->foreignId('list_id')->references('id')->on('lists')->onDelete('cascade');
 			$table->string('title', 255);
 			$table->text('description')->nullable();
+			$table->boolean('is_done')->default(false);
+			$table->dateTime('due')->nullable();
+			$table->integer('order')->default('0');
 			$table->timestamps();
         });
     }

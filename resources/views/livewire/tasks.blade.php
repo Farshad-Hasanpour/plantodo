@@ -24,16 +24,18 @@
 	</form>
 	<div class="flex flex-col items-start space-y-3 mb-6">
 		@foreach($tasks as $task)
-			<div class="w-full flex items-center justify-between px-6 py-4 border border-gray-400 rounded-2xl bg-white">
-				<label
-					wire:key="{{ $task->id }}"
-					class="cursor-pointer py-1 select-none flex items-center space-x-4"
-					draggable="false"
-				>
-					<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
-					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
-				</label>
-			</div>
+			@if($task->is_done)
+				<div class="w-full flex items-center justify-between px-6 py-4 border border-gray-400 rounded-2xl bg-white">
+					<label
+						wire:key="{{ $task->id }}"
+						class="cursor-pointer py-1 select-none flex items-center space-x-4"
+						draggable="false"
+					>
+						<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
+						<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
+					</label>
+				</div>
+			@endif
 		@endforeach
 	</div>
 	<div
@@ -41,6 +43,22 @@
 	>
 		<h3 class="text-4xl font-bold">Completed</h3>
 		<div class="text-sm ">Click to show/hide</div>
+	</div>
+	<div class="flex flex-col items-start space-y-3 mb-6">
+		@foreach($tasks as $task)
+			@if(!$task->is_done)
+				<div class="w-full flex items-center justify-between px-6 py-4 border border-gray-400 rounded-2xl bg-white">
+					<label
+						wire:key="{{ $task->id }}"
+						class="cursor-pointer py-1 select-none flex items-center space-x-4"
+						draggable="false"
+					>
+						<input type="checkbox" checked class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
+						<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
+					</label>
+				</div>
+			@endif
+		@endforeach
 	</div>
 
 </div>
