@@ -5,9 +5,9 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Task;
-use App\Models\TodoList as ListModel;
+use App\Models\TodoList;
 
-class TodoList extends Component
+class Tasks extends Component
 {
 	public $lists = [];
 	public $active_list_id = null;
@@ -42,7 +42,7 @@ class TodoList extends Component
 	}
 
 	public function mount(){
-		$this->lists = ListModel::where('user_id', Auth::id())->get();
+		$this->lists = TodoList::where('user_id', Auth::id())->get();
 		$firstList = $this->lists->first();
 		if($firstList){
 			$this->active_list_id = $firstList->id;
@@ -52,6 +52,6 @@ class TodoList extends Component
 
     public function render()
     {
-        return view('livewire.todo-list');
+        return view('livewire.tasks');
     }
 }

@@ -8,7 +8,7 @@ use App\Livewire\Auth\Passwords\Email;
 use App\Livewire\Auth\Passwords\Reset;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
-use App\Livewire\TodoList;
+use App\Livewire\Tasks;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function () {
 	Route::post('logout', LogoutController::class)
 		->name('logout');
 
-	Route::get('/todo-list', TodoList::class)->name('todo-list');
+	Route::get('/todo-list', Tasks::class)
+		->name('todo-list');
 });
 
 Route::fallback(function(){

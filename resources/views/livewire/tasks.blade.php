@@ -22,17 +22,25 @@
 		/>
 		<button type="submit" class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md">Add</button>
 	</form>
-	<div class="flex flex-col items-start space-y-1">
+	<div class="flex flex-col items-start space-y-3 mb-6">
 		@foreach($tasks as $task)
-			<label
-				wire:key="{{ $task->id }}"
-				class="cursor-pointer py-1 select-none flex items-center space-x-2"
-				draggable="false"
-			>
-				<input type="checkbox" class="w-5 h-5 text-purple-600 focus:ring-purple-600 rounded-md" />
-				<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
-			</label>
+			<div class="w-full flex items-center justify-between px-6 py-4 border border-gray-400 rounded-2xl bg-white">
+				<label
+					wire:key="{{ $task->id }}"
+					class="cursor-pointer py-1 select-none flex items-center space-x-4"
+					draggable="false"
+				>
+					<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-md" />
+					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
+				</label>
+			</div>
 		@endforeach
+	</div>
+	<div
+		class="flex items-center justify-between text-gray-500 py-6 cursor-pointer"
+	>
+		<h3 class="text-4xl font-bold">Completed</h3>
+		<div class="text-sm ">click to show/hide</div>
 	</div>
 
 </div>
