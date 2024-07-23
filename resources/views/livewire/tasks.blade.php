@@ -30,17 +30,17 @@
 					class="cursor-pointer py-1 select-none flex items-center space-x-4"
 					draggable="false"
 				>
-					<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-md" />
+					<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
 					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
 				</label>
 			</div>
 		@endforeach
 	</div>
 	<div
-		class="flex items-center justify-between text-gray-500 py-6 cursor-pointer"
+		class="w-full text-gray-500 py-6 cursor-pointer space-y-1"
 	>
 		<h3 class="text-4xl font-bold">Completed</h3>
-		<div class="text-sm ">click to show/hide</div>
+		<div class="text-sm ">Click to show/hide</div>
 	</div>
 
 </div>
