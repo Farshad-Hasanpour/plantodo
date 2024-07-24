@@ -30,8 +30,12 @@
 					wire:key="{{ $task->id }}"
 					class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
 					draggable="false"
+					wire:click.prevent="completeTask({{$task->id}})"
 				>
-					<input type="checkbox" class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
+					<input
+						type="checkbox"
+						class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
+					/>
 					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
 				</label>
 				<div class="actions">
@@ -48,13 +52,18 @@
 	</div>
 	<div class="flex flex-col items-start space-y-3 mb-6">
 		@foreach($this->completedTasks as $task)
-			<div class="w-full flex items-center px-6 py-4 border border-gray-400 rounded-2xl bg-white">
+			<div class="w-full flex items-center px-6 h-[74px] border border-gray-400 rounded-2xl bg-white">
 				<label
 					wire:key="{{ $task->id }}"
-					class="grow mr-4 cursor-pointer py-1 select-none flex items-center space-x-4"
+					class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
 					draggable="false"
+					wire:click.prevent="makeTaskIncomplete({{$task->id}})"
 				>
-					<input type="checkbox" checked class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full" />
+					<input
+						type="checkbox"
+						checked
+						class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
+					/>
 					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
 				</label>
 				<div class="actions">

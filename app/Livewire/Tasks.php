@@ -21,16 +21,12 @@ class Tasks extends Component
 
 	#[Computed]
 	public function completedTasks(){
-		return $this->tasks->filter(function ($task){
-			return $task->is_done;
-		})->values();
+		return $this->tasks->where('is_done', 1);
 	}
 
 	#[Computed]
 	public function incompleteTasks(){
-		return $this->tasks->filter(function ($task){
-			return !$task->is_done;
-		})->values();
+		return $this->tasks->where('is_done', 0);
 	}
 
 	public function store(){
@@ -54,6 +50,18 @@ class Tasks extends Component
 		if(!$list) return;
 		$this->active_list_id = $list->id;
 		$this->tasks = $list->tasks()->orderBy('created_at', 'desc')->get();
+	}
+
+	public function completeTask($task_id){
+		if(!$task_id) return;
+		Task::where('id', $task_id)->update(['is_done' => 1]);
+		$this->loadList($this->active_list_id);
+	}
+
+	public function makeTaskIncomplete($task_id){
+		if(!$task_id) return;
+		Task::where('id', $task_id)->update(['is_done' => 0]);
+		$this->loadList($this->active_list_id);
 	}
 
 	public function mount(){
