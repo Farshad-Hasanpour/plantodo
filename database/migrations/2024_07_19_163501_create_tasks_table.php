@@ -18,7 +18,7 @@ return new class extends Migration
 			$table->text('description')->nullable();
 			$table->boolean('is_done')->default(false);
 			$table->dateTime('due')->nullable();
-			$table->integer('order')->default('0');
+			$table->integer('priority')->default('0');
 			$table->timestamps();
         });
     }

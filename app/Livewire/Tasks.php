@@ -54,7 +54,7 @@ class Tasks extends Component
 			: $this->lists->first();
 		if(!$list) return;
 		$this->active_list_id = $list->id;
-		$this->tasks = $list->tasks()->orderBy('created_at', 'desc')->get();
+		$this->tasks = $list->tasks()->orderBy('priority', 'desc')->orderBy('created_at', 'desc')->get();
 	}
 
 	public function completeTask($task_id){

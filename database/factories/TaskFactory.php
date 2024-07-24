@@ -23,6 +23,7 @@ class TaskFactory extends Factory
 			'description' => fake()->text(100),
 			'is_done' => fake()->boolean(),
 			'due' => fake()->dateTime(),
+			'priority' => fake()->randomDigit(),
 		];
 	}
 }
