@@ -13,6 +13,7 @@ class Tasks extends Component
 	public $lists = [];
 	public $active_list_id = null;
 	public $tasks = [];
+	public $show_completed = false;
 
 	public $new_task = [
 		'title' => '',
@@ -27,6 +28,10 @@ class Tasks extends Component
 	#[Computed]
 	public function incompleteTasks(){
 		return $this->tasks->where('is_done', 0);
+	}
+
+	public function toggleCompletedList(){
+		$this->show_completed = !$this->show_completed;
 	}
 
 	public function store(){

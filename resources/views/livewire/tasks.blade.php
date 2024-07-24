@@ -46,31 +46,40 @@
 	</div>
 	<div
 		class="w-full text-gray-500 py-6 cursor-pointer space-y-1"
+		wire:click="toggleCompletedList"
 	>
-		<h3 class="text-4xl font-bold">Completed ({{count($this->completedTasks)}})</h3>
+		<div class="text-4xl font-bold flex items-center space-x-3">
+			<h3>Completed ({{count($this->completedTasks)}})</h3>
+			@if($this->show_completed)
+				<span class="mb-3">&#8964;</span>
+			@else
+				<span class="mt-3">&#8963;</span>
+			@endif
+		</div>
 		<div class="text-sm ">Click to show/hide</div>
 	</div>
-	<div class="flex flex-col items-start space-y-3 mb-6">
-		@foreach($this->completedTasks as $task)
-			<div class="w-full flex items-center px-6 h-[74px] border border-gray-400 rounded-2xl bg-white">
-				<label
-					wire:key="{{ $task->id }}"
-					class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
-					draggable="false"
-					wire:click.prevent="makeTaskIncomplete({{$task->id}})"
-				>
-					<input
-						type="checkbox"
-						checked
-						class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
-					/>
-					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
-				</label>
-				<div class="actions">
-					<button type="button">more</button>
+	@if($this->show_completed)
+		<div class="flex flex-col items-start space-y-3 mb-6">
+			@foreach($this->completedTasks as $task)
+				<div class="w-full flex items-center px-6 h-[74px] border border-gray-400 rounded-2xl bg-white">
+					<label
+						wire:key="{{ $task->id }}"
+						class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
+						draggable="false"
+						wire:click.prevent="makeTaskIncomplete({{$task->id}})"
+					>
+						<input
+							type="checkbox"
+							checked
+							class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
+						/>
+						<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
+					</label>
+					<div class="actions">
+						<button type="button">more</button>
+					</div>
 				</div>
-			</div>
-		@endforeach
-	</div>
-
+			@endforeach
+		</div>
+	@endif
 </div>
