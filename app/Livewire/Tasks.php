@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\Attributes\Computed;
 use App\Models\Task;
 use App\Models\TodoList;
 
@@ -17,6 +18,20 @@ class Tasks extends Component
 		'title' => '',
 		'description' => ''
 	];
+
+	#[Computed]
+	public function completedTasks(){
+		return $this->tasks->filter(function ($task){
+			return $task->is_done;
+		})->values();
+	}
+
+	#[Computed]
+	public function incompleteTasks(){
+		return $this->tasks->filter(function ($task){
+			return !$task->is_done;
+		})->values();
+	}
 
 	public function store(){
 		if(!$this->active_list_id || !$this->new_task['title']) return;
@@ -32,26 +47,21 @@ class Tasks extends Component
 		$this->loadList($this->active_list_id);
 	}
 
-	public function loadList($list_id){
-		if(!$list_id) return;
-		$new_list = $this->lists->firstWhere('id', $list_id);
-		if($new_list){
-			$this->active_list_id = $new_list->id;
-			$this->tasks = $new_list->tasks;
-		}
+	public function loadList($list_id = null){
+		$list = $list_id
+			? $this->lists->firstWhere('id', $list_id)
+			: $this->lists->first();
+		if(!$list) return;
+		$this->active_list_id = $list->id;
+		$this->tasks = $list->tasks()->orderBy('created_at', 'desc')->get();
 	}
 
 	public function mount(){
 		$this->lists = TodoList::where('user_id', Auth::id())->get();
-		$firstList = $this->lists->first();
-		if($firstList){
-			$this->active_list_id = $firstList->id;
-			$this->tasks = $firstList->tasks;
-		}
+		$this->loadList();
 	}
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.tasks');
     }
 }
