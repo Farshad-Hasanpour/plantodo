@@ -13,7 +13,7 @@
 			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md disabled:bg-gray-400"
 		>+</button>
 	</div>--}}
-	<form wire:submit="store" class="mb-6">
+	<form wire:submit="store" class="mb-6 flex items-stretch">
 		@csrf
 		<input
 			wire:model.defer="new_task.title"
@@ -21,27 +21,28 @@
 			class="rounded-lg w-full min-w-[300px] max-w-[300px] focus:ring-0 border-2 focus:border-purple-600"
 			placeholder="Enter the title and press enter"
 		/>
-		<button type="submit" class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md">Add</button>
+		<button
+			type="submit"
+			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md flex-center min-w-[80px] ml-2"
+		>
+			<span wire:loading.remove>Add</span>
+			<svg
+				wire:loading
+				class="rotate"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				width="24"
+				height="24"
+			>
+				<title>loading</title>
+				<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
+			</svg>
+		</button>
 	</form>
 	<div class="flex flex-col items-start space-y-3 mb-6">
 		@foreach($this->incompleteTasks as $task)
-			<div class="w-full flex items-center px-6 h-[74px] border border-gray-400 rounded-2xl bg-white">
-				<label
-					wire:key="{{ $task->id }}"
-					class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
-					draggable="false"
-					wire:click.prevent="completeTask({{$task->id}})"
-				>
-					<input
-						type="checkbox"
-						class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
-					/>
-					<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
-				</label>
-				<div class="actions">
-					<button type="button">more</button>
-				</div>
-			</div>
+			<x-task-box :task="$task"></x-task-box>
 		@endforeach
 	</div>
 	<div
@@ -61,24 +62,7 @@
 	@if($this->show_completed)
 		<div class="flex flex-col items-start space-y-3 mb-6">
 			@foreach($this->completedTasks as $task)
-				<div class="w-full flex items-center px-6 h-[74px] border border-gray-400 rounded-2xl bg-white">
-					<label
-						wire:key="{{ $task->id }}"
-						class="grow mr-4 cursor-pointer h-full select-none flex items-center space-x-4"
-						draggable="false"
-						wire:click.prevent="makeTaskIncomplete({{$task->id}})"
-					>
-						<input
-							type="checkbox"
-							checked
-							class="w-7 h-7 text-purple-600 focus:ring-purple-600 rounded-full"
-						/>
-						<span class="text-2xl font-normal text-gray-800">{{$task->title}}</span>
-					</label>
-					<div class="actions">
-						<button type="button">more</button>
-					</div>
-				</div>
+				<x-task-box :task="$task"></x-task-box>
 			@endforeach
 		</div>
 	@endif

@@ -57,15 +57,13 @@ class Tasks extends Component
 		$this->tasks = $list->tasks()->orderBy('priority', 'desc')->orderBy('created_at', 'desc')->get();
 	}
 
-	public function completeTask($task_id){
-		if(!$task_id) return;
-		Task::where('id', $task_id)->update(['is_done' => 1]);
+	public function completeTask(Task $task){
+		$task->update(['is_done' => 1]);
 		$this->loadList($this->active_list_id);
 	}
 
-	public function makeTaskIncomplete($task_id){
-		if(!$task_id) return;
-		Task::where('id', $task_id)->update(['is_done' => 0]);
+	public function makeTaskIncomplete(Task $task){
+		$task->update(['is_done' => 0]);
 		$this->loadList($this->active_list_id);
 	}
 

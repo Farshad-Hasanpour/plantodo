@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('delete-account', [UserController::class, 'deleteAccount'])
 		->name('account.delete');
 
-	Route::get('/todo-list', Tasks::class)
+	Route::get('/tasks', Tasks::class)
 		->name('todo-list');
 });
 
