@@ -13,17 +13,22 @@
 			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md disabled:bg-gray-400"
 		>+</button>
 	</div>--}}
-	<form wire:submit="store" class="mb-6 flex items-stretch">
+	<form wire:submit="store" class="mb-4 mt-4 flex items-start">
 		@csrf
-		<input
-			wire:model.defer="new_task.title"
-			type="text"
-			class="rounded-lg w-full min-w-[300px] max-w-[300px] focus:ring-0 border-2 focus:border-purple-600"
-			placeholder="Enter the title and press enter"
-		/>
+		<label class="cursor-pointer w-full min-w-[300px] max-w-[300px]">
+			<input
+				wire:model.defer="new_task_title"
+				type="text"
+				class="rounded-lg w-full focus:ring-0 border-2 focus:border-purple-600 h-[44px]"
+				placeholder="Enter the title and press enter"
+			/>
+			<span class="block w-full text-red-600 min-h-[24px]">
+				@error('new_task_title') {{$message}} @enderror
+			</span>
+		</label>
 		<button
 			type="submit"
-			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md flex-center min-w-[80px] ml-2"
+			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md flex-center min-w-[80px] h-[44px] ml-2"
 		>
 			<span wire:loading.remove>Add</span>
 			<svg

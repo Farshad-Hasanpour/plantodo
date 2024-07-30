@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
+// use Livewire\Attributes\Rule;
 use App\Models\Task;
 use App\Models\TodoList;
 
@@ -15,10 +16,11 @@ class Tasks extends Component
 	public $tasks = [];
 	public $show_completed = false;
 
-	public $new_task = [
-		'title' => '',
-		'description' => ''
-	];
+	// #[Rule('required|string', as: 'title')]
+	public $new_task_title = '';
+
+	// #[Rule('nullable|string', as: 'description')]
+	public $new_task_description = '';
 
 	#[Computed]
 	public function completedTasks(){
@@ -35,16 +37,26 @@ class Tasks extends Component
 	}
 
 	public function store(){
-		if(!$this->active_list_id || !$this->new_task['title']) return;
+		// $this->validate();
+		$this->validate([
+			'new_task_title' => 'required|string',
+			'new_task_description' => 'nullable|string'
+		], [], [
+			'new_task_title' => 'title',
+			'new_task_description' => 'description'
+		]);
+
+		if(!$this->active_list_id) return;
 		Task::create([
 			'list_id' => $this->active_list_id,
-			'title' => $this->new_task['title'],
-			'description' => empty($this->new_task['description'])
+			'title' => $this->new_task_title,
+			'description' => empty($this->new_task_description)
 				? null
-				: $this->new_task['description'],
+				: $this->new_task_description,
+			'priority' => 1 + $this->tasks->max('priority')
 		]);
-		$this->new_task['title'] = '';
-		$this->new_task['description'] = '';
+		$this->new_task_title = '';
+		$this->new_task_description = '';
 		$this->loadList($this->active_list_id);
 	}
 
@@ -54,7 +66,7 @@ class Tasks extends Component
 			: $this->lists->first();
 		if(!$list) return;
 		$this->active_list_id = $list->id;
-		$this->tasks = $list->tasks()->orderBy('priority', 'desc')->orderBy('created_at', 'desc')->get();
+		$this->tasks = $list->tasks()->orderBy('priority', 'desc')->get();
 	}
 
 	public function completeTask(Task $task){
