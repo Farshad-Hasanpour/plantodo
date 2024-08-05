@@ -42,7 +42,7 @@
 			<x-slot:list>
 				<ul class="select-none w-[140px]">
 					<li
-						class="p-2 hover:bg-gray-100 cursor-pointer"
+						class="p-2 hover:bg-gray-100 cursor-pointer text-red-600"
 						wire:click.stop="delete({{$task->id}}); dropdownOpen = !dropdownOpen"
 					>
 						Delete
