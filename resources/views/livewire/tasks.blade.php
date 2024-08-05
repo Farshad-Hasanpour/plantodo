@@ -49,9 +49,9 @@
 			<x-task-box :task="$task"></x-task-box>
 		@endforeach
 	</div>
-	<div x-cloak x-data="{showCompleted: false}">
+	<div x-cloak x-data="{showCompleted: false}" class="flex flex-col">
 		<div
-			class="w-full text-gray-500 py-6 cursor-pointer space-y-1 select-none"
+			class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
 			x-on:click="showCompleted = !showCompleted"
 		>
 			<div class="text-4xl font-bold flex items-center space-x-3">
