@@ -14,7 +14,6 @@
 		>+</button>
 	</div>--}}
 	<form wire:submit="store" class="mb-4 mt-4 flex items-start">
-		@csrf
 		<label class="w-full min-w-[300px] max-w-[300px]">
 			<input
 				wire:model.defer="new_task_form.title"
@@ -50,25 +49,32 @@
 			<x-task-box :task="$task"></x-task-box>
 		@endforeach
 	</div>
-	<div
-		class="w-full text-gray-500 py-6 cursor-pointer space-y-1"
-		wire:click="toggleCompletedList"
-	>
-		<div class="text-4xl font-bold flex items-center space-x-3">
-			<h3>Completed ({{count($this->completedTasks)}})</h3>
-			@if($this->show_completed)
-				<span class="mb-3">&#8964;</span>
-			@else
-				<span class="mt-3">&#8963;</span>
-			@endif
+	<div x-cloak x-data="{showCompleted: false}">
+		<div
+			class="w-full text-gray-500 py-6 cursor-pointer space-y-1 select-none"
+			x-on:click="showCompleted = !showCompleted"
+		>
+			<div class="text-4xl font-bold flex items-center space-x-3">
+				<h3>Completed ({{count($this->completedTasks)}})</h3>
+				<span x-show="showCompleted" class="mb-3">&#8964;</span>
+				<span x-show="!showCompleted" class="mt-3">&#8963;</span>
+			</div>
+			<div class="text-sm ">Click to show/hide</div>
 		</div>
-		<div class="text-sm ">Click to show/hide</div>
-	</div>
-	@if($this->show_completed)
-		<div class="flex flex-col items-start space-y-3 mb-6">
+		<div
+			x-show="showCompleted"
+			x-transition
+			class="flex flex-col items-start space-y-3 mb-6"
+		>
 			@foreach($this->completedTasks as $task)
 				<x-task-box :task="$task"></x-task-box>
 			@endforeach
 		</div>
-	@endif
+	</div>
 </div>
+
+@script
+<script>
+	console.log($wire);
+</script>
+@endscript

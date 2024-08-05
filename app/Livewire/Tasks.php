@@ -14,7 +14,6 @@ class Tasks extends Component
 	public $lists = [];
 	public $active_list_id = null;
 	public $tasks = [];
-	public $show_completed = false;
 	public NewTaskForm $new_task_form;
 
 	#[Computed]
@@ -25,10 +24,6 @@ class Tasks extends Component
 	#[Computed]
 	public function incompleteTasks(){
 		return $this->tasks->where('is_done', 0);
-	}
-
-	public function toggleCompletedList(){
-		$this->show_completed = !$this->show_completed;
 	}
 
 	public function store(){
@@ -45,6 +40,11 @@ class Tasks extends Component
 		]);
 		$this->new_task_title = '';
 		$this->new_task_description = '';
+		$this->loadList($this->active_list_id);
+	}
+
+	public function delete(Task $task){
+		$task->delete();
 		$this->loadList($this->active_list_id);
 	}
 

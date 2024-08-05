@@ -20,7 +20,11 @@
 		/>
 		<span class="text-md lg:text-2xl font-normal text-gray-800">{{$task->title}}</span>
 	</label>
-	<div class="actions">
+	<div class="actions space-x-1">
+		<button
+			type="button"
+			wire:click.stop="delete({{$task->id}})"
+		>Delete</button>
 		<button type="button">more</button>
 	</div>
 </div>
