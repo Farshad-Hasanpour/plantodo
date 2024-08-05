@@ -15,15 +15,15 @@
 	</div>--}}
 	<form wire:submit="store" class="mb-4 mt-4 flex items-start">
 		@csrf
-		<label class="cursor-pointer w-full min-w-[300px] max-w-[300px]">
+		<label class="w-full min-w-[300px] max-w-[300px]">
 			<input
-				wire:model.defer="new_task_title"
+				wire:model.defer="new_task_form.title"
 				type="text"
 				class="rounded-lg w-full focus:ring-0 border-2 focus:border-purple-600 h-[44px]"
 				placeholder="Enter the title and press enter"
 			/>
 			<span class="block w-full text-red-600 min-h-[24px]">
-				@error('new_task_title') {{$message}} @enderror
+				@error('new_task_form.title') {{$message}} @enderror
 			</span>
 		</label>
 		<button
