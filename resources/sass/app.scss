@@ -50,6 +50,10 @@
  * .skew-45 { ... }
  */
 
+:root{
+	--color-primary: 107 33 168;
+}
+
 [x-cloak] {
     display: none;
 }

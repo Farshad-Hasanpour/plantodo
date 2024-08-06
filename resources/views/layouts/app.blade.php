@@ -4,7 +4,7 @@
 	<div class="min-h-screen bg-gray-200 flex flex-col items-stretch">
 		<nav class="w-full p-4 h-[100px]">
 			<div
-				class="w-full h-full rounded-3xl flex items-center px-7 py-2 bg-purple-800 text-white"
+				class="w-full h-full rounded-3xl flex items-center px-7 py-2 bg-primary text-white"
 				style="box-shadow: 0 8px 16px rgba(107, 33, 168, 0.6);"
 			>
 				@php
@@ -18,7 +18,7 @@
 						href="{{route($name)}}"
 						@class([
 							'px-4 py-2 mr-4 rounded-md uppercase',
-							request()->is($name) ? 'bg-black bg-opacity-30' : 'hover:bg-black hover:bg-opacity-10'
+							\Request::route()->getName() === $name ? 'bg-black/30' : 'hover:bg-black/10'
 						])
 					>
 						{{ $text }}

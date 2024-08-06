@@ -38,8 +38,8 @@ class Tasks extends Component
 				: $this->new_task_form->description,
 			'priority' => 1 + $this->tasks->max('priority')
 		]);
-		$this->new_task_title = '';
-		$this->new_task_description = '';
+		$this->new_task_form->title = '';
+		$this->new_task_form->description = '';
 		$this->loadList($this->active_list_id);
 	}
 

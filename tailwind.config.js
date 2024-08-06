@@ -6,6 +6,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+			colors: {
+				primary: "rgb(var(--color-primary) / <alpha-value>)"
+			}
         },
     },
     variants: {

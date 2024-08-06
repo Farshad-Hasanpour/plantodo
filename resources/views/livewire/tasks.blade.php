@@ -1,34 +1,30 @@
-<div>
-	{{-- TODO: add lists later --}}
-	{{--<div class="mb-8">
+<div class="flex flex-wrap">
+	<div class="flex flex-wrap items-stretch mt-4 mb-8 -ml-2" style="width: calc(100% + 8px)">
+		{{-- TODO: add list modal --}}
+		<x-button class="flex items-center text-xl justify-center mb-2 ms-2 w-10 h-10">+</x-button>
 		@foreach($lists as $list)
-			<button
+			<x-button
 				wire:key="{{$list->id}}"
-				class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md disabled:bg-gray-400"
-				@disabled($list->id == $active_list_id)
+				class="mb-2 ms-2"
+				:disabled="$list->id === $active_list_id"
+				title="{{$list->name ?? 'My List'}}"
 				wire:click="loadList({{$list->id}})"
-			>{{$list->name ?? 'My List'}}</button>
+			>{{$list->name ?? 'My List'}}</x-button>
 		@endforeach
-		<button
-			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md disabled:bg-gray-400"
-		>+</button>
-	</div>--}}
-	<form wire:submit="store" class="mb-4 mt-4 flex items-start">
-		<label class="w-full min-w-[300px] max-w-[300px]">
+	</div>
+	<form wire:submit="store" class="w-full flex items-start">
+		<label class="w-full max-w-[300px]">
 			<input
 				wire:model.defer="new_task_form.title"
 				type="text"
-				class="rounded-lg w-full focus:ring-0 border-2 focus:border-purple-600 h-[44px]"
+				class="rounded-lg w-full focus:ring-0 border-2 focus:border-primary h-[44px]"
 				placeholder="Enter the title and press enter"
 			/>
 			<span class="block w-full text-red-600 min-h-[24px]">
 				@error('new_task_form.title') {{$message}} @enderror
 			</span>
 		</label>
-		<button
-			type="submit"
-			class="uppercase px-3 py-2 bg-purple-600 text-white rounded-md flex-center min-w-[80px] h-[44px] ml-2"
-		>
+		<x-button type="submit" class="min-w-[80px] h-11 ms-2">
 			<span wire:loading.remove>Add</span>
 			<svg
 				wire:loading
@@ -42,14 +38,15 @@
 				<title>loading</title>
 				<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
 			</svg>
-		</button>
+		</x-button>
 	</form>
-	<div class="flex flex-col items-start space-y-3 mb-6">
+
+	<div class="w-full flex flex-col items-start space-y-3 mb-6">
 		@foreach($this->incompleteTasks as $task)
 			<x-task-box :task="$task"></x-task-box>
 		@endforeach
 	</div>
-	<div x-cloak x-data="{showCompleted: false}" class="flex flex-col">
+	<div x-cloak x-data="{showCompleted: false}" class="w-full flex flex-col">
 		<div
 			class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
 			x-on:click="showCompleted = !showCompleted"
