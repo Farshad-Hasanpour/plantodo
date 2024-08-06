@@ -1,6 +1,6 @@
 @props([
-	'hAlign' => 'left',
-	'vAlign' => 'bottom'
+	'hAlign' => 'left', // left | right
+	'vAlign' => 'bottom' // top | bottom
 ])
 
 <div

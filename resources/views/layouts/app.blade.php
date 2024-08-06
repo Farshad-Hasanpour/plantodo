@@ -14,6 +14,7 @@
 				@endphp
 				@foreach($pages as $name => $text)
 					<a
+						wire:navigate
 						href="{{route($name)}}"
 						@class([
 							'px-4 py-2 mr-4 rounded-md uppercase',

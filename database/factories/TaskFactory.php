@@ -24,6 +24,7 @@ class TaskFactory extends Factory
 			'is_done' => fake()->boolean(),
 			'due' => fake()->dateTime(),
 			'priority' => fake()->randomDigit(),
+
 		];
 	}
 }
