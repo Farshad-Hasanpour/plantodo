@@ -2,17 +2,17 @@
 	<div class="flex flex-wrap items-stretch mt-4 mb-8 -ml-2" style="width: calc(100% + 8px)">
 		{{-- TODO: add list modal --}}
 		<x-button class="flex items-center text-xl justify-center mb-2 ms-2 w-10 h-10">+</x-button>
-		@foreach($lists as $list)
+		@foreach($this->lists as $list)
 			<x-button
 				wire:key="{{$list->id}}"
 				class="mb-2 ms-2"
-				:disabled="$list->id === $active_list_id"
+				:disabled="$list->id === $this->active_list_id"
 				title="{{$list->name ?? 'My List'}}"
 				wire:click="loadList({{$list->id}})"
 			>{{$list->name ?? 'My List'}}</x-button>
 		@endforeach
 	</div>
-	<form wire:submit="store" class="w-full flex items-start">
+	<form wire:submit="store" class="w-full flex items-start mb-2">
 		<label class="w-full max-w-[300px]">
 			<input
 				wire:model.defer="new_task_form.title"

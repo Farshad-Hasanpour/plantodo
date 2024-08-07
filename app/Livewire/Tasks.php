@@ -8,13 +8,30 @@ use Livewire\Attributes\Computed;
 use App\Models\Task;
 use App\Models\TodoList;
 use App\Livewire\Forms\NewTaskForm;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Tasks extends Component
 {
-	public $lists = [];
 	public $active_list_id = null;
-	public $tasks = [];
 	public NewTaskForm $new_task_form;
+
+	protected $listeners = ['task-created' => 'tasks'];
+
+	#[Computed]
+	public function lists() {
+		return TodoList::where('user_id', Auth::id())->get();
+	}
+
+	#[Computed]
+	public function tasks(){
+		// return empty collection if no list is selected
+		if(!$this->active_list_id) return new EloquentCollection();
+
+		// show tasks within the selected list
+		$list = $this->lists->firstWhere('id', $this->active_list_id);
+		if(!$list) return new EloquentCollection();
+		return $list->tasks()->orderBy('priority', 'desc')->get();
+	}
 
 	#[Computed]
 	public function completedTasks(){
@@ -29,7 +46,11 @@ class Tasks extends Component
 	public function store(){
 		$this->new_task_form->validate();
 
-		if(!$this->active_list_id) return;
+		if(!$this->active_list_id) {
+			$this->addError('new_task_form.title', 'Please select a list first.');
+			return;
+		};
+
 		Task::create([
 			'list_id' => $this->active_list_id,
 			'title' => $this->new_task_form->title,
@@ -40,35 +61,33 @@ class Tasks extends Component
 		]);
 		$this->new_task_form->title = '';
 		$this->new_task_form->description = '';
-		$this->loadList($this->active_list_id);
+		$this->dispatch('task-created');
 	}
 
 	public function delete(Task $task){
+		$this->authorize('update', $task);
 		$task->delete();
-		$this->loadList($this->active_list_id);
-	}
-
-	public function loadList($list_id = null){
-		$list = $list_id
-			? $this->lists->firstWhere('id', $list_id)
-			: $this->lists->first();
-		if(!$list) return;
-		$this->active_list_id = $list->id;
-		$this->tasks = $list->tasks()->orderBy('priority', 'desc')->get();
 	}
 
 	public function completeTask(Task $task){
+		$this->authorize('update', $task);
 		$task->update(['is_done' => 1]);
-		$this->loadList($this->active_list_id);
 	}
 
 	public function makeTaskIncomplete(Task $task){
+		$this->authorize('update', $task);
 		$task->update(['is_done' => 0]);
-		$this->loadList($this->active_list_id);
+	}
+
+	public function loadList($id = null){
+		if($id){
+			$list = $this->lists->where('user_id', Auth::id())->find($id);
+			if(!$list) abort(403);
+		}
+		$this->active_list_id = $id ?? $this->lists->first()?->id;
 	}
 
 	public function mount(){
-		$this->lists = TodoList::where('user_id', Auth::id())->get();
 		$this->loadList();
 	}
 
