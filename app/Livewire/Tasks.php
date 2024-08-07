@@ -15,8 +15,6 @@ class Tasks extends Component
 	public $active_list_id = null;
 	public NewTaskForm $new_task_form;
 
-	protected $listeners = ['task-created' => 'tasks'];
-
 	#[Computed]
 	public function lists() {
 		return TodoList::where('user_id', Auth::id())->get();
@@ -61,7 +59,9 @@ class Tasks extends Component
 		]);
 		$this->new_task_form->title = '';
 		$this->new_task_form->description = '';
-		$this->dispatch('task-created');
+
+		// refresh computed property
+		unset($this->tasks);
 	}
 
 	public function delete(Task $task){
