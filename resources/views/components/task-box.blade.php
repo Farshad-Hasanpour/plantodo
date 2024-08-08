@@ -9,7 +9,7 @@
 	wire:key="{{ $task->id }}"
 >
 	<label
-		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center space-x-4 py-1"
+		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center py-1"
 		draggable="false"
 		@if($task->is_done)
 			wire:click.prevent="makeTaskIncomplete({{$task->id}})"
@@ -18,11 +18,32 @@
 		@endif
 	>
 		<input
+			wire:loading.remove
+			@if($task->is_done)
+				wire:target="makeTaskIncomplete({{$task->id}})"
+			@else
+				wire:target="completeTask({{$task->id}})"
+			@endif
 			type="checkbox"
 			@checked($task->is_done)
 			class="w-7 h-7 text-primary focus:ring-primary rounded-full"
 		/>
-		<span class="text-md lg:text-2xl font-normal text-gray-800">{{$task->title}}</span>
+		<svg
+			wire:loading
+			@if($task->is_done)
+				wire:target="makeTaskIncomplete({{$task->id}})"
+			@else
+				wire:target="completeTask({{$task->id}})"
+			@endif
+			class="rotate w-7 h-7 text-primary"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+		>
+			<title>loading</title>
+			<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
+		</svg>
+		<span class="text-md lg:text-2xl font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
 	<div class="actions flex items-center space-x-1">
 		<x-button
