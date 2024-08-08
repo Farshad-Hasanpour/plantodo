@@ -8,10 +8,13 @@
     ]) }}
 >
 	<label
-		wire:key="{{ $task->id }}"
 		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center space-x-4 py-1"
 		draggable="false"
-		wire:click.prevent="{{$task->is_done ? 'makeTaskIncomplete(' . $task->id . ')' : 'completeTask(' . $task->id . ')'}}"
+		@if($task->is_done)
+			wire:click.prevent="makeTaskIncomplete({{$task->id}})"
+		@else
+			wire:click.prevent="completeTask({{$task->id}})"
+		@endif
 	>
 		<input
 			type="checkbox"
@@ -21,7 +24,29 @@
 		<span class="text-md lg:text-2xl font-normal text-gray-800">{{$task->title}}</span>
 	</label>
 	<div class="actions flex items-center space-x-1">
-		<x-dropdown h-align="right">
+		<x-button
+			wire:loading.flex
+			wire:target="delete({{$task->id}})"
+			variant="icon"
+			class="w-11 h-11 text-2xl font-bold flex items-center justify-center"
+		>
+			<svg
+				class="rotate"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				width="24"
+				height="24"
+			>
+				<title>loading</title>
+				<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
+			</svg>
+		</x-button>
+		<x-dropdown
+			wire:loading.class="hidden"
+			wire:target="delete({{$task->id}})"
+			h-align="right"
+		>
 			<x-slot:trigger>
 				<x-button variant="icon" class="w-11 h-11 text-2xl font-bold flex items-center justify-center">
 					&vellip;

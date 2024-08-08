@@ -27,3 +27,13 @@
 		{{$list}}
 	</div>
 </div>
+
+{{--@script--}}
+{{--<script>--}}
+{{--	Alpine.data('dropdown', () => ({--}}
+{{--		dropdown: false,--}}
+{{--		init() {--}}
+{{--		},--}}
+{{--	}))--}}
+{{--</script>--}}
+{{--@endscript--}}

@@ -25,9 +25,10 @@
 			</span>
 		</label>
 		<x-button type="submit" class="min-w-[80px] h-11 ms-2">
-			<span wire:loading.remove>Add</span>
+			<span wire:loading.remove wire:target="store">Add</span>
 			<svg
 				wire:loading
+				wire:target="store"
 				class="rotate"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -43,7 +44,7 @@
 
 	<div class="w-full flex flex-col items-start space-y-3 mb-6">
 		@foreach($this->incompleteTasks as $task)
-			<x-task-box :task="$task"></x-task-box>
+			<x-task-box :task="$task" wire:key="{{ $task->id }}"></x-task-box>
 		@endforeach
 	</div>
 	<div x-cloak x-data="{showCompleted: false}" class="w-full flex flex-col">
@@ -64,7 +65,7 @@
 			class="flex flex-col items-start space-y-3 mb-6"
 		>
 			@foreach($this->completedTasks as $task)
-				<x-task-box :task="$task"></x-task-box>
+				<x-task-box :task="$task" wire:key="{{ $task->id }}"></x-task-box>
 			@endforeach
 		</div>
 	</div>
