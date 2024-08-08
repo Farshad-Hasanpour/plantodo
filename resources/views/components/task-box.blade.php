@@ -26,7 +26,7 @@
 			@endif
 			type="checkbox"
 			@checked($task->is_done)
-			class="w-7 h-7 text-primary focus:ring-primary rounded-full"
+			class="w-7 h-7 text-primary focus:ring-primary border-primary border-2 rounded-full"
 		/>
 		<svg
 			wire:loading
