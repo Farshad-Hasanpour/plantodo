@@ -7,8 +7,8 @@ module.exports = {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
 			colors: {
-				primary: "rgb(var(--color-primary) / <alpha-value>)",
-				error: "rgb(var(--color-error) / <alpha-value>)",
+				primary: "rgba(var(--color-primary), <alpha-value>)",
+				error: "rgba(var(--color-error), <alpha-value>)",
 			}
         },
     },

@@ -17,10 +17,10 @@
 			<input
 				wire:model.defer="new_task_form.title"
 				type="text"
-				class="rounded-lg w-full focus:ring-0 border-2 focus:border-primary h-[44px]"
+				class="rounded-lg w-full focus:ring-0 border-2 h-[44px] @error('new_task_form.title') border-error focus:border-error @else focus:border-primary @enderror"
 				placeholder="Enter the title and press enter"
 			/>
-			<span class="block w-full text-red-600 min-h-[24px]">
+			<span class="block w-full text-error min-h-[24px]">
 				@error('new_task_form.title') {{$message}} @enderror
 			</span>
 		</label>
