@@ -4,6 +4,15 @@ import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.e
 AsyncAlpine.init(Alpine);
 
 // Define AsyncAlpine Components here
+Alpine.data('dropdown', () => ({
+	dropdownOpen: false,
+	close(){
+		this.dropdownOpen = false;
+	},
+	toggle() {
+		this.dropdownOpen = !this.dropdownOpen;
+	}
+}));
 
 AsyncAlpine.start();
 Livewire.start()

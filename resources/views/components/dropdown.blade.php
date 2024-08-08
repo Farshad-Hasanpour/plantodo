@@ -1,18 +1,16 @@
 @props([
 	'hAlign' => 'left', // left | right
-	'vAlign' => 'bottom' // top | bottom
+	'vAlign' => 'bottom', // top | bottom
 ])
 
 <div
-	x-data="{dropdownOpen: false}"
+	x-data="dropdown"
 	{{ $attributes->merge([
     	'class' => 'relative'
     ]) }}
-	@click.outside="dropdownOpen = false"
+	x-on:click.outside="close"
 >
-	<div @click="dropdownOpen = !dropdownOpen">
-		{{$trigger}}
-	</div>
+	<div x-on:click="toggle">{{$trigger}}</div>
 	<div
 		x-cloak
 		x-show="dropdownOpen"
@@ -27,13 +25,3 @@
 		{{$list}}
 	</div>
 </div>
-
-{{--@script--}}
-{{--<script>--}}
-{{--	Alpine.data('dropdown', () => ({--}}
-{{--		dropdown: false,--}}
-{{--		init() {--}}
-{{--		},--}}
-{{--	}))--}}
-{{--</script>--}}
-{{--@endscript--}}

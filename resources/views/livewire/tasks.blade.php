@@ -44,7 +44,7 @@
 
 	<div class="w-full flex flex-col items-start space-y-3 mb-6">
 		@foreach($this->incompleteTasks as $task)
-			<x-task-box :task="$task" wire:key="{{ $task->id }}"></x-task-box>
+			<x-task-box :task="$task"></x-task-box>
 		@endforeach
 	</div>
 	<div x-cloak x-data="{showCompleted: false}" class="w-full flex flex-col">
@@ -65,7 +65,7 @@
 			class="flex flex-col items-start space-y-3 mb-6"
 		>
 			@foreach($this->completedTasks as $task)
-				<x-task-box :task="$task" wire:key="{{ $task->id }}"></x-task-box>
+				<x-task-box :task="$task"></x-task-box>
 			@endforeach
 		</div>
 	</div>
