@@ -9,8 +9,10 @@
 		>
 			<x-slot:trigger>
 				<x-button
-					class="flex items-center text-xl justify-center mb-2 ms-2 w-10 h-10"
-				>+</x-button>
+					class="box-center mb-2 ms-2 w-10 h-10 !p-0 bg-secondary"
+				>
+					<x-icons.plus class="w-7 h-7"></x-icons.plus>
+				</x-button>
 			</x-slot:trigger>
 
 			<x-slot:content>
@@ -123,7 +125,7 @@
 				@endforeach
 			@else
 				<p class="text-lg text-gray-500 w-full py-6 box-center text-center">
-					🎉 Congratulations! All tasks completed.
+					🎉 Congratulations! All tasks in this list are completed.
 				</p>
 			@endif
 		</div>

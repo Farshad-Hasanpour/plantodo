@@ -6,10 +6,13 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
-			colors: {
-				primary: "rgba(var(--color-primary), <alpha-value>)",
-				error: "rgba(var(--color-error), <alpha-value>)",
-			}
+			colors: [
+				'primary',
+				'secondary',
+				'error',
+			].map(item => ({
+				[item]: `rgba(var(--color-${item}), <alpha-value>)`
+			})).reduce((acc, obj) => ({...acc, ...obj}), {})
         },
     },
     variants: {
