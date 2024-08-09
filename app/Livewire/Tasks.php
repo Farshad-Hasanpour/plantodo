@@ -52,6 +52,7 @@ class Tasks extends Component
 		]);
 		$this->new_list_form->name = '';
 		$this->loadList($new_list->id);
+		$this->dispatch('close-list-dialog');
 	}
 
 	public function store(){

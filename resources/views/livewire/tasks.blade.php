@@ -5,7 +5,7 @@
 		<x-dialog
 			title="Add a List"
 			is_form
-			on_save="addList(); open = false;"
+			on_save="addList"
 		>
 			<x-slot:trigger>
 				<x-button
@@ -14,7 +14,7 @@
 			</x-slot:trigger>
 
 			<x-slot:content>
-				<div class="w-full">
+				<div class="w-full" @close-list-dialog.window="open = false">
 					<input
 						wire:model.defer="new_list_form.name"
 						type="text"
