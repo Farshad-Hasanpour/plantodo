@@ -1,10 +1,11 @@
 <div class="flex flex-wrap">
+	{{-- All lists plus add form --}}
 	<div class="flex flex-wrap items-stretch mt-4 mb-8 -ml-2" style="width: calc(100% + 8px)">
 		{{-- TODO: add list modal --}}
 		<x-dialog
 			title="Add a List"
 			is_form
-			on_save="addList"
+			on_save="addList(); open = false;"
 		>
 			<x-slot:trigger>
 				<x-button
@@ -13,8 +14,16 @@
 			</x-slot:trigger>
 
 			<x-slot:content>
-				<div class="grid grid-cols-2 gap-2">
-
+				<div class="w-full">
+					<input
+						wire:model.defer="new_list_form.name"
+						type="text"
+						class="rounded-lg bg-gray-100 w-full focus:ring-0 border-2 @error('new_list_form.name') border-error focus:border-error @else focus:border-primary @enderror"
+						placeholder="Enter the list name and press enter"
+					/>
+					<span class="block w-full text-error min-h-[24px]">
+						@error('new_list_form.name') {{$message}} @enderror
+					</span>
 				</div>
 			</x-slot:content>
 
@@ -48,7 +57,26 @@
 			>{{$list->name ?? 'My List'}}</x-button>
 		@endforeach
 	</div>
-	<form wire:submit="store" class="w-full flex items-start mb-2">
+
+	{{-- List Loader --}}
+	<div
+		wire:target="loadList"
+		wire:loading.flex
+		class="w-full box-center flex-wrap py-6"
+	>
+		<x-icons.loading class="w-12 h-12 text-primary mb-2"></x-icons.loading>
+		<p class="w-full text-lg text-gray-500 text-center">
+			Loading the list...
+		</p>
+	</div>
+
+	{{-- Task form for the selected list --}}
+	<form
+		wire:submit="store"
+		wire:target="loadList"
+		wire:loading.remove
+		class="w-full flex items-start mb-2"
+	>
 		<label class="w-full max-w-[300px]">
 			<input
 				wire:model.defer="new_task_form.title"
@@ -71,7 +99,11 @@
 	</form>
 
 	@if(!$this->tasks->count())
-		<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+		<p
+			wire:target="loadList"
+			wire:loading.remove
+			class="text-lg text-gray-500 w-full py-6 box-center text-center"
+		>
 			🕸️
 			@if($this->lists->count())
 				Your list is empty! Try another list or create new tasks for this list.
@@ -80,18 +112,28 @@
 			@endif
 		</p>
 	@else
-		<div class="w-full flex flex-col items-start space-y-3 mb-6">
+		<div
+			wire:target="loadList"
+			wire:loading.remove
+			class="w-full flex flex-col items-start space-y-3 mb-6"
+		>
 			@if($this->incompleteTasks->count())
 				@foreach($this->incompleteTasks as $task)
 					<x-task-box :task="$task"></x-task-box>
 				@endforeach
 			@else
-				<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+				<p class="text-lg text-gray-500 w-full py-6 box-center text-center">
 					🎉 Congratulations! All tasks completed.
 				</p>
 			@endif
 		</div>
-		<div x-cloak x-data="{showCompleted: {{!$this->completedTasks->count() ? 'true' : 'false'}}}" class="w-full flex flex-col">
+		<div
+			wire:target="loadList"
+			wire:loading.remove
+			x-cloak
+			x-data="{showCompleted: {{!$this->completedTasks->count() ? 'true' : 'false'}}}"
+			class="w-full flex flex-col"
+		>
 			<div
 				class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
 				x-on:click="showCompleted = !showCompleted"
@@ -113,7 +155,7 @@
 						<x-task-box :task="$task"></x-task-box>
 					@endforeach
 				@else
-					<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+					<p class="text-lg text-gray-500 w-full py-6 box-center text-center">
 						💪 Never give up! You can do it.
 					</p>
 				@endif

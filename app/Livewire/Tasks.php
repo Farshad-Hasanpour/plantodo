@@ -8,12 +8,14 @@ use Livewire\Attributes\Computed;
 use App\Models\Task;
 use App\Models\TodoList;
 use App\Livewire\Forms\NewTaskForm;
+use App\Livewire\Forms\NewListForm;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Tasks extends Component
 {
 	public $active_list_id = null;
 	public NewTaskForm $new_task_form;
+	public NewListForm $new_list_form;
 
 	#[Computed]
 	public function lists() {
@@ -42,7 +44,14 @@ class Tasks extends Component
 	}
 
 	public function addList(){
-		dd('add list');
+		$this->new_list_form->validate();
+
+		$new_list = TodoList::create([
+			'user_id' => Auth::id(),
+			'name' => $this->new_list_form->name,
+		]);
+		$this->new_list_form->name = '';
+		$this->loadList($new_list->id);
 	}
 
 	public function store(){
