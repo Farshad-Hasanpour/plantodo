@@ -85,12 +85,20 @@ class Tasks extends Component
 
 	public function completeTask(Task $task){
 		$this->authorize('update', $task);
-		$task->update(['is_done' => 1]);
+		$task->update([
+			'is_done' => 1,
+			'priority' => 1 + $this->tasks->max('priority')
+		]);
+		unset($this->tasks);
 	}
 
 	public function makeTaskIncomplete(Task $task){
 		$this->authorize('update', $task);
-		$task->update(['is_done' => 0]);
+		$task->update([
+			'is_done' => 0,
+			'priority' => 1 + $this->tasks->max('priority')
+		]);
+		unset($this->tasks);
 	}
 
 	public function loadList($id = null){

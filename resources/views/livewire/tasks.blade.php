@@ -1,6 +1,6 @@
 <div class="flex flex-wrap">
 	{{-- All lists plus add form --}}
-	<div class="flex flex-wrap items-stretch mt-4 mb-8 -ml-2" style="width: calc(100% + 8px)">
+	<div class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2" style="width: calc(100% + 8px)">
 		{{-- TODO: add list modal --}}
 		<x-dialog
 			title="Add a List"

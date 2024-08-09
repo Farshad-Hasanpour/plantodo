@@ -9,7 +9,7 @@ use App\Models\TodoList;
 class Task extends Model
 {
     use HasFactory;
-	protected $fillable = ['list_id', 'title', 'description', 'is_done', 'due', 'priority'];
+	protected $fillable = ['list_id', 'title', 'description', 'is_done', 'is_daily_habit', 'due', 'priority'];
 
 	public function todoList(){
 		return $this->belongsTo(TodoList::class, 'list_id');

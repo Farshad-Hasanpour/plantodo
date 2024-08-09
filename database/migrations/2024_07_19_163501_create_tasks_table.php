@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->string('title', 255);
 			$table->text('description')->nullable();
 			$table->boolean('is_done')->default(false);
+			$table->boolean('is_daily_habit')->default(false);
 			$table->dateTime('due')->nullable();
 			$table->integer('priority')->default('0');
 			$table->timestamps();

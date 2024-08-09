@@ -22,6 +22,7 @@ class TaskFactory extends Factory
 			'title' => fake()->text(32),
 			'description' => fake()->text(100),
 			'is_done' => fake()->boolean(),
+			'is_daily_habit' => fake()->boolean(),
 			'due' => fake()->dateTime(),
 			'priority' => fake()->randomDigit(),
 
