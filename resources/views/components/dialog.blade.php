@@ -20,12 +20,15 @@
 	<template x-teleport="body">
 		<div
 			x-show="open"
+			x-transition.opacity
 			class="h-screen w-screen fixed top-0 left-0 z-5000 box-center bg-black/50"
 			:class="!persistent ? 'cursor-pointer' : ''"
 			@mousedown.stop="readyToBeClosed = !persistent"
 			@mouseup.stop="closeByClick"
 		>
 			<{{$is_form ? 'form' : 'div'}}
+				x-show="open"
+				x-transition.scale
 				class="dialog-content max-w-[90%] max-h-[90%] rounded-lg cursor-default w-full h-full bg-white flex flex-col items-stretch overflow-hidden"
 				:style="`width: {{$width}}; height: {{$height}}`"
 				@mouseup.stop
