@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 		User::factory()->has(
-			TodoList::factory(1)->has(
-				Task::factory(10)
+			TodoList::factory(rand(3, 7))->has(
+				Task::factory(rand(10, 20))
 			)
 		)->create([
 			'name' => 'Farshad',
@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
 		]);
 
          User::factory(9)->has(
-			 TodoList::factory(1)->has(
-				 Task::factory(10)
+			 TodoList::factory(rand(3, 7))->has(
+				 Task::factory(rand(10, 20))
 			 )
 		 )->create();
     }

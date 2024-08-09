@@ -19,6 +19,7 @@ class TodoListFactory extends Factory
 	{
 		return [
 			'user_id' => \App\Models\User::factory(),
+			'name' => fake()->text(16),
 		];
 	}
 }
