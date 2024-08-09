@@ -1,7 +1,43 @@
 <div class="flex flex-wrap">
 	<div class="flex flex-wrap items-stretch mt-4 mb-8 -ml-2" style="width: calc(100% + 8px)">
 		{{-- TODO: add list modal --}}
-		<x-button class="flex items-center text-xl justify-center mb-2 ms-2 w-10 h-10">+</x-button>
+		<x-dialog
+			title="Add a List"
+			is_form
+			on_save="addList"
+		>
+			<x-slot:trigger>
+				<x-button
+					class="flex items-center text-xl justify-center mb-2 ms-2 w-10 h-10"
+				>+</x-button>
+			</x-slot:trigger>
+
+			<x-slot:content>
+				<div class="grid grid-cols-2 gap-2">
+
+				</div>
+			</x-slot:content>
+
+			<x-slot:actions>
+				<x-button type="submit" class="min-w-[100px]">
+					<span wire:loading.remove wire:target="addList">Add</span>
+					<x-icons.loading
+						wire:loading
+						wire:target="addList"
+						class="w-6 h-6"
+					></x-icons.loading>
+				</x-button>
+				<x-button
+					variant="outline"
+					class="min-w-[100px] text-error hover:bg-error"
+					@click="open = false"
+				>Close</x-button>
+			</x-slot:actions>
+
+			<x-slot:header_icon>
+				<x-icons.pencil-plus-outline class="w-6 h-6"></x-icons.pencil-plus-outline>
+			</x-slot:header_icon>
+		</x-dialog>
 		@foreach($this->lists as $list)
 			<x-button
 				wire:key="{{$list->id}}"
@@ -26,49 +62,64 @@
 		</label>
 		<x-button type="submit" class="min-w-[80px] h-11 ms-2">
 			<span wire:loading.remove wire:target="store">Add</span>
-			<svg
+			<x-icons.loading
 				wire:loading
 				wire:target="store"
-				class="rotate"
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 24 24"
-				fill="currentColor"
-				width="24"
-				height="24"
-			>
-				<title>loading</title>
-				<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
-			</svg>
+				class="w-6 h-6"
+			></x-icons.loading>
 		</x-button>
 	</form>
 
-	<div class="w-full flex flex-col items-start space-y-3 mb-6">
-		@foreach($this->incompleteTasks as $task)
-			<x-task-box :task="$task"></x-task-box>
-		@endforeach
-	</div>
-	<div x-cloak x-data="{showCompleted: false}" class="w-full flex flex-col">
-		<div
-			class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
-			x-on:click="showCompleted = !showCompleted"
-		>
-			<div class="text-4xl font-bold flex items-center space-x-3">
-				<h3>Completed ({{count($this->completedTasks)}})</h3>
-				<span x-show="showCompleted" class="mb-3">&#8964;</span>
-				<span x-show="!showCompleted" class="mt-3">&#8963;</span>
+	@if(!$this->tasks->count())
+		<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+			🕸️
+			@if($this->lists->count())
+				Your list is empty! Try another list or create new tasks for this list.
+			@else
+				No list! Get started by creating a new list.
+			@endif
+		</p>
+	@else
+		<div class="w-full flex flex-col items-start space-y-3 mb-6">
+			@if($this->incompleteTasks->count())
+				@foreach($this->incompleteTasks as $task)
+					<x-task-box :task="$task"></x-task-box>
+				@endforeach
+			@else
+				<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+					🎉 Congratulations! All tasks completed.
+				</p>
+			@endif
+		</div>
+		<div x-cloak x-data="{showCompleted: {{!$this->completedTasks->count() ? 'true' : 'false'}}}" class="w-full flex flex-col">
+			<div
+				class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
+				x-on:click="showCompleted = !showCompleted"
+			>
+				<div class="text-4xl font-bold flex items-center space-x-3">
+					<h3>Completed ({{count($this->completedTasks)}})</h3>
+					<span x-show="showCompleted" class="mb-3">&#8964;</span>
+					<span x-show="!showCompleted" class="mt-3">&#8963;</span>
+				</div>
+				<div class="text-sm ">Click to show/hide</div>
 			</div>
-			<div class="text-sm ">Click to show/hide</div>
+			<div
+				x-show="showCompleted"
+				x-transition
+				class="flex flex-col items-start space-y-3 mb-6"
+			>
+				@if($this->completedTasks->count())
+					@foreach($this->completedTasks as $task)
+						<x-task-box :task="$task"></x-task-box>
+					@endforeach
+				@else
+					<p class="text-lg text-gray-500 w-full py-4 py-6 box-center text-center">
+						💪 Never give up! You can do it.
+					</p>
+				@endif
+			</div>
 		</div>
-		<div
-			x-show="showCompleted"
-			x-transition
-			class="flex flex-col items-start space-y-3 mb-6"
-		>
-			@foreach($this->completedTasks as $task)
-				<x-task-box :task="$task"></x-task-box>
-			@endforeach
-		</div>
-	</div>
+	@endif
 </div>
 
 @script

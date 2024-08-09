@@ -4,7 +4,7 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'w-full flex items-center px-6 border border-gray-400 rounded-2xl bg-white'
+    	'class' => 'w-full flex items-center px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ $task->id }}"
 >
@@ -26,7 +26,7 @@
 			@endif
 			type="checkbox"
 			@checked($task->is_done)
-			class="w-7 h-7 text-primary focus:ring-primary border-primary border-2 rounded-full"
+			class="w-7 h-7 cursor-pointer bg-transparent text-primary focus:ring-primary border-primary border-2 rounded-full"
 		/>
 		<svg
 			wire:loading
@@ -68,10 +68,10 @@
 			wire:loading.class="hidden"
 			wire:target="delete({{$task->id}})"
 			variant="icon"
-			class="w-11 h-11 flex items-center justify-center text-error"
+			class="w-11 h-11 flex items-center justify-center text-gray-500"
 			wire:click.stop="delete({{$task->id}});"
 		>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>
+			<x-icons.trash-can-outline class="w-6 h-6"></x-icons.trash-can-outline>
 		</x-button>
 
 		{{-- TODO: According to the below github issue, Livewire 3 can't handle alpine in dynamically changing loops  --}}

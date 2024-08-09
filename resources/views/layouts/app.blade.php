@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('body')
-	<div class="min-h-screen bg-gray-200 flex flex-col items-stretch">
+	<div class="min-h-screen bg-gray-100 flex flex-col items-stretch">
 		<nav class="w-full p-4 h-[100px]">
 			<div
 				class="w-full h-full rounded-3xl flex items-center px-7 py-2 bg-primary text-white"

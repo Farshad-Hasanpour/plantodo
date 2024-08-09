@@ -41,6 +41,10 @@ class Tasks extends Component
 		return $this->tasks->where('is_done', 0);
 	}
 
+	public function addList(){
+		dd('add list');
+	}
+
 	public function store(){
 		$this->new_task_form->validate();
 

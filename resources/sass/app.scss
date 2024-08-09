@@ -59,6 +59,10 @@
     display: none;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 /* For Firefox */
 @-moz-document url-prefix() {
 	*{
@@ -106,4 +110,8 @@
 
 .menu-shadow{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.box-center{
+	@apply flex items-center justify-center;
 }
