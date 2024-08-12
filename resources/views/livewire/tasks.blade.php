@@ -28,7 +28,16 @@
 						wire:confirm="Do you want to delete {{$list->name}} and all its tasks?"
 						wire:click.stop="deleteList({{$list->id}})"
 					>
-						<x-icons.trash-can-outline class="w-5 h-5"></x-icons.trash-can-outline>
+						<x-icons.loading
+							wire:loading.flex
+							wire:target="deleteList({{$list->id}})"
+							class="w-5 h-5"
+						></x-icons.loading>
+						<x-icons.trash-can-outline
+							wire:loading.remove
+							wire:target="deleteList({{$list->id}})"
+							class="w-5 h-5"
+						></x-icons.trash-can-outline>
 					</x-button>
 					<x-button
 						variant="icon"
