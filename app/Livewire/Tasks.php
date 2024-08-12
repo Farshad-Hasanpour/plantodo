@@ -57,7 +57,10 @@ class Tasks extends Component
 
 	public function deleteList(TodoList $list){
 		if($list->user_id !== Auth::id()) abort(403);
+		if($this->lists->count() <= 1) return;
 		$list->delete();
+		unset($this->lists);
+		$this->loadList();
 	}
 
 	public function store(){

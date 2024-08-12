@@ -20,7 +20,7 @@
 				wire:click="loadList({{$list->id}})"
 			>
 				<span>{{$list->name ?? 'My List'}}</span>
-				@if($list->id === $this->active_list_id)
+				@if($list->id === $this->active_list_id && $this->lists->count() > 1)
 					<x-button
 						variant="icon"
 						class="ms-2 w-8 h-8"
