@@ -12,6 +12,10 @@ initTWE({
 
 AsyncAlpine.init(Alpine);
 
+document.addEventListener('alpine:init', () => {
+	Alpine.store('modals', {});
+});
+
 Alpine.data('dropdown', () => ({
 	dropdownOpen: false,
 	close(){
@@ -22,10 +26,13 @@ Alpine.data('dropdown', () => ({
 	}
 }));
 
-Alpine.data('dialog', (open, persistent) => ({
+Alpine.data('dialog', (id, open, persistent) => ({
 	open: !!open,
 	persistent: !!persistent,
 	readyToBeClosed: false,
+	init(){
+		this.$store.modals[id] = Alpine.$data(this.$refs[id]);
+	},
 	closeByClick(){
 		if(this.readyToBeClosed) this.open = false;
 		this.readyToBeClosed = false;
