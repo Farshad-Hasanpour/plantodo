@@ -4,7 +4,7 @@
 		{{-- TODO: add list modal --}}
 		<x-button
 			class="box-center mb-2 ms-2 w-10 h-10 !p-0 bg-secondary"
-			@click="$store.modals['new-list-modal'].open = true"
+			@click="$store.modals['todo-list-dialog'].open = true"
 		>
 			<x-icons.plus class="w-7 h-7"></x-icons.plus>
 		</x-button>
@@ -29,6 +29,14 @@
 						wire:click.stop="deleteList({{$list->id}})"
 					>
 						<x-icons.trash-can-outline class="w-5 h-5"></x-icons.trash-can-outline>
+					</x-button>
+					<x-button
+						variant="icon"
+						class="ms-2 w-7 h-7"
+						title="Edit {{$list->name}}"
+						@click.stop="$store.modals['todo-list-dialog'].task = {{Js::from($list)}};$store.modals['todo-list-dialog'].open = true"
+					>
+						<x-icons.pencil-outline class="w-5 h-5"></x-icons.pencil-outline>
 					</x-button>
 				@endif
 			</div>

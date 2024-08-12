@@ -15,7 +15,7 @@ class Tasks extends Component
 {
 	public $active_list_id = null;
 	public NewTaskForm $new_task_form;
-	public NewListForm $new_list_form;
+	public NewListForm $list_form;
 
 	#[Computed]
 	public function lists() {
@@ -44,13 +44,13 @@ class Tasks extends Component
 	}
 
 	public function addList(){
-		$this->new_list_form->validate();
+		$this->list_form->validate();
 
 		$new_list = TodoList::create([
 			'user_id' => Auth::id(),
-			'name' => $this->new_list_form->name,
+			'name' => $this->list_form->name,
 		]);
-		$this->new_list_form->name = '';
+		$this->list_form->name = '';
 		$this->loadList($new_list->id);
 		$this->dispatch('close-list-dialog');
 	}
