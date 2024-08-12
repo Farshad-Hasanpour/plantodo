@@ -68,7 +68,7 @@ html {
 @-moz-document url-prefix() {
 	*{
 		scrollbar-width: thin; /* Options: auto, thin, or none */
-		scrollbar-color: rgb(var(--color-primary)) #f1f1f1; /* thumb color and track color */
+		scrollbar-color: #7d7d7d #f1f1f1; /* thumb color and track color */
 	}
 }
 
@@ -83,12 +83,12 @@ html {
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: rgba(var(--color-primary), 0.9); /* Color of the scroll thumb */
+	background-color: #7d7d7d; /* Color of the scroll thumb */
 	border-radius: 10px; /* Optional: for rounded edges */
 }
 
 *::-webkit-scrollbar-thumb:hover {
-	background-color: rgb(var(--color-primary)); /* Optional: color when hovered */
+	background-color: #6d6d6d; /* Optional: color when hovered */
 }
 
 .flex-center{

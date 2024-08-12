@@ -4,12 +4,12 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'w-full flex items-center px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
+    	'class' => 'w-full flex items-center px-3 lg:px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ $task->id }}"
 >
 	<label
-		class="grow mr-4 cursor-pointer min-h-[64px] select-none flex items-center overflow-hidden py-3"
+		class="grow mr-2 lg:mr-4 cursor-pointer min-h-[64px] select-none flex items-center overflow-hidden py-3"
 		draggable="false"
 		title="{{$task->title}}"
 		@if($task->is_done)
@@ -27,7 +27,7 @@
 			@endif
 			type="checkbox"
 			@checked($task->is_done)
-			class="w-7 h-7 cursor-pointer bg-transparent text-primary focus:ring-primary border-primary border-2 rounded-full"
+			class="w-6 h-6 lg:w-7 lg:h-7 cursor-pointer bg-transparent text-primary focus:ring-primary border-primary border-2 rounded-full"
 		/>
 		<svg
 			wire:loading
