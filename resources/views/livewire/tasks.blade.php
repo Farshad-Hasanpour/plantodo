@@ -12,7 +12,7 @@
 			<div
 				wire:key="{{$list->id}}"
 				@class([
-					'bg-gray-500 cursor-not-allowed' => $list->id === $this->active_list_id,
+					'bg-gray-600 cursor-not-allowed' => $list->id === $this->active_list_id,
 					'bg-primary cursor-pointer' => $list->id !== $this->active_list_id,
 					'mb-2 ms-2 text-sm btn uppercase px-3 min-h-10 text-white rounded-md truncate box-center'
 				])
