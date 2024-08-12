@@ -127,8 +127,8 @@
 	<x-tasks.list-dialog></x-tasks.list-dialog>
 </div>
 
-@script
-<script>
-	console.log($wire);
-</script>
-@endscript
+{{--@script--}}
+{{--<script>--}}
+{{--	console.log($wire);--}}
+{{--</script>--}}
+{{--@endscript--}}
