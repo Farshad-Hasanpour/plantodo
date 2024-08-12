@@ -9,7 +9,7 @@
 	wire:key="{{ $task->id }}"
 >
 	<label
-		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center overflow-hidden py-3"
+		class="grow mr-4 cursor-pointer min-h-[64px] select-none flex items-center overflow-hidden py-3"
 		draggable="false"
 		title="{{$task->title}}"
 		@if($task->is_done)
@@ -44,13 +44,15 @@
 			<title>loading</title>
 			<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
 		</svg>
-		<span class="text-md lg:text-2xl font-normal text-gray-800 ms-4">{{$task->title}}</span>
+		<span class="text-md lg:text-lg font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
 	<div class="actions flex items-center space-x-1">
-		<div class="w-11 h-11 text-gray-500 flex items-center justify-center">
+		<div
+			wire:loading.flex
+			wire:target="delete({{$task->id}})"
+			class="w-11 h-11 text-gray-500 flex items-center justify-center"
+		>
 			<svg
-				wire:loading.flex
-				wire:target="delete({{$task->id}})"
 				class="rotate"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
