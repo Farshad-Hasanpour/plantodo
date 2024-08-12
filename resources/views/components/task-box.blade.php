@@ -47,13 +47,10 @@
 		<span class="text-md lg:text-2xl font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
 	<div class="actions flex items-center space-x-1">
-		<x-button
-			wire:loading.flex
-			wire:target="delete({{$task->id}})"
-			variant="icon"
-			class="w-11 h-11 text-gray-600 flex items-center justify-center"
-		>
+		<div class="w-11 h-11 text-gray-500 flex items-center justify-center">
 			<svg
+				wire:loading.flex
+				wire:target="delete({{$task->id}})"
 				class="rotate"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -64,12 +61,13 @@
 				<title>loading</title>
 				<path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
 			</svg>
-		</x-button>
+		</div>
 		<x-button
 			wire:loading.class="hidden"
 			wire:target="delete({{$task->id}})"
 			variant="icon"
 			class="w-11 h-11 flex items-center justify-center text-gray-500"
+			ripple="gray-500"
 			wire:click.stop="delete({{$task->id}});"
 		>
 			<x-icons.trash-can-outline class="w-6 h-6"></x-icons.trash-can-outline>
