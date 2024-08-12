@@ -32,7 +32,7 @@
 					</x-button>
 					<x-button
 						variant="icon"
-						class="ms-2 w-7 h-7"
+						class="w-7 h-7"
 						title="Edit {{$list->name}}"
 						@click.stop="$store.modals['todo-list-dialog'].task = {{Js::from($list)}};$store.modals['todo-list-dialog'].open = true"
 					>
