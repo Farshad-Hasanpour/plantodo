@@ -55,6 +55,11 @@ class Tasks extends Component
 		$this->dispatch('close-list-dialog');
 	}
 
+	public function deleteList(TodoList $list){
+		if($list->user_id !== Auth::id()) abort(403);
+		$list->delete();
+	}
+
 	public function store(){
 		$this->new_task_form->validate();
 

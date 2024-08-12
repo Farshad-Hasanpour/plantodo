@@ -9,13 +9,29 @@
 			<x-icons.plus class="w-7 h-7"></x-icons.plus>
 		</x-button>
 		@foreach($this->lists as $list)
-			<x-button
+			<div
 				wire:key="{{$list->id}}"
-				class="mb-2 ms-2 text-sm"
-				:disabled="$list->id === $this->active_list_id"
-				title="{{$list->name ?? 'My List'}}"
+				@class([
+					'bg-gray-500 cursor-not-allowed' => $list->id === $this->active_list_id,
+					'bg-primary cursor-pointer' => $list->id !== $this->active_list_id,
+					'mb-2 ms-2 text-sm btn uppercase px-3 min-h-10 text-white rounded-md truncate box-center'
+				])
+				title="View {{$list->name ?? 'My List'}}"
 				wire:click="loadList({{$list->id}})"
-			>{{$list->name ?? 'My List'}}</x-button>
+			>
+				<span>{{$list->name ?? 'My List'}}</span>
+				@if($list->id === $this->active_list_id)
+					<x-button
+						variant="icon"
+						class="ms-2 w-8 h-8"
+						title="Delete {{$list->name}}"
+						wire:confirm="Do you want to delete {{$list->name}} and all its tasks?"
+						wire:click.stop="deleteList({{$list->id}})"
+					>
+						<x-icons.trash-can-outline class="w-5 h-5"></x-icons.trash-can-outline>
+					</x-button>
+				@endif
+			</div>
 		@endforeach
 	</div>
 
