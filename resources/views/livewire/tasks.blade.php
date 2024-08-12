@@ -21,6 +21,7 @@
 						wire:model.defer="new_list_form.name"
 						type="text"
 						class="rounded-lg bg-gray-100 w-full focus:ring-0 border-2 @error('new_list_form.name') border-error focus:border-error @else focus:border-primary @enderror"
+						maxlength="255"
 						placeholder="Enter the list name and press enter"
 					/>
 					<span class="block w-full text-error min-h-[24px]">
@@ -85,6 +86,7 @@
 				type="text"
 				class="rounded-lg w-full focus:ring-0 border-2 h-[44px] @error('new_task_form.title') border-error focus:border-error @else focus:border-primary @enderror"
 				placeholder="Enter the title and press enter"
+				maxlength="255"
 			/>
 			<span class="block w-full text-error min-h-[24px]">
 				@error('new_task_form.title') {{$message}} @enderror

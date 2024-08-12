@@ -9,8 +9,9 @@
 	wire:key="{{ $task->id }}"
 >
 	<label
-		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center py-1"
+		class="grow mr-4 cursor-pointer min-h-[74px] select-none flex items-center overflow-hidden py-3"
 		draggable="false"
+		title="{{$task->title}}"
 		@if($task->is_done)
 			wire:click.prevent="makeTaskIncomplete({{$task->id}})"
 		@else

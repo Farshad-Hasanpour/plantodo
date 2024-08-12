@@ -7,6 +7,6 @@ use Livewire\Form;
 
 class NewListForm extends Form
 {
-	#[Rule('required|string', as: 'list name')]
+	#[Rule('required|string|max:255', as: 'list name')]
 	public $name = '';
 }

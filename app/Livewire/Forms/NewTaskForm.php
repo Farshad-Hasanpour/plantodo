@@ -7,7 +7,7 @@ use Livewire\Form;
 
 class NewTaskForm extends Form
 {
-	#[Rule('required|string', as: 'title')]
+	#[Rule('required|string|max:255', as: 'title')]
 	public $title = '';
 
 	#[Rule('nullable|string', as: 'description')]
