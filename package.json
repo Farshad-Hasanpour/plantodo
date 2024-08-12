@@ -17,6 +17,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "async-alpine": "^1.2.2"
+        "async-alpine": "^1.2.2",
+        "tw-elements": "^2.0.0"
     }
 }

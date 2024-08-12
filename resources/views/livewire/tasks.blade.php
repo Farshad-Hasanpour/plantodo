@@ -42,6 +42,7 @@
 				<x-button
 					variant="outline"
 					class="min-w-[100px] text-error hover:bg-error"
+					ripple="red"
 					@click="open = false"
 				>Close</x-button>
 			</x-slot:actions>

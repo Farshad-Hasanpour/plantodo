@@ -30,9 +30,11 @@ module.exports = {
         './resources/**/*.php',
         './resources/**/*.vue',
         './resources/**/*.twig',
+		"./node_modules/tw-elements/js/**/*.js"
     ],
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+		require("tw-elements/plugin.cjs")
     ],
 }

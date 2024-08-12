@@ -45,6 +45,7 @@
 					<x-button
 						variant="icon"
 						class="w-8 h-8 text-gray-600 flex items-center justify-center"
+						ripple="gray-600"
 						@click="open = false"
 					>
 						<x-icons.close class="w-4 h-4"></x-icons.close>

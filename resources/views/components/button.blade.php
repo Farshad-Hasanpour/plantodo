@@ -1,6 +1,7 @@
 @props([
 	'variant' => 'primary',
 	'type' => 'button',
+	'ripple' => 'white'
 ])
 
 @php
@@ -16,6 +17,10 @@
     	'class' => $variants[$variant]
     ]) }}
 	type="{{$type}}"
+	@if(!empty($ripple))
+		data-twe-ripple-init
+		data-twe-ripple-color="{{$ripple}}"
+	@endif
 >
 	{{$slot}}
 </button>

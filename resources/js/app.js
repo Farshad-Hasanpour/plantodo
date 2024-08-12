@@ -1,6 +1,15 @@
 import './bootstrap';
 import AsyncAlpine from 'async-alpine';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import {
+	Ripple,
+	initTWE
+} from "tw-elements";
+
+initTWE({
+	Ripple
+});
+
 AsyncAlpine.init(Alpine);
 
 Alpine.data('dropdown', () => ({
