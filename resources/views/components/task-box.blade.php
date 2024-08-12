@@ -68,7 +68,7 @@
 			variant="icon"
 			class="w-11 h-11 flex items-center justify-center text-gray-500"
 			ripple="gray-500"
-			wire:click.stop="delete({{$task->id}});"
+			@click.stop="confirm('Do you want to delete this task?') && $wire.delete({{$task->id}});"
 		>
 			<x-icons.trash-can-outline class="w-6 h-6"></x-icons.trash-can-outline>
 		</x-button>
