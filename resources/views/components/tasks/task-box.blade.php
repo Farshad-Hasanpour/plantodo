@@ -52,7 +52,7 @@
 			@class([
         		'habit-button--active bg-secondary' => $task->is_daily_habit,
                 'bg-gray-500' => !$task->is_daily_habit,
-        		"habit-button min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
+        		"habit-button flex min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
         	])
 			wire:click="toggleDailyHabit({{$task->id}})"
 		>
@@ -121,14 +121,14 @@
 	</div>
 </div>
 
-@pushonce('styles')
-<style>
-	.habit-button{
-		display: none;
-	}
-	.task-box:hover .habit-button,
-	.habit-button--active{
-		display: flex;
-	}
-</style>
-@endpushonce
+{{--@pushonce('styles')--}}
+{{--<style>--}}
+{{--	.habit-button{--}}
+{{--		display: none;--}}
+{{--	}--}}
+{{--	.task-box:hover .habit-button,--}}
+{{--	.habit-button--active{--}}
+{{--		display: flex;--}}
+{{--	}--}}
+{{--</style>--}}
+{{--@endpushonce--}}
