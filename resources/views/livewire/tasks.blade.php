@@ -1,12 +1,15 @@
 <div class="flex flex-wrap">
 	{{-- All lists plus add form --}}
-	<div class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2" style="width: calc(100% + 8px)">
-		{{-- TODO: add list modal --}}
+	<div
+		x-data="{todoListToEdit: null}"
+		class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2"
+		style="width: calc(100% + 8px)"
+	>
 		<x-button
 			class="box-center mb-2 ms-2 w-10 h-10 !p-0 bg-secondary"
 			@click="
 				$wire.list_form.name = '';
-				$store.todoListToEdit = null;
+				todoListToEdit = null;
 				$store.modals['todo-list-dialog'].open = true
 			"
 		>
@@ -49,7 +52,7 @@
 						title="Edit {{$list->name}}"
 						@click.stop="
 							$wire.list_form.name = '{{$list->name}}';
-							$store.todoListToEdit = {{Js::from($list)}};
+							todoListToEdit = {{Js::from($list)}};
 							$store.modals['todo-list-dialog'].open = true
 						"
 					>
@@ -58,6 +61,7 @@
 				@endif
 			</div>
 		@endforeach
+		<x-tasks.list-dialog></x-tasks.list-dialog>
 	</div>
 
 	{{-- List Loader --}}
@@ -165,5 +169,4 @@
 			</div>
 		</div>
 	@endif
-	<x-tasks.list-dialog></x-tasks.list-dialog>
 </div>
