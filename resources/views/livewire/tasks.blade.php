@@ -21,8 +21,9 @@
 				@class([
 					'bg-gray-600 cursor-not-allowed' => $list->id === $this->active_list_id,
 					'bg-primary cursor-pointer' => $list->id !== $this->active_list_id,
-					'mb-2 ms-2 text-sm btn uppercase px-3 min-h-10 text-white rounded-md truncate box-center'
+					'mb-2 ms-2 text-sm btn px-3 min-h-10 text-white rounded-md truncate box-center'
 				])
+				tabindex="0"
 				title="View {{$list->name ?? 'My List'}}"
 				wire:click="loadList({{$list->id}})"
 			>
