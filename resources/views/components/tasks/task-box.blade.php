@@ -4,7 +4,7 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'w-full flex items-center px-3 lg:px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
+    	'class' => 'task-box w-full flex items-center px-3 lg:px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ $task->id }}"
 >
@@ -47,6 +47,25 @@
 		<span class="text-md lg:text-lg font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
 	<div class="actions flex items-center space-x-1">
+		<x-button
+			variant=""
+			@class([
+        		'habit-button--active bg-secondary' => $task->is_daily_habit,
+                'bg-gray-500' => !$task->is_daily_habit,
+        		"habit-button min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
+        	])
+			wire:click="toggleDailyHabit({{$task->id}})"
+		>
+			<span
+				wire:loading.remove
+				wire:target="toggleDailyHabit({{$task->id}})"
+			>Daily</span>
+			<x-icons.loading
+				wire:loading
+				wire:target="toggleDailyHabit({{$task->id}})"
+				class="w-4 h-4"
+			></x-icons.loading>
+		</x-button>
 		<div
 			wire:loading.flex
 			wire:target="delete({{$task->id}})"
@@ -101,3 +120,15 @@
 		</x-dropdown> -->
 	</div>
 </div>
+
+@pushonce('styles')
+<style>
+	.habit-button{
+		display: none;
+	}
+	.task-box:hover .habit-button,
+	.habit-button--active{
+		display: flex;
+	}
+</style>
+@endpushonce

@@ -65,8 +65,8 @@
 				</div>
 			@endisset
 		</{{$is_form ? 'form' : 'div'}}>
-	</template>
-</div>
+	</div>
+</template>
 
 @pushonce('styles')
 <style>

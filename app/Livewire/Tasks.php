@@ -87,6 +87,7 @@ class Tasks extends Component
 			'description' => empty($this->new_task_form->description)
 				? null
 				: $this->new_task_form->description,
+			'is_daily_habit' => $this->new_task_form->is_daily_habit,
 			'priority' => 1 + $this->tasks->max('priority')
 		]);
 		$this->new_task_form->title = '';
@@ -94,6 +95,13 @@ class Tasks extends Component
 
 		// refresh computed property
 		unset($this->tasks);
+	}
+
+	public function toggleDailyHabit(Task $task){
+		$this->authorize('update', $task);
+		$task->update([
+			'is_daily_habit' => !$task->is_daily_habit,
+		]);
 	}
 
 	public function delete(Task $task){
