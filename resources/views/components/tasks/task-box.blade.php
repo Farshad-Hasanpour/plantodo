@@ -4,7 +4,7 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'task-box w-full flex items-center px-3 lg:px-6 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
+    	'class' => 'task-box w-full flex items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ $task->id }}"
 >
@@ -27,7 +27,7 @@
 			@endif
 			type="checkbox"
 			@checked($task->is_done)
-			class="w-6 h-6 lg:w-7 lg:h-7 cursor-pointer bg-transparent text-primary focus:ring-primary border-primary border-2 rounded-full"
+			class="w-6 h-6 lg:w-7 lg:h-7 ms-1 cursor-pointer bg-transparent text-primary focus:ring-primary border-primary border-2 rounded-full"
 		/>
 		<svg
 			wire:loading
