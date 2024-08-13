@@ -4,7 +4,11 @@
 		{{-- TODO: add list modal --}}
 		<x-button
 			class="box-center mb-2 ms-2 w-10 h-10 !p-0 bg-secondary"
-			@click="$store.modals['todo-list-dialog'].open = true"
+			@click="
+				$wire.list_form.name = '';
+				$store.todoListToEdit = null;
+				$store.modals['todo-list-dialog'].open = true
+			"
 		>
 			<x-icons.plus class="w-7 h-7"></x-icons.plus>
 		</x-button>
@@ -43,7 +47,11 @@
 						variant="icon"
 						class="w-7 h-7"
 						title="Edit {{$list->name}}"
-						@click.stop="$store.modals['todo-list-dialog'].task = {{Js::from($list)}};$store.modals['todo-list-dialog'].open = true"
+						@click.stop="
+							$wire.list_form.name = '{{$list->name}}';
+							$store.todoListToEdit = {{Js::from($list)}};
+							$store.modals['todo-list-dialog'].open = true
+						"
 					>
 						<x-icons.pencil-outline class="w-5 h-5"></x-icons.pencil-outline>
 					</x-button>
@@ -159,9 +167,3 @@
 	@endif
 	<x-tasks.list-dialog></x-tasks.list-dialog>
 </div>
-
-{{--@script--}}
-{{--<script>--}}
-{{--	console.log($wire);--}}
-{{--</script>--}}
-{{--@endscript--}}

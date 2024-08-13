@@ -33,13 +33,13 @@
 			@mouseup.stop
 			@mousedown.stop
 			@if($is_form)
-				wire:submit.prevent="{{$on_save}}"
+				@submit.prevent="{{$on_save}}"
 			@endif
 		>
 			<div class="shrink grow-0 flex items-center justify-between space-x-2 border-b-2 p-4">
 				<div class="flex items-center space-x-2 text-gray-600">
 					{{$header_icon ?? null}}
-					<h3 class="dialog-title text-xl text-bold mb-0">{{ $title }}</h3>
+					<h3 class="dialog-title text-xl text-bold mb-0" x-text="{{ $title }}"></h3>
 				</div>
 				<x-button
 					variant="icon"

@@ -1,8 +1,8 @@
 <x-dialog
 	id="todo-list-dialog"
-	title="Add a List"
+	title="$store.todoListToEdit ? `Edit ${$store.todoListToEdit.name}` : 'Add a List'"
 	is_form
-	on_save="addList"
+	on_save="$store.todoListToEdit ? $wire.editList($store.todoListToEdit.id) : $wire.addList()"
 >
 	<x-slot:content>
 		<div class="w-full" @close-list-dialog.window="open = false">
@@ -21,10 +21,14 @@
 
 	<x-slot:actions>
 		<x-button type="submit" class="min-w-[100px]">
-			<span wire:loading.remove wire:target="addList">Add</span>
+			<span
+				wire:loading.remove
+				wire:target="addList, editList"
+				x-text="$store.todoListToEdit ? 'Edit' : 'Add'"
+			></span>
 			<x-icons.loading
 				wire:loading
-				wire:target="addList"
+				wire:target="addList, editList"
 				class="w-6 h-6"
 			></x-icons.loading>
 		</x-button>
@@ -40,3 +44,11 @@
 		<x-icons.pencil-plus-outline class="w-6 h-6"></x-icons.pencil-plus-outline>
 	</x-slot:header_icon>
 </x-dialog>
+
+@script
+<script>
+document.addEventListener('alpine:init', () => {
+	Alpine.$store('todoListToEdit', null)
+})
+</script>
+@endscript

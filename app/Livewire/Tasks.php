@@ -55,6 +55,16 @@ class Tasks extends Component
 		$this->dispatch('close-list-dialog');
 	}
 
+	public function editList(TodoList $list){
+		if($list->user_id !== Auth::id()) abort(403);
+		$this->list_form->validate();
+
+		$list->update([
+			'name' => $this->list_form->name,
+		]);
+		$this->dispatch('close-list-dialog');
+	}
+
 	public function deleteList(TodoList $list){
 		if($list->user_id !== Auth::id()) abort(403);
 		if($this->lists->count() <= 1) return;
