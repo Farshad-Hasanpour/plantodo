@@ -36,7 +36,7 @@
 			@else
 				wire:target="completeTask({{$task->id}})"
 			@endif
-			class="rotate w-7 h-7 text-primary"
+			class="rotate w-6 h-6 lg:w-7 lg:h-7 ms-1 text-primary"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 24 24"
 			fill="currentColor"
