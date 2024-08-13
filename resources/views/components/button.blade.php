@@ -1,7 +1,7 @@
 @props([
 	'variant' => 'primary',
 	'type' => 'button',
-	'ripple' => 'white'
+	'ripple' => 'white',
 ])
 
 @php

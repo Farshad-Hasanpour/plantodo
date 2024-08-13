@@ -54,7 +54,8 @@
                 'bg-gray-500' => !$task->is_daily_habit,
         		"habit-button flex min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
         	])
-			wire:click="toggleDailyHabit({{$task->id}})"
+			title="{{$task->is_daily_habit ? 'Deactivate the daily reset of task.' : 'Activate to reset the task on a daily basis.'}}"
+			wire:click.stop="toggleDailyHabit({{$task->id}})"
 		>
 			<span
 				wire:loading.remove
@@ -84,7 +85,7 @@
 			</svg>
 		</div>
 		<x-button
-			wire:loading.class="hidden"
+			wire:loading.remove
 			wire:target="delete({{$task->id}})"
 			variant="icon"
 			class="w-11 h-11 flex items-center justify-center text-gray-500"
