@@ -4,7 +4,7 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'task-box w-full flex items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
+    	'class' => 'task-box w-full flex flex-wrap md:flex-nowrap items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ $task->id }}"
 >
@@ -46,7 +46,7 @@
 		</svg>
 		<span class="text-md lg:text-lg font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
-	<div class="actions flex items-center space-x-1">
+	<div class="w-full md:w-auto py-1 md:py-0 border-t-[1px] md:border-none border-gray-300 actions flex items-center justify-end space-x-1">
 		<x-button
 			variant=""
 			@class([
