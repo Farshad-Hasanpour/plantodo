@@ -10,6 +10,7 @@ use App\Models\TodoList;
 use App\Livewire\Forms\NewTaskForm;
 use App\Livewire\Forms\NewListForm;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use \Illuminate\Support\Facades\DB;
 
 class Tasks extends Component
 {
@@ -74,22 +75,37 @@ class Tasks extends Component
 	}
 
 	public function updateTasks($values){
+		// id of all rows
 		$ids = array_map(function($value){
 			return $value['id'];
 		}, $values);
 
+		// authorize all rows
 		$listIds = Task::whereIn('id', $ids)->get()->pluck('list_id')->unique();
 		if(
 			$listIds->count() != 1 ||
 			TodoList::find($listIds[0])?->user_id != Auth::id()
 		) abort(403);
 
-		foreach($values as $value){
-			$query = Task::where('id', $value['id']);
-			unset($value['id']);
-			$query->update($value);
+		// update priorities for all rows with one query
+		$sql = "UPDATE `tasks` SET `priority` = CASE `id`";
+		$params = [];
+		foreach ($values as $value) {
+			$sql .= " WHEN {$value['id']} THEN ?";
+			$params[] = $value['priority'];
 		}
-		unset($this->tasks);
+		$sql .= " END, `updated_at` = NOW() WHERE `id` IN (" . implode(',', array_column($values, 'id')) . ")";
+		DB::update($sql, $params);
+
+		// update is_done for all rows with one query
+		$is_done_sql = "UPDATE `tasks` SET `is_done` = CASE `id`";
+		$params = [];
+		foreach ($values as $value) {
+			$is_done_sql .= " WHEN {$value['id']} THEN ?";
+			$params[] = $value['is_done'];
+		}
+		$is_done_sql .= " END WHERE `id` IN (" . implode(',', array_column($values, 'id')) . ")";
+		DB::update($is_done_sql, $params);
 	}
 
 	public function store(){

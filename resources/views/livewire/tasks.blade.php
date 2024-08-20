@@ -218,11 +218,7 @@
 		const mapFunction = (task) => ({
 			id: task.id,
 			priority: start++,
-			...(
-				removed.id === task.id &&
-				data.from.type !== data.to.type &&
-				{is_done: !removed.is_done}
-			)
+			is_done: removed.id === task.id && data.from.type !== data.to.type ? Number(!removed.is_done) : Number(task.is_done),
 		})
 
 		const tasks = [
