@@ -6,7 +6,7 @@
 	{{ $attributes->merge([
     	'class' => 'task-box w-full flex flex-wrap md:flex-nowrap items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
-	wire:key="{{ $task->id }}"
+	wire:key="{{ ($task->is_done ? 'completed-' : 'incomplete-').$task->id }}"
 >
 	<label
 		class="grow mr-2 lg:mr-4 cursor-pointer min-h-[64px] select-none flex items-center overflow-hidden py-3"
@@ -46,13 +46,15 @@
 		</svg>
 		<span class="text-md lg:text-lg font-normal text-gray-800 ms-4">{{$task->title}}</span>
 	</label>
-	<div class="w-full md:w-auto py-1 md:py-0 border-t-[1px] md:border-none border-gray-300 actions flex items-center justify-end space-x-1">
+	<div
+		class="w-full md:w-auto py-1 md:py-0 border-t-[1px] md:border-none border-gray-300 actions flex items-center justify-end space-x-1"
+	>
 		<x-button
 			variant=""
 			@class([
         		'habit-button--active bg-secondary' => $task->is_daily_habit,
                 'bg-gray-500' => !$task->is_daily_habit,
-        		"habit-button flex min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
+        		"habit-button flex me-2 min-w-[48px] btn select-none items-center justify-center rounded-full text-xs font-bold text-white py-1 transition-colors"
         	])
 			title="{{$task->is_daily_habit ? 'Deactivate the daily reset of task.' : 'Activate to reset the task on a daily basis.'}}"
 			wire:click.stop="toggleDailyHabit({{$task->id}})"
@@ -66,6 +68,26 @@
 				wire:target="toggleDailyHabit({{$task->id}})"
 				class="w-4 h-4"
 			></x-icons.loading>
+		</x-button>
+		<x-button
+			wire:loading.remove
+			wire:target="updateTasks"
+			variant="icon"
+			class="w-11 h-11 text-gray-500 disabled:opacity-40"
+			ripple="gray-500"
+			x-sort:handle
+		>
+			<x-icons.drag-horizontal-variant class="w-6 h-6"></x-icons.drag-horizontal-variant>
+		</x-button>
+		<x-button
+			wire:loading.flex
+			wire:target="updateTasks"
+			variant="icon"
+			class="w-11 h-11 text-gray-500 disabled:opacity-40"
+			ripple="gray-500"
+			disabled
+		>
+			<x-icons.drag-horizontal-variant class="w-6 h-6"></x-icons.drag-horizontal-variant>
 		</x-button>
 		<div
 			wire:loading.flex
@@ -88,7 +110,7 @@
 			wire:loading.remove
 			wire:target="delete({{$task->id}})"
 			variant="icon"
-			class="w-11 h-11 flex items-center justify-center text-gray-500"
+			class="w-11 h-11 text-gray-500"
 			ripple="gray-500"
 			wire:confirm="Do you want to delete this task?"
 			wire:click.stop="delete({{$task->id}});"
@@ -122,14 +144,17 @@
 	</div>
 </div>
 
-{{--@pushonce('styles')--}}
-{{--<style>--}}
-{{--	.habit-button{--}}
-{{--		display: none;--}}
-{{--	}--}}
-{{--	.task-box:hover .habit-button,--}}
-{{--	.habit-button--active{--}}
-{{--		display: flex;--}}
-{{--	}--}}
-{{--</style>--}}
-{{--@endpushonce--}}
+@assets
+<style>
+	.task-box.sortable-ghost {
+		opacity: .7 !important;
+	}
+	.task-box.sortable-drag{
+		background-color: white !important;
+		border: 2px solid rgb(var(--color-secondary));
+	}
+	body.sorting .task-box:hover{
+		background-color: white !important;
+	}
+</style>
+@endassets

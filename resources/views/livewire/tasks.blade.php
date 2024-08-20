@@ -124,10 +124,25 @@
 			wire:target="loadList"
 			wire:loading.remove
 			class="w-full flex flex-col items-start space-y-3 mb-6"
+			x-sort:group="todos"
+			x-sort.ghost="sortTasks(
+				{...$item, to: {index: $position, type: 'incomplete'}},
+				$wire,
+				Object.values({{Js::from($this->incompleteTasks)}}),
+				Object.values({{Js::from($this->completedTasks)}})
+			)"
 		>
 			@if($this->incompleteTasks->count())
 				@foreach($this->incompleteTasks as $task)
-					<x-tasks.task-box :task="$task"></x-tasks.task-box>
+					<x-tasks.task-box
+						:task="$task"
+						x-sort:item="{{ json_encode([
+    						'from' => [
+                                'index' => $loop->index,
+                                'type' => 'incomplete'
+							]
+						]) }}"
+					/>
 				@endforeach
 			@else
 				<p class="text-lg text-gray-500 w-full py-6 box-center text-center">
@@ -157,10 +172,25 @@
 				x-show="showCompleted"
 				x-transition
 				class="flex flex-col items-start space-y-3 mb-6"
+				x-sort:group="todos"
+				x-sort.ghost="sortTasks(
+					{...$item, to: {index: $position, type: 'complete'}},
+					$wire,
+					Object.values({{Js::from($this->incompleteTasks)}}),
+					Object.values({{Js::from($this->completedTasks)}})
+				)"
 			>
 				@if($this->completedTasks->count())
 					@foreach($this->completedTasks as $task)
-						<x-tasks.task-box :task="$task"></x-tasks.task-box>
+						<x-tasks.task-box
+							:task="$task"
+							x-sort:item="{{ json_encode([
+								'from' => [
+									'index' => $loop->index,
+									'type' => 'complete'
+								]
+							]) }}"
+						/>
 					@endforeach
 				@else
 					<p class="text-lg text-gray-500 w-full py-6 box-center text-center">
@@ -171,3 +201,36 @@
 		</div>
 	@endif
 </div>
+
+@assets
+<script>
+	function sortTasks(data, $wire, incompleteTasks, completedTasks) {
+		if(data.from.index === data.to.index && data.from.type === data.to.type) return;
+
+		const listToRemoveFrom = data.from.type === 'complete' ? completedTasks : incompleteTasks;
+		const removed = listToRemoveFrom.splice(data.from.index, 1)[0];
+
+		const listToAddTo = data.to.type === 'complete' ? completedTasks : incompleteTasks;
+
+		listToAddTo.splice(data.to.index, 0, removed);
+
+		let start = 0;
+		const mapFunction = (task) => ({
+			id: task.id,
+			priority: start++,
+			title: task.title,
+			...(
+				removed.id === task.id &&
+				data.from.type !== data.to.type &&
+				{is_done: !removed.is_done}
+			)
+		})
+
+		const tasks = [
+			...completedTasks.reverse().map(mapFunction),
+			...incompleteTasks.reverse().map(mapFunction),
+		];
+		$wire.updateTasks(tasks)
+	}
+</script>
+@endassets

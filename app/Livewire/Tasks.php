@@ -73,6 +73,16 @@ class Tasks extends Component
 		$this->loadList();
 	}
 
+	//TODO: improve performance
+	public function updateTasks($tasks){
+		foreach($tasks as $task){
+			$model = Task::find($task['id']);
+			$this->authorize('update', $model);
+			$model->update($task);
+		}
+		unset($this->tasks);
+	}
+
 	public function store(){
 		$this->new_task_form->validate();
 

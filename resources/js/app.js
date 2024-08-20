@@ -1,6 +1,7 @@
 import './bootstrap';
 import AsyncAlpine from 'async-alpine';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import sort from '@alpinejs/sort'
 import {
 	Ripple,
 	initTWE
@@ -41,5 +42,6 @@ Alpine.data('dialog', (id, open, persistent) => ({
 
 // Define AsyncAlpine Components here
 
+Alpine.plugin(sort);
 AsyncAlpine.start();
 Livewire.start()
