@@ -17,8 +17,6 @@ class TaskPolicy
     }
 
 	public function update(User $user, Task $task){
-		return (
-			$user->id === $task->TodoList->user_id
-		);
+		return ($user->id === $task->TodoList->user_id);
 	}
 }

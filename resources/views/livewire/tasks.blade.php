@@ -218,7 +218,6 @@
 		const mapFunction = (task) => ({
 			id: task.id,
 			priority: start++,
-			title: task.title,
 			...(
 				removed.id === task.id &&
 				data.from.type !== data.to.type &&

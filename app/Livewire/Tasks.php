@@ -73,12 +73,21 @@ class Tasks extends Component
 		$this->loadList();
 	}
 
-	//TODO: improve performance
-	public function updateTasks($tasks){
-		foreach($tasks as $task){
-			$model = Task::find($task['id']);
-			$this->authorize('update', $model);
-			$model->update($task);
+	public function updateTasks($values){
+		$ids = array_map(function($value){
+			return $value['id'];
+		}, $values);
+
+		$listIds = Task::whereIn('id', $ids)->get()->pluck('list_id')->unique();
+		if(
+			$listIds->count() != 1 ||
+			TodoList::find($listIds[0])?->user_id != Auth::id()
+		) abort(403);
+
+		foreach($values as $value){
+			$query = Task::where('id', $value['id']);
+			unset($value['id']);
+			$query->update($value);
 		}
 		unset($this->tasks);
 	}
