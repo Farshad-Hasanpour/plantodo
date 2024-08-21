@@ -1,130 +1,712 @@
 @extends('layouts.landing')
 
 @section('content')
-
-    <style>
-        @media(prefers-color-scheme: dark){ .bg-dots{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(200,200,255,0.15)'/%3E%3C/svg%3E");}}@media(prefers-color-scheme: light){.bg-dots{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,50,0.10)'/%3E%3C/svg%3E")}}
-    </style>
-
-    <div class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
-        @if (Route::has('login'))
-            <div class="p-6 text-right sm:fixed sm:top-0 sm:right-0">
-                @auth
-                    <a href="{{ route('todo-list') }}" class="uppercase font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Dashboard</a>
-					<form
-						action="{{ route('logout') }}"
-						method="POST"
-						class="inline-block ml-4"
+<!--====== NAVBAR NINE PART START ======-->
+<nav
+	class="text-slate-700 antialiased top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
+>
+	<div
+		class="landing-container px-4 mx-auto flex flex-wrap items-center justify-between"
+	>
+		<div
+			class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+		>
+			<a
+				class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+				href="#"
+			>Notus Tailwind JS</a
+			><button
+				class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+				type="button"
+				onclick="toggleNavbar('example-collapse-navbar')"
+			>
+				<i class="text-white fas fa-bars"></i>
+			</button>
+		</div>
+		<div
+			class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden"
+			id="example-collapse-navbar"
+		>
+			<ul class="flex flex-col lg:flex-row list-none mr-auto">
+				<li class="flex items-center">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="https://www.creative-tim.com/learning-lab/tailwind/js/overview/notus?ref=njs-landing"
+					><i
+							class="lg:text-slate-200 text-slate-400 far fa-file-alt text-lg leading-lg mr-2"
+						></i>
+						Docs</a
 					>
-						@csrf
-						<button
-							type="submit"
-							class="uppercase font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
-						>Logout</button>
-					</form>
-				@else
-                    <a href="{{ route('login') }}" class="uppercase font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log in</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="uppercase ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
-
-        <div class="p-6 mx-auto max-w-7xl lg:p-8">
-            <div class="flex flex-col justify-center items-center">
-                <svg class="w-auto h-16 text-indigo-600 bg-gray-100 dark:bg-gray-900" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z" fill="currentColor"/>
-                </svg>
-				<p class="text-white mt-2">{{$announcement['msg']}}</p>
-				@auth
-					<p class="text-white mt-2">Hello User</p>
-				@endauth
-				@guest
-					<p class="text-white mt-2">Hello guest</p>
-				@endguest
-            </div>
-            <div class="mt-16">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-					@php
-						$cards = [
-							[
-								'link' => 'https://tailwindcss.com/docs',
-								'title' => 'Tailwind CSS',
-								'description' => 'Tailwind CSS is a popular utility-first CSS framework that makes it easy to style pages by applying pre-defined classes to HTML elements.',
-								'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center w-6 h-6 mx-6 shrink-0 stroke-indigo-500">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-								</svg>'
-							],
-							[
-								'link' => 'https://alpinejs.dev/docs',
-								'title' => 'AlpineJS',
-								'description' => 'AlpineJS is a lightweight JavaScript framework that allows you to add interactivity to your HTML using simple declarative syntax.',
-								'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center w-6 h-6 mx-6 shrink-0 stroke-indigo-500">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-								</svg>'
-							],
-							[
-								'link' => 'https://laravel.com/docs',
-								'title' => 'Laravel',
-								'description' => 'Laravel is a free and open-source PHP web framework that allows developers to build web applications quickly and easily.',
-								'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center w-6 h-6 mx-6 shrink-0 stroke-indigo-500">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-								</svg>'
-							],
-							[
-								'link' => 'https://livewire.laravel.com/docs',
-								'title' => 'Livewire',
-								'description' => 'Livewire is a tool that simplifies the process of creating interactive and dynamic user interfaces using PHP and Laravel.',
-								'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center w-6 h-6 mx-6 shrink-0 stroke-indigo-500">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-								</svg>'
-							]
-						]
-					@endphp
-					@forelse($cards as $card)
-						<x-intro-box
-							link="{{$card['link']}}"
-							title="{{$card['title']}}"
-							description="{{$card['description']}}"
-							tabindex="{{$loop->index + 1}}"
-							@class([
-								'p-6' => true,
-							])
+				</li>
+			</ul>
+			<ul
+				class="flex flex-col lg:flex-row list-none lg:ml-auto items-center"
+			>
+				<li class="inline-block relative">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="#pablo"
+						onclick="openDropdown(event,'demo-pages-dropdown')"
+					>
+						Demo Pages
+					</a>
+					<div
+						class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-[48px]"
+						id="demo-pages-dropdown"
+					>
+                <span
+					class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
+				>
+                  Admin Layout
+                </span>
+						<a
+							href="./admin/dashboard.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
 						>
-							{!! $card['icon'] !!}
-						</x-intro-box>
-						@empty
-						<p class="text-white text-center">No Info to show</p>
-					@endforelse
-                </div>
-            </div>
-            <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
-                <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">
-                    <div class="flex items-center gap-4">
-                        <a href="https://github.com/sponsors/taylorotwell" class="inline-flex items-center group hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-5 h-5 mr-1 -mt-px stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                            Sponsor
-                        </a>
-                    </div>
-                </div>
-                <div class="ml-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) & Livewire
-                    {{ \Composer\InstalledVersions::getPrettyVersion('livewire/livewire') }}
-                </div>
-            </div>
-        </div>
-    </div>
+							Dashboard
+						</a>
+						<a
+							href="./admin/settings.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Settings
+						</a>
+						<a
+							href="./admin/tables.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Tables
+						</a>
+						<a
+							href="./admin/maps.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Maps
+						</a>
+						<div
+							class="h-0 mx-4 my-2 border border-solid border-slate-100"
+						></div>
+						<span
+							class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
+						>
+                  Auth Layout
+                </span>
+						<a
+							href="./auth/login.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Login
+						</a>
+						<a
+							href="./auth/register.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Register
+						</a>
+						<div
+							class="h-0 mx-4 my-2 border border-solid border-slate-100"
+						></div>
+						<span
+							class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
+						>
+                  No Layout
+                </span>
+						<a
+							href="./landing.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Landing
+						</a>
+						<a
+							href="./profile.html"
+							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						>
+							Profile
+						</a>
+					</div>
+				</li>
+				<li class="flex items-center">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-js%2F"
+						target="_blank"
+					><i
+							class="lg:text-slate-200 text-slate-400 fab fa-facebook text-lg leading-lg"
+						></i
+						><span class="lg:hidden inline-block ml-2">Share</span></a
+					>
+				</li>
+				<li class="flex items-center">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-js%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20JavaScript%20UI%20Kit%20and%20Admin.%20Let%20Notus%20JS%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level."
+						target="_blank"
+					><i
+							class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
+						></i
+						><span class="lg:hidden inline-block ml-2">Tweet</span></a
+					>
+				</li>
+				<li class="flex items-center">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="https://github.com/creativetimofficial/notus-js?ref=njs-landing"
+						target="_blank"
+					><i
+							class="lg:text-slate-200 text-slate-400 fab fa-github text-lg leading-lg"
+						></i
+						><span class="lg:hidden inline-block ml-2">Star</span></a
+					>
+				</li>
+				<li class="flex items-center">
+					<button
+						class="bg-white text-slate-700 active:bg-slate-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+						type="button"
+					>
+						<i class="fas fa-arrow-alt-circle-down"></i> Download
+					</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<main class="text-slate-700 antialiased">
+	<div
+		class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-[75vh]"
+	>
+		<div
+			class="absolute top-0 w-full h-full bg-center bg-cover"
+			style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1267&amp;q=80');"
+		>
+          <span
+			  id="blackOverlay"
+			  class="w-full h-full absolute opacity-75 bg-black"
+		  ></span>
+		</div>
+		<div class="landing-container relative mx-auto">
+			<div class="items-center flex flex-wrap">
+				<div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+					<div class="pr-12">
+						<h1 class="text-white font-semibold text-5xl">
+							Your story starts with us.
+						</h1>
+						<p class="mt-4 text-lg text-slate-200">
+							This is a simple example of a Landing Page you can build using
+							Notus Tailwind JS. It features multiple CSS components based
+							on the Tailwind CSS design system.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-[70px] flex items-end"
+		>
+			<svg
+				class="h-full"
+				xmlns="http://www.w3.org/2000/svg"
+				preserveAspectRatio="none"
+				version="1.1"
+				viewBox="0 0 2560 100"
+				x="0"
+				y="0"
+			>
+				<polygon
+					class="text-slate-200 fill-current"
+					points="2560 0 2560 100 0 100"
+				></polygon>
+			</svg>
+		</div>
+	</div>
+	<section class="pb-20 bg-slate-200 -mt-24">
+		<div class="landing-container mx-auto px-4">
+			<div class="flex flex-wrap">
+				<div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+					<div
+						class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+					>
+						<div class="px-4 py-5 flex-auto">
+							<div
+								class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400"
+							>
+								<i class="fas fa-award"></i>
+							</div>
+							<h6 class="text-xl font-semibold">Awarded Agency</h6>
+							<p class="mt-2 mb-4 text-slate-500">
+								Divide details about your product or agency work into parts.
+								A paragraph describing a feature will be enough.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="w-full md:w-4/12 px-4 text-center">
+					<div
+						class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+					>
+						<div class="px-4 py-5 flex-auto">
+							<div
+								class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-sky-400"
+							>
+								<i class="fas fa-retweet"></i>
+							</div>
+							<h6 class="text-xl font-semibold">Free Revisions</h6>
+							<p class="mt-2 mb-4 text-slate-500">
+								Keep you user engaged by providing meaningful information.
+								Remember that by this time, the user is curious.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="pt-6 w-full md:w-4/12 px-4 text-center">
+					<div
+						class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+					>
+						<div class="px-4 py-5 flex-auto">
+							<div
+								class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400"
+							>
+								<i class="fas fa-fingerprint"></i>
+							</div>
+							<h6 class="text-xl font-semibold">Verified Company</h6>
+							<p class="mt-2 mb-4 text-slate-500">
+								Write a few lines about each one. A paragraph describing a
+								feature will be enough. Keep you user engaged!
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flex flex-wrap items-center mt-32">
+				<div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+					<div
+						class="text-slate-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
+					>
+						<i class="fas fa-user-friends text-xl"></i>
+					</div>
+					<h3 class="text-3xl mb-2 font-semibold leading-normal">
+						Working with us is a pleasure
+					</h3>
+					<p
+						class="text-lg font-light leading-relaxed mt-4 mb-4 text-slate-600"
+					>
+						Don't let your uses guess by attaching tooltips and popoves to
+						any element. Just make sure you enable them first via
+						JavaScript.
+					</p>
+					<p
+						class="text-lg font-light leading-relaxed mt-0 mb-4 text-slate-600"
+					>
+						The kit comes with three pre-built pages to help you get started
+						faster. You can change the text and images and you're good to
+						go. Just make sure you enable them first via JavaScript.
+					</p>
+					<a href="#" class="font-bold text-slate-700 mt-8"
+					>Check Notus Tailwind JS!</a
+					>
+				</div>
+				<div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+					<div
+						class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-pink-500"
+					>
+						<img
+							alt="..."
+							src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
+							class="w-full align-middle rounded-t-lg"
+						/>
+						<blockquote class="relative p-8 mb-4">
+							<svg
+								preserveAspectRatio="none"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 583 95"
+								class="absolute left-0 w-full block h-[95px] top-[-94px]"
+							>
+								<polygon
+									points="-30,95 583,95 583,65"
+									class="text-pink-500 fill-current"
+								></polygon>
+							</svg>
+							<h4 class="text-xl font-bold text-white">
+								Top Notch Services
+							</h4>
+							<p class="text-md font-light mt-2 text-white">
+								The Arctic Ocean freezes every winter and much of the
+								sea-ice then thaws every summer, and that process will
+								continue whatever happens.
+							</p>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="relative py-20">
+		<div
+			class="bottom-0 top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20 flex items-end"
+		>
+			<svg
+				class="w-full h-full"
+				xmlns="http://www.w3.org/2000/svg"
+				preserveAspectRatio="none"
+				version="1.1"
+				viewBox="0 0 2560 100"
+				x="0"
+				y="0"
+			>
+				<polygon
+					class="text-white fill-current"
+					points="2560 0 2560 100 0 100"
+				></polygon>
+			</svg>
+		</div>
+		<div class="landing-container mx-auto px-4">
+			<div class="items-center flex flex-wrap">
+				<div class="w-full md:w-4/12 ml-auto mr-auto px-4">
+					<img
+						alt="..."
+						class="max-w-full rounded-lg shadow-lg"
+						src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
+					/>
+				</div>
+				<div class="w-full md:w-5/12 ml-auto mr-auto px-4">
+					<div class="md:pr-12">
+						<div
+							class="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300"
+						>
+							<i class="fas fa-rocket text-xl"></i>
+						</div>
+						<h3 class="text-3xl font-semibold">A growing company</h3>
+						<p class="mt-4 text-lg leading-relaxed text-slate-500">
+							The extension comes with three pre-built pages to help you get
+							started faster. You can change the text and images and you're
+							good to go.
+						</p>
+						<ul class="list-none mt-6">
+							<li class="py-2">
+								<div class="flex items-center">
+									<div>
+                        <span
+							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
+						><i class="fas fa-fingerprint"></i
+							></span>
+									</div>
+									<div>
+										<h4 class="text-slate-500">
+											Carefully crafted components
+										</h4>
+									</div>
+								</div>
+							</li>
+							<li class="py-2">
+								<div class="flex items-center">
+									<div>
+                        <span
+							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
+						><i class="fab fa-html5"></i
+							></span>
+									</div>
+									<div>
+										<h4 class="text-slate-500">Amazing page examples</h4>
+									</div>
+								</div>
+							</li>
+							<li class="py-2">
+								<div class="flex items-center">
+									<div>
+                        <span
+							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
+						><i class="far fa-paper-plane"></i
+							></span>
+									</div>
+									<div>
+										<h4 class="text-slate-500">Dynamic components</h4>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="pt-20 pb-48">
+		<div class="landing-container mx-auto px-4">
+			<div class="flex flex-wrap justify-center text-center mb-24">
+				<div class="w-full lg:w-6/12 px-4">
+					<h2 class="text-4xl font-semibold">Here are our heroes</h2>
+					<p class="text-lg leading-relaxed m-4 text-slate-500">
+						According to the National Oceanic and Atmospheric
+						Administration, Ted, Scambos, NSIDClead scentist, puts the
+						potentially record maximum.
+					</p>
+				</div>
+			</div>
+			<div class="flex flex-wrap justify-center">
+				<div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+					<div class="px-6">
+						<img
+							alt="..."
+							src="/assets/img/team-4-470x470.png"
+							class="shadow-lg rounded-full mx-auto max-w-[120px]"
+						/>
+						<div class="pt-6 text-center">
+							<h5 class="text-xl font-bold">Jenna Kardi</h5>
+							<p
+								class="mt-1 text-sm text-slate-400 uppercase font-semibold"
+							>
+								Founder and CEO
+							</p>
+							<div class="mt-6">
+								<button
+									class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+									type="button"
+								>
+									<i class="fab fa-dribbble"></i></button
+								><button
+									class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+									type="button"
+								>
+									<i class="fab fa-google"></i></button
+								><button
+									class="bg-sky-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+									type="button"
+								>
+									<i class="fab fa-twitter"></i></button
+								><button
+									class="bg-slate-700 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+									type="button"
+								>
+									<i class="fab fa-instagram"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="pb-20 relative block bg-slate-800">
+		<div
+			class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20 flex items-end"
+		>
+			<svg
+				class="h-full"
+				xmlns="http://www.w3.org/2000/svg"
+				preserveAspectRatio="none"
+				version="1.1"
+				viewBox="0 0 2560 100"
+				x="0"
+				y="0"
+			>
+				<polygon
+					class="text-slate-800 fill-current"
+					points="2560 0 2560 100 0 100"
+				></polygon>
+			</svg>
+		</div>
+		<div class="landing-container mx-auto px-4 lg:pt-24 lg:pb-64">
+			<div class="flex flex-wrap text-center justify-center">
+				<div class="w-full lg:w-6/12 px-4">
+					<h2 class="text-4xl font-semibold text-white">Build something</h2>
+					<p class="text-lg leading-relaxed mt-4 mb-4 text-slate-400">
+						Put the potentially record low maximum sea ice extent tihs year
+						down to low ice. According to the National Oceanic and
+						Atmospheric Administration, Ted, Scambos.
+					</p>
+				</div>
+			</div>
+			<div class="flex flex-wrap mt-12 justify-center">
+				<div class="w-full lg:w-3/12 px-4 text-center">
+					<div
+						class="text-slate-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+					>
+						<i class="fas fa-medal text-xl"></i>
+					</div>
+					<h6 class="text-xl mt-5 font-semibold text-white">
+						Excelent Services
+					</h6>
+					<p class="mt-2 mb-4 text-slate-400">
+						Some quick example text to build on the card title and make up
+						the bulk of the card's content.
+					</p>
+				</div>
+				<div class="w-full lg:w-3/12 px-4 text-center">
+					<div
+						class="text-slate-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+					>
+						<i class="fas fa-poll text-xl"></i>
+					</div>
+					<h5 class="text-xl mt-5 font-semibold text-white">
+						Grow your market
+					</h5>
+					<p class="mt-2 mb-4 text-slate-400">
+						Some quick example text to build on the card title and make up
+						the bulk of the card's content.
+					</p>
+				</div>
+				<div class="w-full lg:w-3/12 px-4 text-center">
+					<div
+						class="text-slate-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+					>
+						<i class="fas fa-lightbulb text-xl"></i>
+					</div>
+					<h5 class="text-xl mt-5 font-semibold text-white">Launch time</h5>
+					<p class="mt-2 mb-4 text-slate-400">
+						Some quick example text to build on the card title and make up
+						the bulk of the card's content.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+<footer class="antialiased relative bg-slate-200 pt-8 pb-6">
+	<div
+		class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20 flex items-end"
+		style="transform: translateZ(0px)"
+	>
+		<svg
+			class="h-full"
+			xmlns="http://www.w3.org/2000/svg"
+			preserveAspectRatio="none"
+			version="1.1"
+			viewBox="0 0 2560 100"
+			x="0"
+			y="0"
+		>
+			<polygon
+				class="text-slate-200 fill-current"
+				points="2560 0 2560 100 0 100"
+			></polygon>
+		</svg>
+	</div>
+	<div class="landing-container mx-auto px-4">
+		<div class="flex flex-wrap text-center lg:text-left">
+			<div class="w-full lg:w-6/12 px-4">
+				<h4 class="text-3xl font-semibold">Let's keep in touch!</h4>
+				<h5 class="text-lg mt-0 mb-2 text-slate-600">
+					Find us on any of these platforms, we respond 1-2 business days.
+				</h5>
+				<div class="mt-6 lg:mb-0 mb-6">
+					<button
+						class="bg-white text-sky-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+						type="button"
+					>
+						<i class="fab fa-twitter"></i></button
+					><button
+						class="bg-white text-sky-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+						type="button"
+					>
+						<i class="fab fa-facebook-square"></i></button
+					><button
+						class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+						type="button"
+					>
+						<i class="fab fa-dribbble"></i></button
+					><button
+						class="bg-white text-slate-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+						type="button"
+					>
+						<i class="fab fa-github"></i>
+					</button>
+				</div>
+			</div>
+			<div class="w-full lg:w-6/12 px-4">
+				<div class="flex flex-wrap items-top mb-6">
+					<div class="w-full lg:w-4/12 px-4 ml-auto">
+                <span
+					class="block uppercase text-slate-500 text-sm font-semibold mb-2"
+				>Useful Links</span
+				>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://www.creative-tim.com/presentation?ref=njs-landing"
+								>About Us</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://blog.creative-tim.com?ref=njs-landing"
+								>Blog</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://www.github.com/creativetimofficial?ref=njs-landing"
+								>Github</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-landing"
+								>Free Products</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="w-full lg:w-4/12 px-4">
+                <span
+					class="block uppercase text-slate-500 text-sm font-semibold mb-2"
+				>Other Resources</span
+				>
+						<ul class="list-unstyled">
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-landing"
+								>MIT License</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://creative-tim.com/terms?ref=njs-landing"
+								>Terms &amp; Conditions</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://creative-tim.com/privacy?ref=njs-landing"
+								>Privacy Policy</a
+								>
+							</li>
+							<li>
+								<a
+									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+									href="https://creative-tim.com/contact-us?ref=njs-landing"
+								>Contact Us</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="my-6 border-slate-300" />
+		<div
+			class="flex flex-wrap items-center md:justify-between justify-center"
+		>
+			<div class="w-full md:w-4/12 px-4 mx-auto text-center">
+				<div class="text-sm text-slate-500 font-semibold py-1">
+					Copyright © <span id="get-current-year"></span> Notus Tailwind JS
+					by
+					<a
+						href="https://www.creative-tim.com?ref=njs-landing"
+						class="text-slate-500 hover:text-slate-800"
+					>Creative Tim</a
+					>.
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
 @endsection
 
-@push('scripts')
-<script>
-	console.log({{Js::from($announcement)}})
-	console.log(@json($announcement))
-</script>
-@endpush
-
-
+@pushonce('styles')
+<link href="{{ asset('/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+@endpushonce
