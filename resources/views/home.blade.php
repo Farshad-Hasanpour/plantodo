@@ -463,7 +463,7 @@
 				></polygon>
 			</svg>
 		</div>
-		<div class="landing-container mx-auto px-4 lg:pt-24 lg:pb-64">
+		<div class="landing-container mx-auto px-4 lg:pt-24 lg:pb-24">
 			<div class="flex flex-wrap text-center justify-center">
 				<div class="w-full lg:w-6/12 px-4">
 					<h2 class="text-4xl font-semibold text-white">Plan your time</h2>
@@ -540,103 +540,122 @@
 			<div class="w-full lg:w-6/12 px-4">
 				<h4 class="text-3xl font-semibold">Let's keep in touch!</h4>
 				<h5 class="text-lg mt-0 mb-2 text-slate-600">
-					Find us on any of these platforms, we respond 1-2 business days.
+					Find me on any of these platforms.
 				</h5>
-				<div class="mt-6 lg:mb-0 mb-6">
-					<button
-						class="bg-white text-sky-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-						type="button"
+				<div class="flex items-center mt-6 lg:mb-0 mb-6">
+					<a
+						href="https://www.linkedin.com/in/farshad-hasanpour/"
+						target="_blank"
+						rel="noopener"
 					>
-						<i class="fab fa-twitter"></i></button
-					><button
-						class="bg-white text-sky-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-						type="button"
+						<button
+							class="bg-white text-sky-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+							type="button"
+						>
+							<i class="fab fa-linkedin"></i>
+						</button>
+					</a>
+					<a
+						href="https://x.com/F_Hasanpour"
+						target="_blank"
+						rel="noopener"
 					>
-						<i class="fab fa-facebook-square"></i></button
-					><button
-						class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-						type="button"
+						<button
+							class="bg-white bg-black shadow-lg font-normal h-10 w-10 flex items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+							type="button"
+						>
+							<x-icons.twitter class="w-4 h-4" />
+						</button>
+					</a>
+					<a
+						href="https://github.com/Farshad-Hasanpour/tall-learning"
+						target="_blank"
+						rel="noopener"
 					>
-						<i class="fab fa-dribbble"></i></button
-					><button
-						class="bg-white text-slate-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-						type="button"
-					>
-						<i class="fab fa-github"></i>
-					</button>
+						<button
+							class="bg-white text-slate-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+							type="button"
+						>
+							<i class="fab fa-github"></i>
+						</button>
+					</a>
 				</div>
 			</div>
 			<div class="w-full lg:w-6/12 px-4">
 				<div class="flex flex-wrap items-top mb-6">
 					<div class="w-full lg:w-4/12 px-4 ml-auto">
-                <span
-					class="block uppercase text-slate-500 text-sm font-semibold mb-2"
-				>Useful Links</span
-				>
+						<span class="block uppercase text-slate-500 text-sm font-semibold mb-2">Useful Links</span>
 						<ul class="list-unstyled">
-							<li>
-								<a
-									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://www.creative-tim.com/presentation?ref=njs-landing"
-								>About Us</a
-								>
-							</li>
-							<li>
-								<a
-									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://blog.creative-tim.com?ref=njs-landing"
-								>Blog</a
-								>
-							</li>
-							<li>
-								<a
-									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://www.github.com/creativetimofficial?ref=njs-landing"
-								>Github</a
-								>
-							</li>
-							<li>
-								<a
-									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-landing"
-								>Free Products</a
-								>
-							</li>
+							@auth
+								<li>
+									<a
+										class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+										href="{{ route('todo-list') }}"
+									>Dashboard</a>
+								</li>
+								<li>
+									<form
+										action="{{ route('logout') }}"
+										method="POST"
+										class="inline-block"
+									>
+										@csrf
+										<button
+											type="submit"
+											class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+										>Logout</button>
+									</form>
+								</li>
+							@else
+								<li>
+									<a
+										class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+										href="{{ route('login') }}"
+									>Login</a>
+								</li>
+								<li>
+									<a
+										class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
+										href="{{ route('register') }}"
+									>Register</a>
+								</li>
+							@endauth
 						</ul>
 					</div>
 					<div class="w-full lg:w-4/12 px-4">
-                <span
-					class="block uppercase text-slate-500 text-sm font-semibold mb-2"
-				>Other Resources</span
-				>
+                		<span class="block uppercase text-slate-500 text-sm font-semibold mb-2">Other Resources</span>
 						<ul class="list-unstyled">
 							<li>
 								<a
 									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-landing"
-								>MIT License</a
-								>
+									href="https://github.com/Farshad-Hasanpour/tall-learning/blob/master/LICENSE"
+									target="_blank"
+									rel="noopener"
+								>MIT License</a>
 							</li>
 							<li>
 								<a
 									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://creative-tim.com/terms?ref=njs-landing"
-								>Terms &amp; Conditions</a
-								>
+									href="https://freepik.com"
+									target="_blank"
+									rel="noopener"
+								>Freepik</a>
 							</li>
 							<li>
 								<a
 									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://creative-tim.com/privacy?ref=njs-landing"
-								>Privacy Policy</a
-								>
+									href="https://www.creative-tim.com/"
+									target="_blank"
+									rel="noopener"
+								>Creative Tim</a>
 							</li>
 							<li>
 								<a
 									class="text-slate-600 hover:text-slate-800 font-semibold block pb-2 text-sm"
-									href="https://creative-tim.com/contact-us?ref=njs-landing"
-								>Contact Us</a
-								>
+									href="https://codewanted.net"
+									target="_blank"
+									rel="noopener"
+								>My Blog</a>
 							</li>
 						</ul>
 					</div>
@@ -649,13 +668,14 @@
 		>
 			<div class="w-full md:w-4/12 px-4 mx-auto text-center">
 				<div class="text-sm text-slate-500 font-semibold py-1">
-					Copyright © <span id="get-current-year"></span> Notus Tailwind JS
+					Copyright © <span x-data="{}" x-text="new Date().getFullYear()"></span> What To Do
 					by
 					<a
-						href="https://www.creative-tim.com?ref=njs-landing"
+						href="https://www.linkedin.com/in/farshad-hasanpour/"
+						target="_blank"
+						rel="noopener"
 						class="text-slate-500 hover:text-slate-800"
-					>Creative Tim</a
-					>.
+					>Farshad Hasanpour</a>.
 				</div>
 			</div>
 		</div>
