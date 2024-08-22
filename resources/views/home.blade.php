@@ -3,199 +3,164 @@
 @section('content')
 <!--====== NAVBAR NINE PART START ======-->
 <nav
+	x-data="{showSidebar: false}"
 	class="text-slate-700 antialiased top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
 >
-	<div
-		class="landing-container px-4 mx-auto flex flex-wrap items-center justify-between"
-	>
-		<div
-			class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
-		>
+	<div class="landing-container px-4 mx-auto flex flex-wrap items-center justify-between">
+		<div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
 			<a
 				class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-				href="#"
-			>Notus Tailwind JS</a
-			><button
-				class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+				href="{{route('home')}}"
+			>What To-Do</a>
+			<button
 				type="button"
-				onclick="toggleNavbar('example-collapse-navbar')"
+				class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+				@click="showSidebar = !showSidebar"
 			>
 				<i class="text-white fas fa-bars"></i>
 			</button>
 		</div>
 		<div
-			class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden"
-			id="example-collapse-navbar"
+			class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 rounded-md lg:rounded-none shadow-xl lg:shadow-none"
+			:class="showSidebar ? 'block' : 'hidden'"
 		>
-			<ul class="flex flex-col lg:flex-row list-none mr-auto">
+			<ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
 				<li class="flex items-center">
 					<a
 						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-						href="https://www.creative-tim.com/learning-lab/tailwind/js/overview/notus?ref=njs-landing"
-					><i
-							class="lg:text-slate-200 text-slate-400 far fa-file-alt text-lg leading-lg mr-2"
-						></i>
-						Docs</a
+						href="https://www.linkedin.com/in/farshad-hasanpour/"
+						target="_blank"
 					>
+						<i
+							class="lg:text-slate-200 text-slate-400 fab fa-linkedin text-lg leading-lg"
+						></i>
+						<span class="lg:hidden inline-block ml-2">Linkedin</span>
+					</a>
 				</li>
-			</ul>
-			<ul
-				class="flex flex-col lg:flex-row list-none lg:ml-auto items-center"
-			>
-				<li class="inline-block relative">
+				<li class="flex items-center">
 					<a
 						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-						href="#pablo"
-						onclick="openDropdown(event,'demo-pages-dropdown')"
+						href="https://x.com/F_Hasanpour"
+						target="_blank"
 					>
-						Demo Pages
+						<i
+							class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
+						></i>
+						<span class="lg:hidden inline-block ml-2">X platform</span>
 					</a>
-					<div
-						class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-[48px]"
-						id="demo-pages-dropdown"
+				</li>
+				<li class="flex items-center">
+					<a
+						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+						href="https://github.com/Farshad-Hasanpour/tall-learning"
+						target="_blank"
 					>
-                <span
-					class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
-				>
-                  Admin Layout
-                </span>
-						<a
-							href="./admin/dashboard.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+						<i
+							class="lg:text-slate-200 text-slate-400 fab fa-github text-lg leading-lg"
+						></i>
+						<span class="lg:hidden inline-block ml-2">Github</span>
+					</a>
+				</li>
+				@auth
+					<li class="flex items-center lg:ms-6">
+						<form
+							action="{{ route('logout') }}"
+							method="POST"
+							class="inline-block"
 						>
-							Dashboard
+							@csrf
+							<button
+								type="submit"
+								class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+							>Logout</button>
+						</form>
+					</li>
+					<li>
+						<a href="{{ route('todo-list') }}">
+							<button
+								class="bg-white text-slate-700 active:bg-slate-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+								type="button"
+							>
+								Dashboard
+							</button>
 						</a>
+					</li>
+				@else
+					<li class="flex items-center lg:ms-6">
 						<a
-							href="./admin/settings.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-						>
-							Settings
-						</a>
-						<a
-							href="./admin/tables.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-						>
-							Tables
-						</a>
-						<a
-							href="./admin/maps.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-						>
-							Maps
-						</a>
-						<div
-							class="h-0 mx-4 my-2 border border-solid border-slate-100"
-						></div>
-						<span
-							class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
-						>
-                  Auth Layout
-                </span>
-						<a
-							href="./auth/login.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+							class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+							href="{{ route('login') }}"
 						>
 							Login
 						</a>
+					</li>
+					<li class="flex lg:hidden items-center">
 						<a
-							href="./auth/register.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+							class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+							href="{{ route('register') }}"
 						>
 							Register
 						</a>
-						<div
-							class="h-0 mx-4 my-2 border border-solid border-slate-100"
-						></div>
-						<span
-							class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-slate-400"
-						>
-                  No Layout
-                </span>
-						<a
-							href="./landing.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-						>
-							Landing
+					</li>
+					<li class="hidden lg:flex items-center">
+						<a href="{{ route('register') }}">
+							<button
+								class="bg-white text-slate-700 active:bg-slate-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+								type="button"
+							>
+								Register
+							</button>
 						</a>
-						<a
-							href="./profile.html"
-							class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-						>
-							Profile
-						</a>
-					</div>
-				</li>
-				<li class="flex items-center">
-					<a
-						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-						href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-js%2F"
-						target="_blank"
-					><i
-							class="lg:text-slate-200 text-slate-400 fab fa-facebook text-lg leading-lg"
-						></i
-						><span class="lg:hidden inline-block ml-2">Share</span></a
-					>
-				</li>
-				<li class="flex items-center">
-					<a
-						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-						href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-js%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20JavaScript%20UI%20Kit%20and%20Admin.%20Let%20Notus%20JS%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level."
-						target="_blank"
-					><i
-							class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
-						></i
-						><span class="lg:hidden inline-block ml-2">Tweet</span></a
-					>
-				</li>
-				<li class="flex items-center">
-					<a
-						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-						href="https://github.com/creativetimofficial/notus-js?ref=njs-landing"
-						target="_blank"
-					><i
-							class="lg:text-slate-200 text-slate-400 fab fa-github text-lg leading-lg"
-						></i
-						><span class="lg:hidden inline-block ml-2">Star</span></a
-					>
-				</li>
-				<li class="flex items-center">
-					<button
-						class="bg-white text-slate-700 active:bg-slate-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-						type="button"
-					>
-						<i class="fas fa-arrow-alt-circle-down"></i> Download
-					</button>
-				</li>
+					</li>
+				@endauth
 			</ul>
 		</div>
 	</div>
 </nav>
+
 <main class="text-slate-700 antialiased">
-	<div
-		class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-[75vh]"
-	>
+	<div class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-[75vh]">
 		<div
 			class="absolute top-0 w-full h-full bg-center bg-cover"
-			style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1267&amp;q=80');"
+			style="background-image: url('/assets/img/dashboard.png');"
 		>
-          <span
-			  id="blackOverlay"
-			  class="w-full h-full absolute opacity-75 bg-black"
-		  ></span>
+          <span class="w-full h-full absolute opacity-90 bg-black"></span>
 		</div>
 		<div class="landing-container relative mx-auto">
 			<div class="items-center flex flex-wrap">
-				<div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
-					<div class="pr-12">
-						<h1 class="text-white font-semibold text-5xl">
-							Your story starts with us.
-						</h1>
-						<p class="mt-4 text-lg text-slate-200">
-							This is a simple example of a Landing Page you can build using
-							Notus Tailwind JS. It features multiple CSS components based
-							on the Tailwind CSS design system.
-						</p>
+				<div class="w-full px-4 flex flex-col items-center">
+					<h1 class="text-white font-semibold text-center text-xl sm:text-2xl md:text-5xl my-8">
+						First, PLAN Then DO
+					</h1>
+					<div class="flex flex-col sm:flex-row sm:space-x-24 text-slate-200 text-lg mb-8">
+						<ul>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>Multiple lists</span>
+							</li>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>No tracker cookies</span>
+							</li>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>No advertisement</span>
+							</li>
+						</ul>
+						<ul>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>Free to use</span>
+							</li>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>Open source</span>
+							</li>
+						</ul>
 					</div>
+					<a href="@auth {{route('todo-list')}} @else {{route('login')}} @endauth">
+						<x-button class="shadow-xl px-6 py-3">MAKE A PLAN</x-button>
+					</a>
 				</div>
 			</div>
 		</div>
