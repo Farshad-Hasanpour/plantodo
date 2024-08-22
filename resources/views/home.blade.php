@@ -11,7 +11,7 @@
 			<a
 				class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
 				href="{{route('home')}}"
-			>What To-Do</a>
+			>What To Do</a>
 			<button
 				type="button"
 				class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -30,6 +30,7 @@
 						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
 						href="https://www.linkedin.com/in/farshad-hasanpour/"
 						target="_blank"
+						rel="noopener"
 					>
 						<i
 							class="lg:text-slate-200 text-slate-400 fab fa-linkedin text-lg leading-lg"
@@ -42,6 +43,7 @@
 						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
 						href="https://x.com/F_Hasanpour"
 						target="_blank"
+						rel="noopener"
 					>
 						<i
 							class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
@@ -54,6 +56,7 @@
 						class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
 						href="https://github.com/Farshad-Hasanpour/tall-learning"
 						target="_blank"
+						rel="noopener"
 					>
 						<i
 							class="lg:text-slate-200 text-slate-400 fab fa-github text-lg leading-lg"
@@ -144,22 +147,26 @@
 							</li>
 							<li class="py-1">
 								<i class="fa fa-check text-success me-2"></i>
-								<span>No advertisement</span>
+								<span>Open source</span>
 							</li>
 						</ul>
 						<ul>
 							<li class="py-1">
 								<i class="fa fa-check text-success me-2"></i>
-								<span>Free to use</span>
+								<span>Daily habits</span>
 							</li>
 							<li class="py-1">
 								<i class="fa fa-check text-success me-2"></i>
-								<span>Open source</span>
+								<span>No advertisement</span>
+							</li>
+							<li class="py-1">
+								<i class="fa fa-check text-success me-2"></i>
+								<span>Free to use</span>
 							</li>
 						</ul>
 					</div>
 					<a href="@auth {{route('todo-list')}} @else {{route('login')}} @endauth">
-						<x-button class="shadow-xl px-6 py-3">MAKE A PLAN</x-button>
+						<x-button class="shadow-xl px-6 py-3 uppercase">build a to-do</x-button>
 					</a>
 				</div>
 			</div>
@@ -194,12 +201,11 @@
 							<div
 								class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400"
 							>
-								<i class="fas fa-award"></i>
+								<i class="fas fa-redo"></i>
 							</div>
-							<h6 class="text-xl font-semibold">Awarded Agency</h6>
+							<h6 class="text-xl font-semibold">Updates Are Coming</h6>
 							<p class="mt-2 mb-4 text-slate-500">
-								Divide details about your product or agency work into parts.
-								A paragraph describing a feature will be enough.
+								New features will be released over time. Remember to check out the project sometimes.
 							</p>
 						</div>
 					</div>
@@ -212,12 +218,17 @@
 							<div
 								class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-sky-400"
 							>
-								<i class="fas fa-retweet"></i>
+								<i class="fas fa-code-branch"></i>
 							</div>
-							<h6 class="text-xl font-semibold">Free Revisions</h6>
+							<h6 class="text-xl font-semibold">Open Source</h6>
 							<p class="mt-2 mb-4 text-slate-500">
-								Keep you user engaged by providing meaningful information.
-								Remember that by this time, the user is curious.
+								An educational open source to-do list powered by Livewire. Checkout the
+								<a
+									href="https://github.com/Farshad-Hasanpour/tall-learning"
+									target="_bland"
+									rel="noopener"
+									class="text-pink-600"
+								>repository</a>.
 							</p>
 						</div>
 					</div>
@@ -232,10 +243,9 @@
 							>
 								<i class="fas fa-fingerprint"></i>
 							</div>
-							<h6 class="text-xl font-semibold">Verified Company</h6>
+							<h6 class="text-xl font-semibold">No Permission Required</h6>
 							<p class="mt-2 mb-4 text-slate-500">
-								Write a few lines about each one. A paragraph describing a
-								feature will be enough. Keep you user engaged!
+								You are not prompted to accept tracker cookies! Use the application and enjoy!
 							</p>
 						</div>
 					</div>
@@ -249,24 +259,24 @@
 						<i class="fas fa-user-friends text-xl"></i>
 					</div>
 					<h3 class="text-3xl mb-2 font-semibold leading-normal">
-						Working with us is a pleasure
+						Technical Details
 					</h3>
 					<p
 						class="text-lg font-light leading-relaxed mt-4 mb-4 text-slate-600"
 					>
-						Don't let your uses guess by attaching tooltips and popoves to
-						any element. Just make sure you enable them first via
-						JavaScript.
+						This to-list is powered by the TALL stack. It means Tailwind, Alpine.js, Livewire, and Laravel. The project is open source, and it's made primarily for educational purposes.
 					</p>
 					<p
-						class="text-lg font-light leading-relaxed mt-0 mb-4 text-slate-600"
+						class="text-lg font-light leading-relaxed mt-4 mb-4 text-slate-600"
 					>
-						The kit comes with three pre-built pages to help you get started
-						faster. You can change the text and images and you're good to
-						go. Just make sure you enable them first via JavaScript.
+						You can register, create multiple to-do lists, set the tasks to reset daily, and much more...
 					</p>
-					<a href="#" class="font-bold text-slate-700 mt-8"
-					>Check Notus Tailwind JS!</a
+					<a
+						href="{{route('register')}}"
+						target="_bland"
+						rel="noopener"
+						class="font-bold text-pink-600 mt-8"
+					>Register and see for yourself!</a
 					>
 				</div>
 				<div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -274,8 +284,8 @@
 						class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-pink-500"
 					>
 						<img
-							alt="..."
-							src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
+							alt=""
+							src="/assets/img/community.jpg"
 							class="w-full align-middle rounded-t-lg"
 						/>
 						<blockquote class="relative p-8 mb-4">
@@ -291,12 +301,13 @@
 								></polygon>
 							</svg>
 							<h4 class="text-xl font-bold text-white">
-								Top Notch Services
+								Fun Fact!
 							</h4>
 							<p class="text-md font-light mt-2 text-white">
-								The Arctic Ocean freezes every winter and much of the
-								sea-ice then thaws every summer, and that process will
-								continue whatever happens.
+								Did you know there are more than 1 million public Github repositories of to-do lists?
+							</p>
+							<p class="text-md font-light mt-2 text-white">
+								Each made by someone unique!
 							</p>
 						</blockquote>
 					</div>
@@ -327,9 +338,9 @@
 			<div class="items-center flex flex-wrap">
 				<div class="w-full md:w-4/12 ml-auto mr-auto px-4">
 					<img
-						alt="..."
+						alt=""
 						class="max-w-full rounded-lg shadow-lg"
-						src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
+						src="/assets/img/contact-me.jpg"
 					/>
 				</div>
 				<div class="w-full md:w-5/12 ml-auto mr-auto px-4">
@@ -337,54 +348,24 @@
 						<div
 							class="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300"
 						>
-							<i class="fas fa-rocket text-xl"></i>
+							<i class="fas fa-question text-xl"></i>
 						</div>
-						<h3 class="text-3xl font-semibold">A growing company</h3>
+						<h3 class="text-3xl font-semibold">Having any question?</h3>
 						<p class="mt-4 text-lg leading-relaxed text-slate-500">
-							The extension comes with three pre-built pages to help you get
-							started faster. You can change the text and images and you're
-							good to go.
+							Please contact me if you need any explanation, have a suggestion,
+							or have anything else to say.
 						</p>
 						<ul class="list-none mt-6">
 							<li class="py-2">
 								<div class="flex items-center">
-									<div>
-                        <span
-							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
-						><i class="fas fa-fingerprint"></i
-							></span>
-									</div>
-									<div>
-										<h4 class="text-slate-500">
-											Carefully crafted components
-										</h4>
-									</div>
-								</div>
-							</li>
-							<li class="py-2">
-								<div class="flex items-center">
-									<div>
-                        <span
-							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
-						><i class="fab fa-html5"></i
-							></span>
-									</div>
-									<div>
-										<h4 class="text-slate-500">Amazing page examples</h4>
-									</div>
-								</div>
-							</li>
-							<li class="py-2">
-								<div class="flex items-center">
-									<div>
-                        <span
-							class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
-						><i class="far fa-paper-plane"></i
-							></span>
-									</div>
-									<div>
-										<h4 class="text-slate-500">Dynamic components</h4>
-									</div>
+									<span
+										class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 mr-3"
+									>
+										<i class="far fa-envelope"></i>
+									</span>
+									<a class="text-slate-500" href="mailto:farshad.hasanpour96@gmail.com">
+										farshad.hasanpour96@gmail.com
+									</a>
 								</div>
 							</li>
 						</ul>
@@ -397,11 +378,9 @@
 		<div class="landing-container mx-auto px-4">
 			<div class="flex flex-wrap justify-center text-center mb-24">
 				<div class="w-full lg:w-6/12 px-4">
-					<h2 class="text-4xl font-semibold">Here are our heroes</h2>
+					<h2 class="text-4xl font-semibold">About me?</h2>
 					<p class="text-lg leading-relaxed m-4 text-slate-500">
-						According to the National Oceanic and Atmospheric
-						Administration, Ted, Scambos, NSIDClead scentist, puts the
-						potentially record maximum.
+						I am a front-end web developer familiar with databases, backend frameworks, Python, and neural networks. I put most of my attention on JS language and continuously learn new related technologies. This to-do list is one of my projects to get more into the details of full-stack web development.
 					</p>
 				</div>
 			</div>
@@ -409,39 +388,55 @@
 				<div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
 					<div class="px-6">
 						<img
-							alt="..."
-							src="/assets/img/team-4-470x470.png"
+							alt=""
+							src="/assets/img/me.png"
 							class="shadow-lg rounded-full mx-auto max-w-[120px]"
 						/>
 						<div class="pt-6 text-center">
-							<h5 class="text-xl font-bold">Jenna Kardi</h5>
+							<h5 class="text-xl font-bold">Farshad Hasanpour</h5>
 							<p
 								class="mt-1 text-sm text-slate-400 uppercase font-semibold"
 							>
-								Founder and CEO
+								Developer
 							</p>
-							<div class="mt-6">
-								<button
-									class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-									type="button"
+							<div class="box-center mt-6 space-x-2">
+								<a
+									href="https://www.linkedin.com/in/farshad-hasanpour/"
+									target="_blank"
+									rel="noopener"
 								>
-									<i class="fab fa-dribbble"></i></button
-								><button
-									class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-									type="button"
+									<button
+										class="box-center bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none"
+										type="button"
+									>
+										<i class="fab fa-linkedin"></i>
+									</button>
+								</a>
+
+								<a
+									href="https://x.com/F_Hasanpour"
+									target="_blank"
+									rel="noopener"
 								>
-									<i class="fab fa-google"></i></button
-								><button
-									class="bg-sky-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-									type="button"
+									<button
+										class="box-center bg-black text-white w-8 h-8 rounded-full outline-none focus:outline-none"
+										type="button"
+									>
+										<x-icons.twitter class="w-4 h-4" />
+									</button>
+								</a>
+								<a
+									href="https://github.com/Farshad-Hasanpour/"
+									target="_blank"
+									rel="noopener"
 								>
-									<i class="fab fa-twitter"></i></button
-								><button
-									class="bg-slate-700 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-									type="button"
-								>
-									<i class="fab fa-instagram"></i>
-								</button>
+									<button
+										class="box-center bg-slate-700 text-white w-8 h-8 rounded-full outline-none focus:outline-none"
+										type="button"
+									>
+										<i class="fab fa-github"></i>
+									</button>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -471,11 +466,9 @@
 		<div class="landing-container mx-auto px-4 lg:pt-24 lg:pb-64">
 			<div class="flex flex-wrap text-center justify-center">
 				<div class="w-full lg:w-6/12 px-4">
-					<h2 class="text-4xl font-semibold text-white">Build something</h2>
+					<h2 class="text-4xl font-semibold text-white">Plan your time</h2>
 					<p class="text-lg leading-relaxed mt-4 mb-4 text-slate-400">
-						Put the potentially record low maximum sea ice extent tihs year
-						down to low ice. According to the National Oceanic and
-						Atmospheric Administration, Ted, Scambos.
+						Using this to-do list is easy!
 					</p>
 				</div>
 			</div>
@@ -484,14 +477,13 @@
 					<div
 						class="text-slate-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
 					>
-						<i class="fas fa-medal text-xl"></i>
+						<i class="fa fa-solid fa-list text-xl"></i>
 					</div>
 					<h6 class="text-xl mt-5 font-semibold text-white">
-						Excelent Services
+						Create a to-do list
 					</h6>
 					<p class="mt-2 mb-4 text-slate-400">
-						Some quick example text to build on the card title and make up
-						the bulk of the card's content.
+						Each to-do list has its tasks. You can manage your tasks in various lists.
 					</p>
 				</div>
 				<div class="w-full lg:w-3/12 px-4 text-center">
@@ -501,23 +493,22 @@
 						<i class="fas fa-poll text-xl"></i>
 					</div>
 					<h5 class="text-xl mt-5 font-semibold text-white">
-						Grow your market
+						Create a task
 					</h5>
 					<p class="mt-2 mb-4 text-slate-400">
-						Some quick example text to build on the card title and make up
-						the bulk of the card's content.
+						Inside each to-do list, you can create multiple tasks. You can even set them to reset daily.
 					</p>
 				</div>
 				<div class="w-full lg:w-3/12 px-4 text-center">
 					<div
 						class="text-slate-800 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
 					>
-						<i class="fas fa-lightbulb text-xl"></i>
+						<i class="fa fa-regular fa-clock text-xl"></i>
 					</div>
-					<h5 class="text-xl mt-5 font-semibold text-white">Launch time</h5>
+					<h5 class="text-xl mt-5 font-semibold text-white">Make your day perfect</h5>
 					<p class="mt-2 mb-4 text-slate-400">
-						Some quick example text to build on the card title and make up
-						the bulk of the card's content.
+						They say the key to happiness is to be in control of your time!
+						Complete tasks and track your progress.
 					</p>
 				</div>
 			</div>
