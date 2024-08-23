@@ -23,12 +23,6 @@ class Verify extends Component
 			redirect(route('todo-list'));
 		}
 
-        return view('livewire.auth.verify')
-			->layoutData([
-				'metaKeys' => 'key1',
-				'metaDescription' => 'Some description',
-				'metaAuthor' => 'John G__',
-				'title' => 'Email Verificaion'
-			])->layout('layouts.auth');
+        return view('livewire.auth.verify')->layout('layouts.auth');
     }
 }

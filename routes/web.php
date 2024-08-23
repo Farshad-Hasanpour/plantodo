@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'home')->name('home');
+Route::get('/', function(){
+	return view('home', [
+		'title' => 'Home'
+	]);
+})->name('home');
 Route::permanentRedirect('home', '/');
 Route::get('password/reset', Email::class)->name('password.request');
 Route::get('password/reset/{token}', Reset::class)->name('password.reset');

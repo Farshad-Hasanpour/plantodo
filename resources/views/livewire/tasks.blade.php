@@ -159,12 +159,14 @@
 		>
 			<div
 				class="self-start text-gray-500 py-6 cursor-pointer space-y-1 select-none"
-				x-on:click="showCompleted = !showCompleted"
+				@click="showCompleted = !showCompleted"
 			>
 				<div class="text-4xl font-bold flex items-center space-x-3">
 					<h3>Completed ({{count($this->completedTasks)}})</h3>
-					<span x-show="showCompleted" class="mb-3">&#8964;</span>
-					<span x-show="!showCompleted" class="mt-3">&#8963;</span>
+					<x-icons.menu-up-outline
+						class="mt-1 w-10 h-10 transition-transform"
+						x-bind:class="showCompleted ? 'reverse' : ''"
+					/>
 				</div>
 				<div class="text-sm ">Click to show/hide</div>
 			</div>

@@ -22,13 +22,6 @@ class Confirm extends Component
 
     public function render()
     {
-        return view('livewire.auth.passwords.confirm')
-			->layoutData([
-				'metaKeys' => 'key1',
-				'metaDescription' => 'Some description',
-				'metaAuthor' => 'John G__',
-				'title' => 'Confirm Password'
-			])
-			->extends('layouts.auth');
+        return view('livewire.auth.passwords.confirm')->extends('layouts.auth');
     }
 }

@@ -42,11 +42,6 @@ class Email extends Component
 
     public function render()
     {
-        return view('livewire.auth.passwords.email')->layoutData([
-			'metaKeys' => 'key1',
-			'metaDescription' => 'Some description',
-			'metaAuthor' => 'John G__',
-			'title' => 'Reset Password'
-		])->layout('layouts.auth');
+        return view('livewire.auth.passwords.email')->layout('layouts.auth');
     }
 }

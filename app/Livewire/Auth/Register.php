@@ -52,12 +52,6 @@ class Register extends Component
     public function render()
     {
         return view('livewire.auth.register')
-			->layoutData([
-				'metaKeys' => 'key1',
-				'metaDescription' => 'Some description',
-				'metaAuthor' => 'John G__',
-				'title' => 'Register'
-			])
 			->extends('layouts.auth');
     }
 }
