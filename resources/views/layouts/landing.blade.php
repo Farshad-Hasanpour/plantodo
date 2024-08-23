@@ -11,7 +11,7 @@
 				<a
 					class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
 					href="{{route('home')}}"
-				>What To Do</a>
+				>{{config('app.name')}}</a>
 				<button
 					type="button"
 					class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -278,7 +278,7 @@
 			>
 				<div class="w-full md:w-4/12 px-4 mx-auto text-center">
 					<div class="text-sm text-slate-500 font-semibold py-1">
-						Copyright © <span x-data="{}" x-text="new Date().getFullYear()"></span> What To Do
+						Copyright © <span x-data="{}" x-text="new Date().getFullYear()"></span> {{config('app.name')}}
 						by
 						<a
 							href="https://www.linkedin.com/in/farshad-hasanpour/"

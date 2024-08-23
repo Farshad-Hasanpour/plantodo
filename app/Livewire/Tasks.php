@@ -175,6 +175,8 @@ class Tasks extends Component
 	}
 
     public function render(){
-        return view('livewire.tasks');
+        return view('livewire.tasks')->layoutData([
+			'title' => 'Tasks'
+		]);
     }
 }
