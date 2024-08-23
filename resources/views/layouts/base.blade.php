@@ -30,8 +30,10 @@
 		<meta name="theme-color" content="#FF00FF">
 
 		<title>@isset($title) {{$title . ' - '}} @endisset{{ config('app.name') }}</title>
+		<!-- Font -->
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 		<!-- Build styles and scripts -->
-		@vite(['resources/sass/app.scss', 'resources/sass/inter.css', 'resources/js/app.js'])
+		@vite(['resources/sass/app.scss', 'resources/js/app.js'])
 		@livewireStyles
 		<!-- stack styles -->
 		@stack('styles')
