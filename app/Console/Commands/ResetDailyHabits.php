@@ -27,8 +27,8 @@ class ResetDailyHabits extends Command
     public function handle()
     {
 		// Update the tasks table
-		Task::where('is_daily_habit', 1)->update(['is_done' => 0]);
+		$affectedRows = Task::where('is_daily_habit', 1)->update(['is_done' => 0]);
 
-		$this->info('Daily habits reset successfully!');
+		$this->info('Daily habits reset successfully! '.$affectedRows. ' rows affected');
     }
 }
