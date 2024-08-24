@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lists', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->string('name', 255)->nullable();
+			$table->string('name', 255)->default('My List');
 			$table->string('background', 255)->nullable();
 			$table->timestamps();
         });
