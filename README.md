@@ -2,6 +2,10 @@
 
 Powered by TALL (Tailwind, Alpine, Laravel, Livewire) stack.
 
+## Website
+You can see the project here:
+[https://plantodo.ir/](https://plantodo.ir/)
+
 ## How to Run
 Execute these two commands and open http://localhost:8000
 
