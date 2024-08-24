@@ -152,7 +152,7 @@
 					<h5 class="text-lg mt-0 mb-2 text-slate-600">
 						Find me on any of these platforms.
 					</h5>
-					<div class="flex items-center mt-6 lg:mb-0 mb-6">
+					<div class="flex items-center justify-center lg:justify-start mt-6 lg:mb-0 mb-6">
 						<a
 							href="https://www.linkedin.com/in/farshad-hasanpour/"
 							target="_blank"

@@ -51,7 +51,7 @@
 		</div>
 	</div>
 	<div
-		class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-[70px] flex items-end"
+		class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-20 flex items-end"
 	>
 		<svg
 			class="h-full"
@@ -131,7 +131,7 @@
 			</div>
 		</div>
 		<div class="flex flex-wrap items-center mt-32">
-			<div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+			<div class="w-full md:w-5/12 px-4 mr-auto ml-auto mb-4">
 				<div
 					class="text-slate-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"
 				>
@@ -225,7 +225,7 @@
 			<div class="w-full md:w-5/12 ml-auto mr-auto px-4">
 				<div class="md:pr-12">
 					<div
-						class="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300"
+						class="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 my-6 shadow-lg rounded-full bg-pink-300"
 					>
 						<i class="fas fa-question text-xl"></i>
 					</div>
