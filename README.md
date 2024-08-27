@@ -15,10 +15,10 @@ Execute these two commands and open http://localhost:8000
 
 ## How to Set Up
 ### Clone the Repository
-```git clone https://github.com/Farshad-Hasanpour/tall-learning.git```
+```git clone https://github.com/Farshad-Hasanpour/plantodo.git```
 
 ### Navigate to the Project Directory
-```cd tall-learning```
+```cd plantodo```
 
 ### Install Composer Dependencies
 ```composer install```
