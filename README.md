@@ -1,6 +1,6 @@
-# Awesome Todo List
+# PlanToDo
 
-Powered by TALL (Tailwind, Alpine, Laravel, Livewire) stack.
+Yet another todo list powered by Tailwind, Alpine.js, Livewire, and Laravel aka TALL stack.
 
 ## Website
 You can see the project here:
