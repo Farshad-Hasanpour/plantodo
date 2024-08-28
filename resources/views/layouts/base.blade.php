@@ -11,6 +11,7 @@
 		@isset($metaDescription) <meta name="description" content="{{$metaDescription}}"> @endisset
 		<meta name="author" content="Farshad Hasanpour">
 		<meta name="language" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+		@yield('other_meta_tags')
 
 		<meta property="og:site_name" content="{{config('app.name')}}">
 		<meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">

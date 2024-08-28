@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('other_meta_tags')
+	<meta name="robots" content="noindex">
+@endsection
+
 @section('body')
 	<div class="min-h-screen bg-gray-100 flex flex-col items-stretch">
 		<nav class="w-full p-4 h-[100px]">
