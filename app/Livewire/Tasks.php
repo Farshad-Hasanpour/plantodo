@@ -24,11 +24,6 @@ class Tasks extends Component
 	}
 
 	#[Computed]
-	public function listCount() {
-		return TodoList::where('user_id', Auth::id())->count();
-	}
-
-	#[Computed]
 	public function tasks(){
 		// return empty collection if no list is selected
 		if(!$this->active_list_id) return new EloquentCollection();
@@ -77,7 +72,8 @@ class Tasks extends Component
 
 	public function deleteList(TodoList $list){
 		$this->authorizeTodoList($list);
-		if($this->listCount <= 1) return;
+		$listsCount = TodoList::where('user_id', Auth::id())->count();
+		if($listsCount <= 1) return;
 		$list->delete();
 		unset($this->lists);
 		$this->loadList();
@@ -89,11 +85,11 @@ class Tasks extends Component
 			return $value['id'];
 		}, $values);
 
-		// authorize all rows
-		$listIds = Task::whereIn('id', $ids)->get()->pluck('list_id')->unique();
+		// check if all the tasks have an authorized user_id
+		$listIds = Task::select(['list_id'])->whereIn('id', $ids)->get()->pluck('list_id')->unique();
 		if(
 			$listIds->count() != 1 ||
-			TodoList::find($listIds[0])?->user_id != Auth::id()
+			TodoList::select('user_id')->find($listIds[0])?->user_id != Auth::id()
 		) abort(403);
 
 		// update priorities for all rows with one query
