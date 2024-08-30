@@ -162,7 +162,7 @@
 				@click="showCompleted = !showCompleted"
 			>
 				<div class="text-4xl font-bold flex items-center space-x-3">
-					<h3>Completed ({{count($this->completedTasks)}})</h3>
+					<h3>Completed ({{$this->completedTasks->count()}})</h3>
 					<x-icons.menu-up-outline
 						class="mt-1 w-10 h-10 transition-transform"
 						x-bind:class="showCompleted ? 'reverse' : ''"

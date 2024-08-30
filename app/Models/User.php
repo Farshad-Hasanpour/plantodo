@@ -49,4 +49,8 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(TodoList::class, 'user_id');
 	}
+
+	/*public function firstTodoList(){
+		return $this->todoLists()->one()->ofMany('created_at', 'min');
+	}*/
 }

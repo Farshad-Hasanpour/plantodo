@@ -24,12 +24,17 @@ class Tasks extends Component
 	}
 
 	#[Computed]
+	public function listCount() {
+		return TodoList::where('user_id', Auth::id())->count();
+	}
+
+	#[Computed]
 	public function tasks(){
 		// return empty collection if no list is selected
 		if(!$this->active_list_id) return new EloquentCollection();
 
 		// show tasks within the selected list
-		$list = $this->lists->firstWhere('id', $this->active_list_id);
+		$list = $this->lists->find($this->active_list_id);
 		if(!$list) return new EloquentCollection();
 		return $list->tasks()->orderBy('priority', 'desc')->get();
 	}
@@ -42,6 +47,10 @@ class Tasks extends Component
 	#[Computed]
 	public function incompleteTasks(){
 		return $this->tasks->where('is_done', 0);
+	}
+
+	protected function authorizeTodoList(TodoList $list){
+		if($list->user_id != Auth::id()) abort(403);
 	}
 
 	public function addList(){
@@ -57,7 +66,7 @@ class Tasks extends Component
 	}
 
 	public function editList(TodoList $list){
-		if($list->user_id != Auth::id()) abort(403);
+		$this->authorizeTodoList($list);
 		$this->list_form->validate();
 
 		$list->update([
@@ -67,8 +76,8 @@ class Tasks extends Component
 	}
 
 	public function deleteList(TodoList $list){
-		if($list->user_id != Auth::id()) abort(403);
-		if($this->lists->count() <= 1) return;
+		$this->authorizeTodoList($list);
+		if($this->listCount <= 1) return;
 		$list->delete();
 		unset($this->lists);
 		$this->loadList();
