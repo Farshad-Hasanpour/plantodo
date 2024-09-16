@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+		'google_drive_backup_file_id'
     ];
 
     /**
