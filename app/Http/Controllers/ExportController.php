@@ -6,13 +6,14 @@ use App\Models\TodoList;
 use Google\Client;
 use Google\Exception as GoogleException;
 use Google\Service\Drive;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ExportController extends Controller
 {
-	protected function CreateCSVFile(){
+	protected function CreateCSVFile(): false|string{
 		$allTasks = TodoList::with(['tasks' => function ($query) {
 			$query->select(['list_id', 'title', 'is_done']);
 		}])->select('id', 'name')->get();
@@ -31,9 +32,12 @@ class ExportController extends Controller
 		return $csvContent;
 	}
 
-	public function exportToDrive(){
+	public function exportToDrive(): RedirectResponse{
 		if(request('error')){
-			Session::flash('google_drive.error', 'Access to Google Drive is cancelled! Your list is not exported.');
+			Session::flash('google_drive', [
+				'type' => 'error',
+				'msg' => 'Access to Google Drive is cancelled! Your list is not exported.'
+			]);
 		}else if(request('code')){
 			try {
 				$client = new Client();
@@ -68,22 +72,37 @@ class ExportController extends Controller
 					$file->id != $file_id && $user->update([
 						'google_drive_backup_file_id' => $file->id
 					]);
+					Session::flash('google_drive', [
+						'type' => 'success',
+						'msg' => 'Your tasks are exported to your Google Drive account.'
+					]);
 				}else{
-					Session::flash('google_drive.error', 'Failed to upload the exported file.');
+					Session::flash('google_drive', [
+						'type' => 'error',
+						'msg' => 'Failed to upload the exported file.'
+					]);
 				}
 			} catch(GoogleException $e) {
 				if(App::hasDebugModeEnabled()){
 					dd($e);
 				}else{
-					Session::flash('google_drive.error', 'Something went wrong while exporting your data to Google Drive.');
+					Session::flash('google_drive', [
+						'type' => 'error',
+						'msg' => 'Something went wrong while exporting your data to Google Drive.'
+					]);
 				}
 			}
+		}else{
+			Session::flash('google_drive', [
+				'type' => 'error',
+				'msg' => 'Something went wrong while exporting your data to Google Drive.'
+			]);
 		}
 
 		return redirect()->away(route('todo-list'));
 	}
 
-	public function getGoogleDriveAccess(){
+	public function getGoogleDriveAccess(): RedirectResponse{
 		$client = new Client();
 		$client->setClientId(config('services.google_drive.client_id'));
 		$client->addScope(Drive::DRIVE_FILE);

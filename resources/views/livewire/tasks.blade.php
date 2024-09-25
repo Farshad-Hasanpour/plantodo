@@ -1,4 +1,13 @@
 <div class="flex flex-wrap">
+	{{-- All lists plus add form --}}
+	@if(session('google_drive'))
+		<div
+			class="text-center mx-auto text-lg text-error p-4 rounded-xl bg-{{session('google_drive')['type']}}-100 text-{{session('google_drive')['type']}}"
+		>
+			{{session('google_drive')['msg']}}
+		</div>
+	@endif
+
 	<div
 		x-data="{todoListToEdit: null}"
 		class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2"

@@ -22,6 +22,10 @@ module.exports = {
 			})).reduce((acc, obj) => ({...acc, ...obj}), {}),
         },
     },
+	safelist: [
+		'bg-error-100',
+		'bg-success-100'
+	],
     variants: {
         extend: {
             backgroundColor: ['active'],
