@@ -10,6 +10,7 @@ use App\Livewire\Auth\Passwords\Reset;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Tasks;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+	Route::prefix('export')->group(function(){
+		Route::get('/google-drive', [ExportController::class, 'getGoogleDriveAccess'])
+			->name('export-to-google-drive');
+
+		Route::get('/progress', [ExportController::class, 'exportToDrive'])
+			->name('export-in-progress');
+	});
+
 	Route::get('email/verify', Verify::class)
         ->middleware('throttle:6,1')
         ->name('verification.notice');

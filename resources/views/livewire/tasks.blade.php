@@ -1,9 +1,4 @@
 <div class="flex flex-wrap">
-	{{-- All lists plus add form --}}
-	@error('google_drive.access_denied')
-		<div class="w-full text-center text-lg text-error py-4">{{$message}}</div>
-	@enderror
-
 	<div
 		x-data="{todoListToEdit: null}"
 		class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2"
