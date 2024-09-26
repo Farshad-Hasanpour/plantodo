@@ -10,13 +10,18 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
 
 class ExportController extends Controller
 {
 	protected function CreateCSVFile(): false|string{
 		$allTasks = TodoList::with(['tasks' => function ($query) {
-			$query->select(['list_id', 'title', 'is_done']);
-		}])->select('id', 'name')->get();
+			$query->select(['list_id', 'title', 'is_done'])
+				->orderBy('is_done', 'asc')
+				->orderBy('priority', 'desc');
+		}])->select('id', 'name', 'user_id')
+			->where('user_id', Auth::id())
+			->get();
 
 		$csvData = fopen('php://temp', 'r+');
 		foreach ($allTasks as $list) {
@@ -108,5 +113,12 @@ class ExportController extends Controller
 		$client->addScope(Drive::DRIVE_FILE);
 		$client->setRedirectUri(config('app.url') . '/export/progress');
 		return redirect()->away($client->createAuthUrl());
+	}
+
+	public function downloadCSVExport(): \Illuminate\Http\Response{
+		return Response::make($this->CreateCSVFile(), 200, [
+			'Content-Type' => 'text/csv',
+			'Content-Disposition' => 'attachment; filename="backup_from_plantodo_ir.csv"',
+		]);
 	}
 }

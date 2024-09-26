@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
 		Route::get('/progress', [ExportController::class, 'exportToDrive'])
 			->name('export-in-progress');
+
+		Route::get('/download', [ExportController::class, 'downloadCSVExport'])
+			->name('download-csv-export');
 	});
 
 	Route::get('email/verify', Verify::class)

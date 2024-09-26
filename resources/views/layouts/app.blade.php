@@ -40,9 +40,19 @@
 						</x-slot:trigger>
 						<x-slot:list>
 							<div class="select-none">
-								<a href="{{route('export-to-google-drive')}}" class="p-2 text-gray-800 hover:bg-gray-100 flex items-center whitespace-nowrap">
+								<a
+									href="{{route('export-to-google-drive')}}"
+									class="p-2 text-gray-800 hover:bg-gray-100 flex items-center whitespace-nowrap"
+								>
 									<x-icons.google-drive class="w-5 h-5 mr-2" />
-									<span>Export to Google Drive</span>
+									<span>Export CSV to Google Drive</span>
+								</a>
+								<a
+									href="{{route('download-csv-export')}}"
+									class="p-2 text-gray-800 hover:bg-gray-100 flex items-center whitespace-nowrap"
+								>
+									<x-icons.cellpone-link class="w-5 h-5 mr-2" />
+									<span>Export CSV to Device</span>
 								</a>
 							</div>
 						</x-slot:list>
