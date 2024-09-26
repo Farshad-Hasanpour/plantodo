@@ -24,7 +24,9 @@ module.exports = {
     },
 	safelist: [
 		'bg-error-100',
-		'bg-success-100'
+		'bg-success-100',
+		'border-error',
+		'border-success'
 	],
     variants: {
         extend: {

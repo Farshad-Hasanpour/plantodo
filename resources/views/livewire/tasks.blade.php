@@ -2,7 +2,7 @@
 	{{-- All lists plus add form --}}
 	@if(session('google_drive'))
 		<div
-			class="text-center mx-auto text-lg text-error p-4 rounded-xl bg-{{session('google_drive')['type']}}-100 text-{{session('google_drive')['type']}}"
+			class="text-center mx-auto text-lg text-error p-4 rounded-xl border border-{{session('google_drive')['type']}} bg-{{session('google_drive')['type']}}-100 text-{{session('google_drive')['type']}}"
 		>
 			{{session('google_drive')['msg']}}
 		</div>
