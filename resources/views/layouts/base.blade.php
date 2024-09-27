@@ -35,6 +35,8 @@
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 		<!-- Build styles and scripts -->
 		@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+		<link rel="manifest" href="/build/manifest.webmanifest">
+		<script id="vite-plugin-pwa:register" src="/build/registerSW.js"></script>
 		@livewireStyles
 		<!-- stack styles -->
 		@stack('styles')

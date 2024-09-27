@@ -12,26 +12,41 @@ export default defineConfig(({ mode }) => {
 				refresh: true,
 			}),
 			VitePWA({
-				strategies: "generateSW",
+				strategies: "injectManifest",
+				srcDir: 'resources/js',
+				filename: 'sw.js',
+				inject: {
+					// You can set up a custom destination here
+					sw: 'public/sw.js', // The name of your service worker file
+				},
 				injectRegister: 'auto',
 				registerType: 'autoUpdate',
-				workbox: {
-					globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,eot,ttf}'],
+				outDir: 'public',
+				buildBase: '/',
+				scope: '/',
+				injectManifest: {
+					injectionPoint: undefined
 				},
+
+				/*workbox: {
+					globPatterns: ['**!/!*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,eot,ttf}'],
+					additionalManifestEntries: [{
+						url: 'index.html', revision: null
+					}],
+				},*/
 				manifest: {
 					name: env.VITE_APP_NAME,
 					short_name: env.VITE_APP_NAME,
-					start_url: '.',
 					theme_color: '#ff00ff',
 					lang: 'en',
 					icons: [
 						{
-							src: "assets/img/logo-512x512.png",
+							src: "/assets/img/logo-512x512.png",
 							sizes: "512x512",
 							type: "image/png"
 						},
 						{
-							src: "assets/img/logo-512x512-maskable.png",
+							src: "/assets/img/logo-512x512-maskable.png",
 							sizes: "512x512",
 							type: "image/png",
 							purpose: "maskable"
