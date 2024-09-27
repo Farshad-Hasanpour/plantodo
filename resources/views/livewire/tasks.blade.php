@@ -10,7 +10,7 @@
 
 	<div
 		x-data="{todoListToEdit: null}"
-		class="flex flex-wrap items-stretch mt-4 mb-10 -ml-2"
+		class="flex flex-wrap items-stretch my-2 -ml-2"
 		style="width: calc(100% + 8px)"
 	>
 		<x-button
