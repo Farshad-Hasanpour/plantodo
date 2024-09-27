@@ -139,6 +139,7 @@
 				Object.values({{Js::from($this->incompleteTasks)}}),
 				Object.values({{Js::from($this->completedTasks)}})
 			)"
+			x-sort:config="sortConfig"
 		>
 			@if($this->incompleteTasks->count())
 				@foreach($this->incompleteTasks as $task)
@@ -189,6 +190,7 @@
 					Object.values({{Js::from($this->incompleteTasks)}}),
 					Object.values({{Js::from($this->completedTasks)}})
 				)"
+				x-sort:config="sortConfig"
 			>
 				@if($this->completedTasks->count())
 					@foreach($this->completedTasks as $task)
@@ -214,6 +216,7 @@
 
 @assets
 <script>
+	const sortConfig = { delay: 250, delayOnTouchOnly: true }
 	function sortTasks(data, $wire, incompleteTasks, completedTasks) {
 		if(data.from.index === data.to.index && data.from.type === data.to.type) return;
 

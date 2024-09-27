@@ -4,7 +4,7 @@
 
 <div
 	{{ $attributes->merge([
-    	'class' => 'task-box w-full flex flex-wrap md:flex-nowrap items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border border-gray-400 rounded-2xl bg-white hover:bg-primary/5'
+    	'class' => 'task-box w-full flex flex-wrap md:flex-nowrap items-center ps-2 pe-3 lg:ps-5 lg:pe-5 border-2 border-gray-300 rounded-2xl bg-white hover:bg-primary/5'
     ]) }}
 	wire:key="{{ ($task->is_done ? 'completed-' : 'incomplete-').$task->id }}"
 >
@@ -146,12 +146,14 @@
 
 @assets
 <style>
-	.task-box.sortable-ghost {
-		opacity: .7 !important;
+	.task-box.sortable-chosen{
+		border: 2px solid rgb(var(--color-secondary));
+	}
+	.task-box.sortable-ghost{
+
 	}
 	.task-box.sortable-drag{
 		background-color: white !important;
-		border: 2px solid rgb(var(--color-secondary));
 	}
 	body.sorting .task-box:hover{
 		background-color: white !important;
