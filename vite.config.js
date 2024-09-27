@@ -39,6 +39,7 @@ export default defineConfig(({ mode }) => {
 					short_name: env.VITE_APP_NAME,
 					theme_color: '#ff00ff',
 					lang: 'en',
+					start_url: '/tasks',
 					icons: [
 						{
 							src: "/assets/img/logo-512x512.png",
