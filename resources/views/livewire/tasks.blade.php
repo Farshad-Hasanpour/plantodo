@@ -241,17 +241,6 @@
 		];
 		$wire.updateTasks(tasks)
 	}
-
-	// Set task form sticky and add a shadow to it only when it is out of the page
-	document.onscroll = () => {
-		const taskForm = document.getElementsByClassName('task-form')[0];
-		if(!taskForm) return;
-		if(document.documentElement.scrollTop + 5 > taskForm.offsetTop){
-			taskForm.classList.add('is-stuck');
-		}else{
-			taskForm.classList.remove('is-stuck');
-		}
-	}
 </script>
 
 <style>
@@ -261,3 +250,22 @@
 	}
 </style>
 @endassets
+
+@script
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		// Set task form sticky and add a shadow to it only when it is out of the page
+		function setStickyForm() {
+			const taskForm = document.getElementsByClassName('task-form')[0];
+			if(!taskForm) return;
+			if(document.documentElement.scrollTop + 5 > taskForm.offsetTop){
+				taskForm.classList.add('is-stuck');
+			}else{
+				taskForm.classList.remove('is-stuck');
+			}
+		}
+		document.onscroll = setStickyForm;
+		setStickyForm();
+	})
+</script>
+@endscript
