@@ -10,7 +10,7 @@
 
 	<div
 		x-data="{todoListToEdit: null}"
-		class="flex flex-wrap items-stretch mt-4 mb-16 -ml-2"
+		class="flex flex-wrap items-stretch mt-4 mb-10 -ml-2"
 		style="width: calc(100% + 8px)"
 	>
 		<x-button
@@ -90,7 +90,8 @@
 		wire:submit="store"
 		wire:target="loadList"
 		wire:loading.remove
-		class="w-full flex items-start mb-2"
+		class="task-form flex items-start top-0 pt-6 mb-2 bg-gray-100 -mx-4 px-4"
+		style="width: calc(100% + 2rem)"
 	>
 		<label class="w-full max-w-[300px]">
 			<input
@@ -240,5 +241,23 @@
 		];
 		$wire.updateTasks(tasks)
 	}
+
+	// Set task form sticky and add a shadow to it only when it is out of the page
+	document.onscroll = () => {
+		const taskForm = document.getElementsByClassName('task-form')[0];
+		if(!taskForm) return;
+		if(document.documentElement.scrollTop + 5 > taskForm.offsetTop){
+			taskForm.classList.add('is-stuck');
+		}else{
+			taskForm.classList.remove('is-stuck');
+		}
+	}
 </script>
+
+<style>
+	.is-stuck{
+		position: sticky;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	}
+</style>
 @endassets
