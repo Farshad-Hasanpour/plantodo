@@ -17,6 +17,7 @@ module.exports = {
 				'primary',
 				'secondary',
 				'error',
+				'attention'
 			].map(item => ({
 				[item]: `rgba(var(--color-${item}), <alpha-value>)`
 			})).reduce((acc, obj) => ({...acc, ...obj}), {}),
