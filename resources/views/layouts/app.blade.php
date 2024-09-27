@@ -8,7 +8,7 @@
 	<div class="min-h-screen bg-gray-100 flex flex-col items-stretch">
 		<nav class="w-full p-4 h-[100px]">
 			<div
-				class="w-full h-full rounded-3xl flex justify-between items-center px-7 py-2 bg-primary text-white"
+				class="w-full h-full rounded-3xl px-4 sm:px-7 py-2 flex justify-between items-center bg-primary text-white"
 				style="box-shadow: 0 8px 16px rgba(107, 33, 168, 0.6);"
 			>
 				@php
@@ -17,25 +17,48 @@
 					]
 				@endphp
 				<div class="flex items-center">
+					<a
+						wire:navigate
+						href="{{route('home')}}"
+						class="mr-1 sm:mr-4"
+					>
+						<x-button variant="icon" class="p-1 hover:bg-transparent">
+							<x-logo class="w-9 h-9" />
+						</x-button>
+					</a>
+
 					@foreach($pages as $name => $text)
 						<a
 							wire:navigate
 							href="{{route($name)}}"
+							title="{{$text}}"
 							@class([
-								'px-4 py-2 mr-4 rounded-md uppercase',
-								\Request::route()->getName() === $name ? 'bg-black/30' : 'hover:bg-black/10'
+								'sm:px-4 sm:py-2 mr-4 sm:rounded-md uppercase',
+								\Request::route()->getName() === $name ? 'sm:bg-black/30' : 'sm:hover:bg-black/10'
 							])
 						>
-							{{ $text }}
+							<span class="hidden sm:block">{{ $text }}</span>
+							<x-button variant="icon-text" class="sm:hidden p-2">
+								<x-icons.download-outline class="w-6 h-6 shrink-0" />
+								<span class="text-xs">Tasks</span>
+							</x-button>
 						</a>
 					@endforeach
 				</div>
 
 				<div class="flex items-center space-x-1">
+					<form action="{{route('logout')}}" method="POST" class="block">
+						@csrf
+						<x-button type="submit" variant="icon-text" title="Logout" class="p-2">
+							<x-icons.logout class="w-6 h-6 shrink-0" />
+							<span class="text-xs">Logout</span>
+						</x-button>
+					</form>
 					<x-dropdown h-align="right">
 						<x-slot:trigger>
-							<x-button variant="icon" title="Export tasks" class="p-2">
-								<x-icons.download-outline class="w-6 h-6" />
+							<x-button variant="icon-text" title="Export tasks" class="p-2">
+								<x-icons.download-outline class="w-6 h-6 shrink-0" />
+								<span class="text-xs">Export</span>
 							</x-button>
 						</x-slot:trigger>
 						<x-slot:list>
@@ -57,12 +80,6 @@
 							</div>
 						</x-slot:list>
 					</x-dropdown>
-					<form action="{{route('logout')}}" method="POST" class="block">
-						@csrf
-						<x-button type="submit" variant="icon" title="Logout" class="p-2">
-							<x-icons.logout class="w-6 h-6" />
-						</x-button>
-					</form>
 				</div>
 			</div>
 		</nav>

@@ -11,6 +11,7 @@
     	'primary' => "btn select-none uppercase px-3 py-2 bg-". ($color ? $color : 'primary') ." text-white rounded-md truncate disabled:bg-gray-500 disabled:cursor-not-allowed",
 		'outline' => 'btn select-none uppercase px-3 py-2'. ($color ? ' text-'.$color : '') .' bg-transparent hover:bg-opacity-10 border-current border-2 rounded-md truncate disabled:text-gray-400 disabled:cursor-not-allowed',
 		'icon' => 'btn select-none box-center hover:bg-black/5 rounded-full disabled:opacity-40 disabled:cursor-not-allowed',
+		'icon-text' => 'btn select-none box-center flex-col rounded-full disabled:opacity-40 disabled:cursor-not-allowed',
 	]
 @endphp
 
