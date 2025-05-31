@@ -8,7 +8,7 @@ define('PROD_SCOPE', '/plantodo');
 
 define('LARAVEL_START', microtime(true));
 
-$root = __DIR__ . '/..'
+$root = __DIR__ . '/..';
 if (!file_exists($root . '/bootstrap/app.php')) {
 	$root = $root . PROD_SCOPE ;
 }
