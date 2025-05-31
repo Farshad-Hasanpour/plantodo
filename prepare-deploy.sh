@@ -25,7 +25,7 @@ mkdir -p "$PRIVATE_DIR/public/build"
 cp public/build/manifest.json "$PRIVATE_DIR/public/build/manifest.json"
 cp artisan "$PRIVATE_DIR/artisan"
 cp composer.json "$PRIVATE_DIR/composer.json"
-cp composer.lock "$PRIVATE_DIR/composer.lock
+cp composer.lock "$PRIVATE_DIR/composer.lock"
 
 # Separate vendor files because it is uploaded only when composer file is changed
 cp -r vendor/* "$VENDOR_DIR"
