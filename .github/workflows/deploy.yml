@@ -39,7 +39,7 @@ jobs:
         run: npm run build
 
       - name: Make upload directory
-        run: npm run deploy:prepare
+        run: chmod +x prepare-deploy.sh && npm run deploy:prepare
 
       - name: Upload public files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
