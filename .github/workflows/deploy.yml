@@ -39,7 +39,7 @@ jobs:
         run: npm run build
 
       - name: Make upload directory
-        run: chmod +x prepare-deploy.sh && npm run deploy:prepare
+        run: npm run deploy:prepare:repo
 
       - name: Upload public files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -47,7 +47,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./upload/public
+          local-dir: ./upload/public/
           server-dir: ${{ secrets.SERVER_PUBLIC_DIR }}
 
       - name: Upload private files via FTP
@@ -56,5 +56,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./upload/private
+          local-dir: ./upload/private/
           server-dir: ${{ secrets.SERVER_PRIVATE_DIR }}
