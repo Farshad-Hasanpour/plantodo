@@ -3,7 +3,7 @@
 rm -rf upload
 
 # Define Upload Directories
-PUBLIC_DIR="upload/public_html"
+PUBLIC_DIR="upload/public"
 PRIVATE_DIR="upload/private"
 VENDOR_DIR="upload/vendor"
 
@@ -13,7 +13,7 @@ mkdir -p "$PRIVATE_DIR"
 mkdir -p "$VENDOR_DIR"
 
 # Copy public directory
-cp -r public "$PUBLIC_DIR"
+cp -r public/* "$PUBLIC_DIR"
 
 # Copy private directories
 for dir in app bootstrap config resources routes storage; do
