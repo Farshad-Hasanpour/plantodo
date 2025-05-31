@@ -23,9 +23,10 @@ done
 # Copy individual private files
 mkdir -p "$PRIVATE_DIR/public/build"
 cp public/build/manifest.json "$PRIVATE_DIR/public/build/manifest.json"
-cp .env "$PRIVATE_DIR/.env"
 cp artisan "$PRIVATE_DIR/artisan"
 
 # Separate vendor files because it is uploaded only when composer file is changed
 cp -r vendor/* "$VENDOR_DIR"
+
+echo -e "\e[31m You should copy .env file manually. \e[0m"
 
