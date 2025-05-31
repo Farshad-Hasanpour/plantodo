@@ -51,6 +51,12 @@ export default defineConfig(({ mode }) => {
 							sizes: "512x512",
 							type: "image/png",
 							purpose: "maskable"
+						},
+						{
+							src: "/assets/img/logo.svg",
+							sizes: "any",
+							type: "image/svg+xml",
+							purpose: "monochrome"
 						}
 					]
 				},
