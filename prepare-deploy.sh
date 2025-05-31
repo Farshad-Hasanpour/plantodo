@@ -14,8 +14,9 @@ mkdir -p "$VENDOR_DIR"
 
 # Copy public directory
 cp -r public/* "$PUBLIC_DIR"
+cp public/.htaccess "$PUBLIC_DIR/.htaccess"
 
-# Copy private directories
+# Copy private directories except vendor
 for dir in app bootstrap config resources routes storage; do
   cp -r "$dir" "$PRIVATE_DIR/$dir"
 done
