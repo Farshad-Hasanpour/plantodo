@@ -3,7 +3,7 @@
 rm -rf upload
 
 # Define Upload Directories
-PUBLIC_DIR="upload/public"
+PUBLIC_DIR="upload/public_html"
 PRIVATE_DIR="upload/private"
 VENDOR_DIR="upload/vendor"
 
