@@ -44,3 +44,5 @@ set up a cron job to run ```php artisan app:reset-daily-habits``` every midnight
 
 e.g.
 ```0 0 * * * /usr/bin/php /path-to-your-project/artisan app:reset-daily-habits >> /dev/null 2>&1```
+
+test
