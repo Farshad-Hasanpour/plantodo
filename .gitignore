@@ -6,6 +6,7 @@
 /storage/*.key
 public/sw.js
 /vendor
+/upload
 .env
 .env.backup
 .env.production

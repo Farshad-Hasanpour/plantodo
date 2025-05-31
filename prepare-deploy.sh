@@ -1,4 +1,7 @@
 #!/bin/bash
+# Delete old directory
+rm -rf upload
+
 # Define Upload Directories
 PUBLIC_DIR="upload/public"
 PRIVATE_DIR="upload/private"
@@ -24,5 +27,5 @@ cp .env "$PRIVATE_DIR/.env"
 cp artisan "$PRIVATE_DIR/artisan"
 
 # Separate vendor files because it is uploaded only when composer file is changed
-cp -r vendor "$VENDOR_DIR"
+cp -r vendor/* "$VENDOR_DIR"
 
