@@ -45,9 +45,7 @@
 							target="_blank"
 							rel="noopener"
 						>
-							<i
-								class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
-							></i>
+							<x-icons.twitter class="lg:text-slate-200 text-slate-400 text-lg leading-lg h-[1.125rem] w-[1.125rem]" />
 							<span class="lg:hidden inline-block ml-2">X platform</span>
 						</a>
 					</li>
