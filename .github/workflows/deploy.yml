@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./upload/public/
           server-dir: ${{ secrets.SERVER_PUBLIC_DIR }}
-          delete: true
+          dangerous-clean-slate: true
 
       - name: Upload private files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
