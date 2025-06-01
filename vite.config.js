@@ -35,8 +35,9 @@ export default defineConfig(({ mode }) => {
 					}],
 				},*/
 				manifest: {
-					name: env.VITE_APP_NAME,
-					short_name: env.VITE_APP_NAME,
+					// TODO: env is not provided when deploying using github actions
+					name: env.VITE_APP_NAME || 'PlanToDo',
+					short_name: env.VITE_APP_NAME || 'PlanToDo',
 					theme_color: '#EC4899',
 					lang: 'en',
 					start_url: '/tasks',
