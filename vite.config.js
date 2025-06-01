@@ -40,6 +40,7 @@ export default defineConfig(({ mode }) => {
 					short_name: env.VITE_APP_NAME || 'PlanToDo',
 					description: 'PlanToDo is powered by the TALL stack. It means Tailwind, Alpine.js, Livewire, and Laravel. The project is open source, and it\'s made primarily for educational purposes.',
 					theme_color: '#EC4899',
+					background_color: '#EC4899',
 					lang: 'en',
 					start_url: '/tasks',
 					"display_override": ["window-controls-overlay"],
