@@ -44,11 +44,18 @@ export default defineConfig(({ mode }) => {
 					start_url: '/tasks',
 					"screenshots": [
 						{
-							"src": "/assets/img/dashboard.png",
-							"sizes": "903x708",
+							"src": "/assets/img/screenshot-wide.png",
+							"sizes": "920x822",
 							"type": "image/png",
 							"form_factor": "wide",
-							"label": "Wonder Widgets"
+							"label": "Desktop Dashboard"
+						},
+						{
+							"src": "/assets/img/screenshot-narrow.png",
+							"sizes": "724x1040",
+							"type": "image/png",
+							"form_factor": "narrow",
+							"label": "Phone Dashboard"
 						}
 					],
 					icons: [
@@ -56,18 +63,13 @@ export default defineConfig(({ mode }) => {
 							src: "/assets/img/logo-512x512-maskable.png",
 							sizes: "any",
 							type: "image/png",
-							purpose: "maskable"
+							purpose: "any maskable"
 						},
 						{
 							src: "/assets/img/logo.svg",
 							sizes: "any",
 							type: "image/svg+xml",
 							purpose: "monochrome"
-						},
-						{
-							src: "/assets/img/logo-512x512.png",
-							sizes: "any",
-							type: "image/png",
 						},
 					]
 				},
