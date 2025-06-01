@@ -42,20 +42,20 @@ export default defineConfig(({ mode }) => {
 					start_url: '/tasks',
 					icons: [
 						{
-							src: "/assets/img/logo-512x512-maskable.png",
-							sizes: "512x512",
-							type: "image/png",
-							purpose: "maskable"
-						},
-						{
 							src: "/assets/img/logo.svg",
 							sizes: "any",
 							type: "image/svg+xml",
 							purpose: "monochrome"
 						},
 						{
+							src: "/assets/img/logo-512x512-maskable.png",
+							sizes: "any",
+							type: "image/png",
+							purpose: "maskable"
+						},
+						{
 							src: "/assets/img/logo-512x512.png",
-							sizes: "512x512",
+							sizes: "any",
 							type: "image/png",
 						},
 					]
