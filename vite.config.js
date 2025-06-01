@@ -66,13 +66,13 @@ export default defineConfig(({ mode }) => {
 							purpose: "maskable"
 						},
 						{
-							src: "/assets/img/logo.svg",
+							src: "/assets/img/logo-reverse.svg",
 							sizes: "any",
 							type: "image/svg+xml",
 							purpose: "monochrome"
 						},
 						{
-							src: "/assets/img/logo-512x512.png",
+							src: "/assets/img/logo-512x512-maskable.png",
 							sizes: "any",
 							type: "image/png",
 							purpose: "any"
