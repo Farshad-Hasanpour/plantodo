@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
 				manifest: {
 					name: env.VITE_APP_NAME,
 					short_name: env.VITE_APP_NAME,
-					theme_color: '#ff00ff',
+					theme_color: '#EC4899',
 					lang: 'en',
 					start_url: '/tasks',
 					icons: [

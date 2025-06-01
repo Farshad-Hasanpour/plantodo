@@ -28,7 +28,7 @@
 		@isset($metaDescription) <meta property="twitter:description" content="{{$metaDescription}}"> @endisset
 		<meta name="twitter:creator" content="@F_Hasanpour">
 
-		<meta name="theme-color" content="#FF00FF">
+		<meta name="theme-color" content="#EC4899">
 
 		<title>@isset($title) {{$title . ' - '}} @endisset{{ config('app.name') }}</title>
 		<!-- Font -->
