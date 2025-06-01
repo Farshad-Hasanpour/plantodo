@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
 					"screenshots": [
 						{
 							"src": "/assets/img/screenshot-wide.png",
-							"sizes": "1920x822",
+							"sizes": "1475x809",
 							"type": "image/png",
 							"form_factor": "wide",
 							"label": "Desktop Dashboard"
