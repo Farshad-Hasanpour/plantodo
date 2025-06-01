@@ -42,6 +42,8 @@ export default defineConfig(({ mode }) => {
 					theme_color: '#EC4899',
 					lang: 'en',
 					start_url: '/tasks',
+					"display_override": ["window-controls-overlay"],
+					display: 'standalone',
 					"screenshots": [
 						{
 							"src": "/assets/img/screenshot-wide.png",
