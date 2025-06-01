@@ -45,7 +45,7 @@ export default defineConfig(({ mode }) => {
 					"screenshots": [
 						{
 							"src": "/assets/img/screenshot-wide.png",
-							"sizes": "920x822",
+							"sizes": "1920x822",
 							"type": "image/png",
 							"form_factor": "wide",
 							"label": "Desktop Dashboard"
@@ -63,13 +63,19 @@ export default defineConfig(({ mode }) => {
 							src: "/assets/img/logo-512x512-maskable.png",
 							sizes: "any",
 							type: "image/png",
-							purpose: "any maskable"
+							purpose: "maskable"
 						},
 						{
 							src: "/assets/img/logo.svg",
 							sizes: "any",
 							type: "image/svg+xml",
 							purpose: "monochrome"
+						},
+						{
+							src: "/assets/img/logo-512x512.png",
+							sizes: "any",
+							type: "image/png",
+							purpose: "any"
 						},
 					]
 				},
