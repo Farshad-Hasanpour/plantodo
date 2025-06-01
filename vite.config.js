@@ -38,21 +38,31 @@ export default defineConfig(({ mode }) => {
 					// TODO: env is not provided when deploying using github actions
 					name: env.VITE_APP_NAME || 'PlanToDo',
 					short_name: env.VITE_APP_NAME || 'PlanToDo',
+					description: 'PlanToDo is powered by the TALL stack. It means Tailwind, Alpine.js, Livewire, and Laravel. The project is open source, and it\'s made primarily for educational purposes.',
 					theme_color: '#EC4899',
 					lang: 'en',
 					start_url: '/tasks',
-					icons: [
+					"screenshots": [
 						{
-							src: "/assets/img/logo.svg",
-							sizes: "any",
-							type: "image/svg+xml",
-							purpose: "monochrome"
-						},
+							"src": "/assets/img/dashboard.png",
+							"sizes": "903x708",
+							"type": "image/png",
+							"form_factor": "wide",
+							"label": "Wonder Widgets"
+						}
+					],
+					icons: [
 						{
 							src: "/assets/img/logo-512x512-maskable.png",
 							sizes: "any",
 							type: "image/png",
 							purpose: "maskable"
+						},
+						{
+							src: "/assets/img/logo.svg",
+							sizes: "any",
+							type: "image/svg+xml",
+							purpose: "monochrome"
 						},
 						{
 							src: "/assets/img/logo-512x512.png",
