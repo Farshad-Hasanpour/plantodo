@@ -118,6 +118,7 @@ class Tasks extends Component
 
 		if(!$this->active_list_id) {
 			$this->addError('new_task_form.title', 'Please select a list first.');
+			$this->dispatch('newTaskSubmitted');
 			return;
 		};
 
@@ -135,6 +136,7 @@ class Tasks extends Component
 
 		// refresh computed property
 		unset($this->tasks);
+		$this->dispatch('newTaskSubmitted');
 	}
 
 	public function toggleDailyHabit(Task $task){

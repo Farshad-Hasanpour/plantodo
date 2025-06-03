@@ -266,6 +266,11 @@
 		}
 		document.onscroll = setStickyForm;
 		setStickyForm();
+
+		// dispatched by Tasks.php
+		$wire.on('newTaskSubmitted', () => {
+			$nextTick(() => setStickyForm())
+		});
 	})
 </script>
 @endscript
