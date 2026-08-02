@@ -14,6 +14,7 @@
 				@php
 					$pages = [
 						'todo-list' => 'Tasks',
+						'profile' => 'Profile',
 					]
 				@endphp
 				<div class="flex items-center">
@@ -40,7 +41,7 @@
 							<span class="hidden sm:block">{{ $text }}</span>
 							<x-button variant="icon-text" class="sm:hidden p-2">
 								<x-icons.download-outline class="w-6 h-6 shrink-0" />
-								<span class="text-xs">Tasks</span>
+								<span class="text-xs">{{ $text }}</span>
 							</x-button>
 						</a>
 					@endforeach

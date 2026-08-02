@@ -10,6 +10,7 @@ use App\Livewire\Auth\Passwords\Reset;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Tasks;
+use App\Livewire\Profile;
 use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +73,9 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/tasks', Tasks::class)
 		->name('todo-list');
+
+	Route::get('/profile', Profile::class)
+		->name('profile');
 });
 
 Route::fallback(function(){
