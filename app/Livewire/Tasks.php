@@ -158,6 +158,7 @@ class Tasks extends Component
 			'priority' => 1 + $this->tasks->max('priority')
 		]);
 		unset($this->tasks);
+		$this->dispatch('taskCompleted');
 	}
 
 	public function makeTaskIncomplete(Task $task){

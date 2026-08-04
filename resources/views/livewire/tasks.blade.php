@@ -254,6 +254,9 @@
 @script
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
+		const successSound = new Audio('/assets/sounds/success.mp3');
+		successSound.preload = 'auto';
+
 		// Set task form sticky and add a shadow to it only when it is out of the page
 		function setStickyForm() {
 			const taskForm = document.getElementsByClassName('task-form')[0];
@@ -270,6 +273,11 @@
 		// dispatched by Tasks.php
 		$wire.on('newTaskSubmitted', () => {
 			$nextTick(() => setStickyForm())
+		});
+
+		$wire.on('taskCompleted', () => {
+			successSound.currentTime = 0;
+			successSound.play().catch(() => {});
 		});
 	})
 </script>
