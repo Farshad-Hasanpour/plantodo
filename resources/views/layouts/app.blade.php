@@ -13,8 +13,8 @@
 			>
 				@php
 					$pages = [
-						'todo-list' => 'Tasks',
-						'profile' => 'Profile',
+						'todo-list' => ['title' => 'Tasks', 'icon' => 'icons.page-tasks'],
+						'profile' => ['title' => 'Profile', 'icon' => 'icons.page-profile']
 					]
 				@endphp
 				<div class="flex items-center">
@@ -28,20 +28,20 @@
 						</x-button>
 					</a>
 
-					@foreach($pages as $name => $text)
+					@foreach($pages as $name => $pageDetails)
 						<a
 							wire:navigate
 							href="{{route($name)}}"
-							title="{{$text}}"
+							title="{{$pageDetails['title']}}"
 							@class([
 								'sm:px-4 sm:py-2 mr-4 sm:rounded-md uppercase',
 								\Request::route()->getName() === $name ? 'sm:bg-black/30' : 'sm:hover:bg-black/10'
 							])
 						>
-							<span class="hidden sm:block">{{ $text }}</span>
+							<span class="hidden sm:block">{{ $pageDetails['title'] }}</span>
 							<x-button variant="icon-text" class="sm:hidden p-2">
-								<x-icons.download-outline class="w-6 h-6 shrink-0" />
-								<span class="text-xs">{{ $text }}</span>
+								<x-dynamic-component :component="$pageDetails['icon']" class="w-6 h-6 shrink-0" />
+								<span class="text-xs">{{ $pageDetails['title'] }}</span>
 							</x-button>
 						</a>
 					@endforeach
